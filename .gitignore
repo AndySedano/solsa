@@ -1,6 +1,6 @@
 #ant specific
-SOLSA/dist/
-SOLSA/build/
+dist/
+build/
  
 #netbeans specific
 core
