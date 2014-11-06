@@ -1,7 +1,21 @@
-nbproject/private/
-build/
-nbbuild/
+#ant specific
 dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
+build/
+ 
+#netbeans specific
+core
+SOLSA/nbproject/*
+!SOLSA/nbproject/project.properties
+!SOLSA/nbproject/project.xml
+ 
+#java specific
+*.class
+ 
+#general swap/backup files
+*.so
+*.log
+*.out
+*~
+*.swp
+*.DS_Store
+*.lock
