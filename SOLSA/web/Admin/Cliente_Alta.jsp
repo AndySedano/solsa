@@ -1,11 +1,11 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 
-<t:layout seccion="clientes" activo ="productos">
+<t:layout seccion="admin" activo ="cliente_alta">
     <jsp:attribute name="titulo">
-        Productos
+        Admin
     </jsp:attribute>
     <jsp:body>
-        productos
+        Alta cliente
     </jsp:body>
 </t:layout>

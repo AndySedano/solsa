@@ -1,11 +1,11 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 
-<t:layout seccion="clientes" activo ="reporte">
+<t:layout seccion="aprobador" activo ="reporte">
     <jsp:attribute name="titulo">
-        Reporte
+        Admin
     </jsp:attribute>
     <jsp:body>
-        reporte
+        <h1>Bienvenido ${requestScope.nombre} ! </h1>
     </jsp:body>
 </t:layout>
