@@ -42,7 +42,7 @@
                     <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Incluyendo LADA">
                 </div>
             </div>
-            <button type="submit">Crear</button>
+            <button type="submit" class="btn btn-primary">Crear</button>
         </form>
     </jsp:body>
 </t:layout>
