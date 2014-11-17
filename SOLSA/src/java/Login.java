@@ -58,7 +58,7 @@ public class Login extends HttpServlet {
             }
         } else {
             request.setAttribute("res", "Usuario o Contrase&ntilde;a Incorrectos");
-            RequestDispatcher disp = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher disp = request.getRequestDispatcher("/Login.jsp");
             disp.include(request, response);
         }
     }
