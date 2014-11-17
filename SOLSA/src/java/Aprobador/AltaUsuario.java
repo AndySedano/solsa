@@ -17,9 +17,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author David
+ * @author EquipoRojt
  */
-public class AltaEmpleado extends HttpServlet {
+public class AltaUsuario extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -74,7 +74,7 @@ public class AltaEmpleado extends HttpServlet {
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(AltaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AltaUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

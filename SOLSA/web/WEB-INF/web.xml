@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>AltaEmpleado</servlet-name>
-        <servlet-class>Aprobador.AltaEmpleado</servlet-class>
+        <servlet-class>Aprobador.AltaUsuario</servlet-class>
         <init-param>
             <param-name>url</param-name>
             <param-value>jdbc:mysql://solsa20.caafufvdj2xl.us-west-2.rds.amazonaws.com/solsa2020</param-value>
