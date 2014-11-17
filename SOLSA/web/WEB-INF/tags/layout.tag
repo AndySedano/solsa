@@ -104,10 +104,9 @@
                                 <img src="../CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("productos") ? "active" : "none"}><a href="../Clientes/Productos.jsp">Productos</a></li>
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="../Clientes/Reporte.jsp">Reporte</a></li>
-                                <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="../Clientes/Peticiones.jsp">Peticiones</a></li>
-                                <li class=${activo.equals("carrito") ? "active" : "none"}><a href="../Clientes/Carrito.jsp">Carrito</a></li>
+                                <li class=${activo.equals("productos") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
+                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Pedidos">Pedidos</a></li>
+                                
                             </ul> 
                         </c:when>
                     </c:choose>
