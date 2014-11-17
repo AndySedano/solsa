@@ -8,6 +8,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="titulo" fragment="true" %>
 <%@ attribute name="seccion" type="java.lang.String" %>
+
+<%@ attribute name="urlimagen" fragment="true" %>
 <!DOCTYPE html>
 <html>
 	<head>

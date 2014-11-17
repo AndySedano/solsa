@@ -7,7 +7,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 
-<t:example seccion="clientes">
+<t:layout seccion="clientes">
     <jsp:attribute name="titulo">
 		Nuevo Cliente
     </jsp:attribute>
