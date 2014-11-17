@@ -32,9 +32,9 @@ public class AltaUsuario extends HttpServlet {
         
         HttpSession session = request.getSession();
         //request.getCharacterEncoder("UTF-8");
-        String url = getInitParameter("url");
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
+        String url  = getServletContext().getInitParameter("url");
+        String user = getServletContext().getInitParameter("user");
+        String pass = getServletContext().getInitParameter("pass");
         boolean st = false;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
