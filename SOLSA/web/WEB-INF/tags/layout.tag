@@ -49,46 +49,64 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
-                    <ul class="nav nav-sidebar">
-                        <c:choose>
-                            <c:when test="${seccion == 'clientes'}">
+                    <c:choose>
+                        <c:when test="${seccion == 'cliente'}">
+                            <ul class="nav nav-sidebar">
                                 <img src="../CSS/Solsa1.png" height="100" width="200" >
-                                </br>
-                                </br>
+                            </ul>
+                            <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("productos") ? "active" : "none"}><a href="Productos">Productos</a></li>
+                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
+                                <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="Peticiones">Peticiones</a></li>
+                                <li class=${activo.equals("carrito") ? "active" : "none"}><a href="Carrito">Carrito</a></li>
+                            </ul>
+                        </c:when>
+                        <c:when test="${seccion == 'admin'}">
+                            <ul class="nav nav-sidebar">
+                                <img src="../CSS/Solsa1.png" height="100" width="200" >
+                            </ul>
+                            <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("empresa_alta") ? "active" : "none"}><a href="Empresa_Alta">Alta Empresa</a></li>
+                                <li class=${activo.equals("empresa_modificacion") ? "active" : "none"}><a href="Empresa_Modificar">Modificar Empresa</a></li>
+                            </ul>
+                            <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("producto_alta") ? "active" : "none"}><a href="Producto_Alta">Alta Producto</a></li>
+                                <li class=${activo.equals("producto_modificacion") ? "active" : "none"}><a href="Producto_Modificar">Modificar Producto</a></li>
+                            </ul>
+                            <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("ventas_alta") ? "active" : "none"}><a href="Ventas_Alta">Alta Empleado Ventas</a></li>
+                                <li class=${activo.equals("ventas_modificacion") ? "active" : "none"}><a href="Ventas_Modificar">Modificacion Empleado Ventas</a></li>
+                            </ul>
+                            <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("cliente_alta") ? "active" : "none"}><a href="Cliente_Alta">Productos</a></li>
+                                <li class=${activo.equals("cliente_Modificacion") ? "active" : "none"}><a href="Cliente_Modificar">Reporte</a></li>
+                            </ul>
+                            <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
+                                <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
+                            </ul>
+                        </c:when>
+                        <c:when test="${seccion == 'aprobador'}">
+                            <ul class="nav nav-sidebar">
+                                <img src="../CSS/Solsa1.png" height="100" width="200" >
+                            </ul>
+                            <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="../Clientes/Reporte.jsp">Reporte</a></li>
+                                <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="../Clientes/Peticiones.jsp">Peticiones</a></li>
+                            </ul> 
+                        </c:when>
+                        <c:when test="${seccion == 'ventas'}">
+                            <ul class="nav nav-sidebar">
+                                <img src="../CSS/Solsa1.png" height="100" width="200" >
+                            </ul>
+                            <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("productos") ? "active" : "none"}><a href="../Clientes/Productos.jsp">Productos</a></li>
                                 <li class=${activo.equals("reporte") ? "active" : "none"}><a href="../Clientes/Reporte.jsp">Reporte</a></li>
                                 <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="../Clientes/Peticiones.jsp">Peticiones</a></li>
                                 <li class=${activo.equals("carrito") ? "active" : "none"}><a href="../Clientes/Carrito.jsp">Carrito</a></li>
-                                </c:when>
-                                <c:when test="${seccion == 'admin'}">
-                                <img src="../CSS/Solsa1.png" height="100" width="200" >
-                                </br>
-                                </br>
-                                <li class=${activo.equals("productos") ? "active" : "none"}><a href="../Clientes/Productos.jsp">Productos</a></li>
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="../Clientes/Reporte.jsp">Reporte</a></li>
-                                <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="../Clientes/Peticiones.jsp">Peticiones</a></li>
-                                <li class=${activo.equals("carrito") ? "active" : "none"}><a href="../Clientes/Carrito.jsp">Carrito</a></li>
-                                </c:when>
-                                <c:when test="${seccion == 'aprobador'}">
-                                <img src="../CSS/Solsa1.png" height="100" width="200" >
-                                </br>
-                                </br>
-                                <li class=${activo.equals("productos") ? "active" : "none"}><a href="../Clientes/Productos.jsp">Productos</a></li>
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="../Clientes/Reporte.jsp">Reporte</a></li>
-                                <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="../Clientes/Peticiones.jsp">Peticiones</a></li>
-                                <li class=${activo.equals("carrito") ? "active" : "none"}><a href="../Clientes/Carrito.jsp">Carrito</a></li>
-                                </c:when>
-                                <c:when test="${seccion == 'ventas'}">
-                                <img src="../CSS/Solsa1.png" height="100" width="200" >
-                                </br>
-                                </br>
-                                <li class=${activo.equals("productos") ? "active" : "none"}><a href="../Clientes/Productos.jsp">Productos</a></li>
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="../Clientes/Reporte.jsp">Reporte</a></li>
-                                <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="../Clientes/Peticiones.jsp">Peticiones</a></li>
-                                <li class=${activo.equals("carrito") ? "active" : "none"}><a href="../Clientes/Carrito.jsp">Carrito</a></li>
-                                </c:when>
-                            </c:choose>
-                    </ul>
+                            </ul> 
+                        </c:when>
+                    </c:choose>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <jsp:doBody />
