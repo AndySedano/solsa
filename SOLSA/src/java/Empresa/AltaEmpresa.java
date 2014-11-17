@@ -33,7 +33,11 @@ public class AltaEmpresa extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //Datos de la session y la conexion
         HttpSession session = request.getSession();
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding
         String url = getInitParameter("url");
         String user = getInitParameter("user");
         String pass = getInitParameter("pass");
@@ -43,11 +47,13 @@ public class AltaEmpresa extends HttpServlet {
         String nombreLogo = request.getParameter("nombreLogo");
         File imagen = new File(request.getParameter("imagen"));
         logo1 = new FileInputStream(imagen);
+        //Empresa
         String nombre = request.getParameter("nombre");
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
         String RFC = request.getParameter("RFC");
         int idContrato = Integer.parseInt(request.getParameter("idContrato"));
+        //Inserta foto y empresa
         String sql1 = "INSERT INTO Fotografia (nombre, imagen) VALUES (?, ?);";
         String sql2 = "INSERT INTO Empresa (nombre, direccion, telefono, RFC, Contrato_idContrato, Fotografia_idFotografia) VALUES (?, ?, ?, ?, ?, ?);";
         
@@ -60,14 +66,15 @@ public class AltaEmpresa extends HttpServlet {
                     ResultSet rs1 = ps1.executeQuery();
                     while (rs1.next()) {
                         try (PreparedStatement ps2 = con.prepareStatement(sql2)) {
-                            ps2.setString(3, nombre);
-                            ps2.setString(4, direccion);
-                            ps2.setString(5, telefono);
-                            ps2.setString(6, RFC);
-                            ps2.setInt(7, idContrato);
+                            ps2.setString(1, nombre);
+                            ps2.setString(2, direccion);
+                            ps2.setString(3, telefono);
+                            ps2.setString(4, RFC);
+                            ps2.setInt(5, idContrato);
+                            ps2.setInt(6, Statement.RETURN_GENERATED_KEYS);
                             ResultSet rs2 = ps2.executeQuery();
                             while (rs2.next()) {
-                                
+                                st = true;
                             }
                         }
                     }
