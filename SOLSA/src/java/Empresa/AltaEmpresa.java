@@ -1,10 +1,8 @@
 package Empresa;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,7 +20,7 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author David
- */
+ */ 
 public class AltaEmpresa extends HttpServlet {
 
     @Override
@@ -37,7 +35,7 @@ public class AltaEmpresa extends HttpServlet {
         //Datos de la session y la conexion
         HttpSession session = request.getSession();
         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding
+        response.setCharacterEncoding("UTF-8");
         String url = getInitParameter("url");
         String user = getInitParameter("user");
         String pass = getInitParameter("pass");
