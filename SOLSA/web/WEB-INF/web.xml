@@ -20,6 +20,10 @@
         <servlet-name>AltaEmpleado</servlet-name>
         <servlet-class>Aprobador.AltaUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SuperAdmin_AddUser</servlet-name>
+        <servlet-class>SuperAdmin.AddUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>AltaEmpleado</servlet-name>
         <url-pattern>/AltaEmpleado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SuperAdmin_AddUser</servlet-name>
+        <url-pattern>/SuperAdmin/AddUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

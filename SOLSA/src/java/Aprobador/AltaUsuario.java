@@ -19,7 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author EquipoRojt
  */
-public class AltaUsuario extends HttpServlet {
+public class AltaUsuario extends HttpServlet
+{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

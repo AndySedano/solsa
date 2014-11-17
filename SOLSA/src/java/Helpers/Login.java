@@ -1,11 +1,20 @@
 package Helpers;
 
-
 import java.security.*;
 import java.sql.*;
+import java.util.*;
+import org.javatuples.*;
 
 public class Login
 {
+    public static Pair<String, Integer> createNewHash(String password)
+    {
+        Random random = new SecureRandom();
+        int salt = random.nextInt();
+        String hashed = SHA256(password + salt);
+        return Pair.with(hashed, salt);
+    }
+    
     public static String SHA256(String value)
     {
         try
