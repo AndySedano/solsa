@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -73,9 +74,19 @@ public class AltaEmpresa extends HttpServlet {
                             ResultSet rs2 = ps2.executeQuery();
                             while (rs2.next()) {
                                 st = true;
+                                session.setAttribute("nombre", session.getAttribute("nombre"));
                             }
                         }
                     }
+                }
+                if (st) {
+                    request.setAttribute("res", "La empresa " + session.getAttribute("nombre"));
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("lapagina.jsp");
+                    rd.include(request, response);
+                } else {
+                    request.setAttribute("res", "Lo sentimos, ha ocurrido un error, ingrese los datos nuevamente");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("lapagina.jsp");
+                    rd.include(request, response);
                 }
             }
         }
