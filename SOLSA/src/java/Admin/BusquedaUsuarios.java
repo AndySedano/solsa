@@ -1,4 +1,4 @@
-package Aprobador;
+package Admin;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -19,13 +19,13 @@ import javax.servlet.http.HttpSession;
  *
  * @author David
  */
-public class ModificaNombreUsuario extends HttpServlet {
+public class BusquedaUsuarios extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,34 +35,30 @@ public class ModificaNombreUsuario extends HttpServlet {
         String user = getInitParameter("user");
         String pass = getInitParameter("pass");
         String nombre = request.getParameter("nombre");
-        String username = request.getParameter("username");
         boolean st = false;
-        String sql = "UPDATE Usuario SET nombre=? WHERE username=?;";
+        String sql = "SELECT username,nombre,tipo,idDepartamento FROM Usuario WHERE nombre LIKE ?";
         
         try {
             Class.forName("con.mysql.jdbc.Driver");
             try (Connection con = DriverManager.getConnection(url, user, pass)) {
                 try (PreparedStatement ps = con.prepareStatement(sql)) {
                     ps.setString(1, nombre);
-                    ps.setString(2, username);
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         st = true;
                     }
                 }
-                if (st) {
-                    request.setAttribute("res", "El usuario " + session.getAttribute("username") + " ha sido modificado exitosamente!");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("");
-                    rd.include(request, response);
-                } else {
-                    request.setAttribute("res", "Lo sentimos, ha habido un error, ingrese los datos nuevamente.");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("");
-                    rd.include(request, response);
-                }
+            } if (st) {
+                request.setAttribute("res", "El usuario " + session.getAttribute("username") + " ha sido modificado exitosamente.");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("modifica.... .jsp");
+                rd.include(request, response);
+            } else {
+                request.setAttribute("res", "Lo sentimos, hubo un error, seleccione nuevamente.");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("modifica.... .jsp");
+                rd.include(request, response);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(ModificaNombreUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (ClassNotFoundException | SQLException  ex) {
+            Logger.getLogger(BusquedaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }       
     }
-
 }

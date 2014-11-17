@@ -8,7 +8,9 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -46,20 +48,29 @@ public class AltaEmpresa extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String RFC = request.getParameter("RFC");
         int idContrato = Integer.parseInt(request.getParameter("idContrato"));
-        String sql = "INSERT INTO Fotografia (nombre, imagen) VALUES (?, ?); INSERT INTO Empresa (nombre, direccion, telefono, RFC, Contrato_idContrato, Fotografia_idFotografia) VALUES (?, ?, ?, ?, ?, ?);";
+        String sql1 = "INSERT INTO Fotografia (nombre, imagen) VALUES (?, ?);";
+        String sql2 = "INSERT INTO Empresa (nombre, direccion, telefono, RFC, Contrato_idContrato, Fotografia_idFotografia) VALUES (?, ?, ?, ?, ?, ?);";
         
         try {
             Class.forName("con.mysql.jdbc.Driver");
             try (Connection con = DriverManager.getConnection(url, user, pass)) {
-                try (PreparedStatement ps = con.prepareStatement(sql)) {
-                    ps.setString(1, nombreLogo);
-                    ps.setBlob(2, logo1);
-                    ps.setString(3, nombre);
-                    ps.setString(4, direccion);
-                    ps.setString(5, telefono);
-                    ps.setString(6, RFC);
-                    ps.setInt(7, idContrato);
-                    
+                try (PreparedStatement ps1 = con.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS)) {
+                    ps1.setString(1, nombreLogo);
+                    ps1.setBlob(2, logo1);
+                    ResultSet rs1 = ps1.executeQuery();
+                    while (rs1.next()) {
+                        try (PreparedStatement ps2 = con.prepareStatement(sql2)) {
+                            ps2.setString(3, nombre);
+                            ps2.setString(4, direccion);
+                            ps2.setString(5, telefono);
+                            ps2.setString(6, RFC);
+                            ps2.setInt(7, idContrato);
+                            ResultSet rs2 = ps2.executeQuery();
+                            while (rs2.next()) {
+                                
+                            }
+                        }
+                    }
                 }
             }
         }
