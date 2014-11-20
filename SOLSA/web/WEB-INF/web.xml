@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    
     <context-param>
         <param-name>url</param-name>
         <param-value>jdbc:mysql://solsa20.caafufvdj2xl.us-west-2.rds.amazonaws.com/solsa2020</param-value>
@@ -12,44 +13,150 @@
         <param-name>pass</param-name>
         <param-value>solsa2020</param-value>
     </context-param>
+    
+    <!---           Servlets               -->
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>Login</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>AltaEmpleado</servlet-name>
-        <servlet-class>Aprobador.AltaUsuario</servlet-class>
-    </servlet>
+    <!--Super admin-->
     <servlet>
         <servlet-name>SuperAdmin_AddUser</servlet-name>
         <servlet-class>SuperAdmin.AddUser</servlet-class>
+    </servlet>
+    <!--Admin-->
+    <servlet>
+        <servlet-name>Admin_Inicio</servlet-name>
+        <servlet-class>Admin.Inicio</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cliente_Alta</servlet-name>
+        <servlet-class>Admin.Cliente_Alta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cliente_Modificar</servlet-name>
+        <servlet-class>Admin.Cliente_Modificar</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Empresa_Alta</servlet-name>
         <servlet-class>Admin.Empresa_Alta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Empresa_Modificar</servlet-name>
+        <servlet-class>Admin.Empresa_Modificar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Producto_Alta</servlet-name>
+        <servlet-class>Admin.Producto_Alta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Producto_Modificar</servlet-name>
+        <servlet-class>Admin.Producto_Modificar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Ventas_Alta</servlet-name>
+        <servlet-class>Admin.Ventas_Alta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Ventas_Modificar</servlet-name>
+        <servlet-class>Admin.Ventas_Modificar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Departamento_Alta</servlet-name>
+        <servlet-class>Admin.Departamento_Alta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Departamento_Modificar</servlet-name>
+        <servlet-class>Admin.Departamento_Modificar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Admin_Reporte</servlet-name>
+        <servlet-class>Admin.Reporte</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Admin_Buscar</servlet-name>
+        <servlet-class>Admin.Buscar</servlet-class>
+    </servlet>
+    
+    <!--            Servlet Mapping             -->
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AltaEmpleado</servlet-name>
-        <url-pattern>/AltaEmpleado</url-pattern>
-    </servlet-mapping>
+    <!--Super admin-->
     <servlet-mapping>
         <servlet-name>SuperAdmin_AddUser</servlet-name>
         <url-pattern>/SuperAdmin/AddUser</url-pattern>
     </servlet-mapping>
+    <!--Admin-->
+    <servlet-mapping>
+        <servlet-name>Admin_Inicio</servlet-name>
+        <url-pattern>/Admin/Inicio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cliente_Alta</servlet-name>
+        <url-pattern>/Admin/Cliente_Alta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cliente_Modificar</servlet-name>
+        <url-pattern>/Admin/Cliente_Modificar</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Empresa_Alta</servlet-name>
-        <url-pattern>/Empresa_Alta</url-pattern>
+        <url-pattern>/Admin/Empresa_Alta</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Empresa_Modificar</servlet-name>
+        <url-pattern>/Admin/Empresa_Modificar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Producto_Alta</servlet-name>
+        <url-pattern>/Admin/Producto_Alta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Producto_Modificar</servlet-name>
+        <url-pattern>/Admin/Producto_Modificar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Ventas_Alta</servlet-name>
+        <url-pattern>/Admin/Ventas_Alta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Ventas_Modificar</servlet-name>
+        <url-pattern>/Admin/Ventas_Modificar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Departamento_Alta</servlet-name>
+        <url-pattern>/Admin/Departamento_Alta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Departamento_Modificar</servlet-name>
+        <url-pattern>/Admin/Departamento_Modificar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_Reporte</servlet-name>
+        <url-pattern>/Admin/Reporte</url-pattern>
+        <servlet-mapping>
+            <servlet-name>Admin_Buscar</servlet-name>
+            <url-pattern>/Admin/Buscar</url-pattern>
+        </servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin_Buscar</servlet-name>
+        <url-pattern>/Admin/Buscar</url-pattern>
+    </servlet-mapping>
+    
+    <!--             Session            -->
+    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-</web-app>
+
+    
+    &gt;
+    </web-app>
 <!--?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>

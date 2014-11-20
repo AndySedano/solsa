@@ -51,7 +51,7 @@ public class Login extends HttpServlet
                         }
                         case ("admin"):
                         {
-                            jspUrl = "";
+                            jspUrl = "Admin/Inicio";
                             break;
                         }
                         case ("aprobador"):

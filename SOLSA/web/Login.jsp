@@ -26,11 +26,10 @@
         </script>
         <div class="jumbotron">
             <center>
-                
-            <img src="https://s3.amazonaws.com/media.jetstrap.com/6B6pVJ0wTerow0dAVEk4_logo.png"
-                 width="400">
-            <img src="https://s3.amazonaws.com/media.jetstrap.com/gOhjW4DyS4OEkhATd7gh_Logo2.png"
-                 width="300">
+                <img src="https://s3.amazonaws.com/media.jetstrap.com/6B6pVJ0wTerow0dAVEk4_logo.png"
+                     width="400">
+                <img src="https://s3.amazonaws.com/media.jetstrap.com/gOhjW4DyS4OEkhATd7gh_Logo2.png"
+                     width="300">
             </center>
         </div>
         <div class="row">
@@ -68,7 +67,7 @@
             <hr>
             <p>
                 <a href="./index.html">Volver a SOLSA.com</a>
-                
+
             </p>
             <p>
                 &copy; SOLSA 2014
