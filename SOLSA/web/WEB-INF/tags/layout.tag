@@ -105,8 +105,7 @@
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("productos") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Pedidos">Pedidos</a></li>
-                                
+                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Pedidos">Pedidos</a></li>    
                             </ul> 
                         </c:when>
                     </c:choose>

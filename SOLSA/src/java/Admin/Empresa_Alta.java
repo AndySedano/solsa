@@ -27,7 +27,6 @@ public class Empresa_Alta extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
@@ -36,7 +35,7 @@ public class Empresa_Alta extends HttpServlet {
             response.sendRedirect("../Login");
         }
 
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/inicio.jsp");
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Empresa_Alta.jsp");
         disp.include(request, response);
     }
 
