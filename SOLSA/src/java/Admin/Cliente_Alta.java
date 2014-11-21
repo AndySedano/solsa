@@ -41,7 +41,6 @@ public class Cliente_Alta extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        //request.getCharacterEncoder("UTF-8");
         String url = getInitParameter("url");
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
@@ -76,11 +75,11 @@ public class Cliente_Alta extends HttpServlet {
                 }
                 if (st) {
                     request.setAttribute("res", "El ususario " + session.getAttribute("username") + " ha sido registrado exitosamente.");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("lapagina.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("Cliente_Alta.jsp");
                     rd.include(request, response);
                 } else {
                     request.setAttribute("res", "Lo sentimos, hubo un error, ingrese los datos nuevamente...");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("lapagina.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("Cliente_Alta.jsp");
                     rd.include(request, response);
                 }
             }
