@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "Cliente_Modificar_Nombre", urlPatterns = {"/Cliente_Modificar_Nombre"})
-public class Cliente_Modificar_Nombre extends HttpServlet {
+public class Cliente_Modificar_Direccion extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,15 +42,15 @@ public class Cliente_Modificar_Nombre extends HttpServlet {
         String url = getInitParameter("url");
         String user = getInitParameter("user");
         String pass = getInitParameter("pass");
-        String nombre = request.getParameter("nombre");
+        String direccion = request.getParameter("direccion");
         String username = request.getParameter("username");
         boolean st = false;
-        String sql = "UPDATE Usuario SET nombre=? WHERE username=?;";
+        String sql = "UPDATE Usuario SET direccion=? WHERE username=?;";
         try {
             Class.forName("con.mysql.jdbc.Driver");
             try (Connection con = DriverManager.getConnection(url, user, pass)) {
                 try (PreparedStatement ps = con.prepareStatement(sql)) {
-                    ps.setString(1, nombre);
+                    ps.setString(1, direccion);
                     ps.setString(2, username);
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
@@ -58,17 +58,17 @@ public class Cliente_Modificar_Nombre extends HttpServlet {
                     }
                 }
                 if (st) {
-                    request.setAttribute("res", "El cliente " + session.getAttribute("username") + " ha sido modificado exitosamente, su nombre es " + session.getAttribute("nombre"));
+                    request.setAttribute("res", "El cliente " + session.getAttribute("username") + " ha sido modificado exitosamente, su direccion es " + session.getAttribute("direccion"));
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("Cliente_Modificar.jsp");
                     rd.include(request, response);
                 } else {
                     request.setAttribute("res", "Lo sentimos, hubo un error, ingrese los datos nuevamente...");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("Cliente_Modificar_Nombre.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("Cliente_Modificar_Direccion.jsp");
                     rd.include(request, response);
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Cliente_Modificar_Nombre.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Cliente_Modificar_Direccion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
