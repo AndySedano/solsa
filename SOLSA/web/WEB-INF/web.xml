@@ -19,6 +19,10 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>Logout</servlet-class>
+    </servlet>
     <!--Super admin-->
     <servlet>
         <servlet-name>SuperAdmin_AddUser</servlet-name>
@@ -90,13 +94,33 @@
         <servlet-name>EstadoPedido</servlet-name>
         <servlet-class>Ventas.EstadoPedido</servlet-class>
     </servlet>
-    
+    <!--Cliente-->
+    <servlet>
+        <servlet-name>Productos</servlet-name>
+        <servlet-class>Cliente.Productos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cliente_Reporte</servlet-name>
+        <servlet-class>Cliente.Reporte</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cliente_Peticiones</servlet-name>
+        <servlet-class>Cliente.Peticiones</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Carrito</servlet-name>
+        <servlet-class>Cliente.Carrito</servlet-class>
+    </servlet>
     
     <!--            Servlet Mapping             -->
     
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <!--Super admin-->
     <servlet-mapping>
@@ -173,6 +197,24 @@
     <servlet-mapping>
         <servlet-name>EstadoPedido</servlet-name>
         <url-pattern>/Ventas/EstadoPedido</url-pattern>
+    </servlet-mapping>
+    <!--Cliente-->
+    
+    <servlet-mapping>
+        <servlet-name>Productos</servlet-name>
+        <url-pattern>/Cliente/Productos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cliente_Reporte</servlet-name>
+        <url-pattern>/Cliente/Reporte</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cliente_Peticiones</servlet-name>
+        <url-pattern>/Cliente/Peticiones</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Carrito</servlet-name>
+        <url-pattern>/Cliente/Carrito</url-pattern>
     </servlet-mapping>
   
   

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Productos extends HttpServlet {
+public class Carrito extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -21,7 +21,7 @@ public class Productos extends HttpServlet {
             response.sendRedirect("../Login");
         }
 
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Cliente/Productos.jsp");
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Cliente/Carrito.jsp");
         disp.include(request, response);
     }
 

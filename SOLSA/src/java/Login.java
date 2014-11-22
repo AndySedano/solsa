@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
                             break;
                         }
                         case ("aprobador"): {
-                            jspUrl = "";
+                            jspUrl = "Aprobador/Peticiones";
                             break;
                         }
                         case ("cliente"): {
