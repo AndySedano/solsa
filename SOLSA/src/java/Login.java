@@ -4,73 +4,63 @@ import java.util.logging.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class Login extends HttpServlet
-{
+public class Login extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Login.jsp");
         disp.include(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException
-    {
+            throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
-        String base_url  = getServletContext().getInitParameter("url");
+        String base_url = getServletContext().getInitParameter("url");
         String base_user = getServletContext().getInitParameter("user");
         String base_pass = getServletContext().getInitParameter("pass");
 
-        try
-        {
+        try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection(base_url, base_user, base_pass))
-            {
+            try (Connection con = DriverManager.getConnection(base_url, base_user, base_pass)) {
                 String tipo = Helpers.Login.verifyLogin(username, password, con);
                 String jspUrl = null;
-                
-                if (tipo == null)
-                {
+
+                if (tipo == null) {
                     jspUrl = "Login";
-                }
-                else
-                {
+                } else {
                     session.setAttribute("username", username);
                     session.setAttribute("tipo", tipo);
-                    // enum('admin','aprobador','cliente','superadmin')
-                    switch (tipo)
-                    {
-                        case ("superadmin"):
-                        {
+                    // enum('admin','aprobador','cliente','superadmin','ventas')
+                    switch (tipo) {
+                        case ("superadmin"): {
                             jspUrl = "SuperAdmin/AddUser";
                             break;
                         }
-                        case ("admin"):
-                        {
+                        case ("admin"): {
                             jspUrl = "Admin/Inicio";
                             break;
                         }
-                        case ("aprobador"):
-                        {
+                        case ("aprobador"): {
                             jspUrl = "";
                             break;
                         }
-                        case ("cliente"):
-                        {
+                        case ("cliente"): {
                             jspUrl = "Cliente/Productos";
+                            break;
+                        }
+                        case ("ventas"): {
+                            jspUrl = "Ventas/Pedidos";
                             break;
                         }
                     }
                 }
                 response.sendRedirect(jspUrl);
             }
-        }
-        catch (ClassNotFoundException | SQLException ex)
-        {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
 
