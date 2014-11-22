@@ -53,7 +53,8 @@ public class AddUser extends HttpServlet
             
             Pair<String, Integer> hash = Helpers.Login.createNewHash(request.getParameter("password"));
             
-            PreparedStatement p = con.prepareStatement("insert into Usuario (username, password, salt, nombre, direccion, telefono, tipo) values (?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement p =
+                con.prepareStatement("insert into Usuario (username, password, salt, nombre, direccion, telefono, tipo) values (?, ?, ?, ?, ?, ?, ?)");
             p.setString(1, request.getParameter("username"));
             p.setString(2, hash.getValue0());
             p.setInt   (3, hash.getValue1());
