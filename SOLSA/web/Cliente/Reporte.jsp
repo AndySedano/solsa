@@ -6,6 +6,52 @@
         Reporte
     </jsp:attribute>
     <jsp:body>
-        reporte
+        <form>
+
+            <h1>Reporte de Pedidos</h1>
+            <p>
+                Para hacer un reporte ingrese las fechas en el formato
+                correspondiente.
+            </p>
+            <br />
+            Fecha de Inicio
+            <br />
+            <input type="text" value="día">&nbsp;
+            <input type="text" value="mes">&nbsp;
+            <input type="text" value="año">&nbsp;
+            <br />
+            <br />
+            Fecha de Fin
+            <br />
+            <input type="text" value="día">&nbsp;
+            <input type="text" value="mes">&nbsp;
+            <input type="text" value="año">&nbsp;
+            <br />
+            <br />
+            <input type="submit" value="Realizar Reporte" />
+            <br />
+            <br />
+
+
+            <div>
+                <h3>Reporte</h3>
+                <br />
+                <br />
+                Peticiones Aceptados: 
+                <br />
+                Peticiones Canceladas:
+                <br />
+                <br />
+                Pedidos Entregados:
+                <br />
+                Pedidos En Tránsito:
+                <br />
+                <br />
+                Costo Total: MXN
+                <br />
+            </div>
+
+
+        </form>
     </jsp:body>
 </t:layout>

@@ -74,10 +74,6 @@
         <servlet-class>Admin.Departamento_Modificar</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Admin_Reporte</servlet-name>
-        <servlet-class>Admin.Reporte</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Admin_Buscar</servlet-name>
         <servlet-class>Admin.Buscar</servlet-class>
     </servlet>
@@ -182,14 +178,6 @@
         <url-pattern>/Admin/Departamento_Modificar</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Admin_Reporte</servlet-name>
-        <url-pattern>/Admin/Reporte</url-pattern>
-        <servlet-mapping>
-            <servlet-name>Admin_Buscar</servlet-name>
-            <url-pattern>/Admin/Buscar</url-pattern>
-        </servlet-mapping>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Admin_Buscar</servlet-name>
         <url-pattern>/Admin/Buscar</url-pattern>
     </servlet-mapping>
@@ -244,7 +232,7 @@
 
     
     &gt;
-</web-app>
+    </web-app>
 <!--?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
