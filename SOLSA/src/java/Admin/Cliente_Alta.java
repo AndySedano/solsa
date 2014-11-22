@@ -61,13 +61,12 @@ public class Cliente_Alta extends HttpServlet {
                 try (PreparedStatement ps = con.prepareStatement(sql)) {
                     ps.setString(1, username);
                     ps.setString(2, password);
-                    ps.setString(3, telefono);
-                    ps.setInt(4, salt);
-                    ps.setString(5, nombre);
-                    ps.setString(6, direccion);
-                    ps.setString(7, telefono);
-                    ps.setString(8, tipo);
-                    ps.setInt(9, idDepartamento);
+                    ps.setInt(3, salt);
+                    ps.setString(4, nombre);
+                    ps.setString(5, direccion);
+                    ps.setString(6, telefono);
+                    ps.setString(7, tipo);
+                    ps.setInt(8, idDepartamento);
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         st = true;
