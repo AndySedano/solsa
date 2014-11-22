@@ -6,62 +6,28 @@
         Admin
     </jsp:attribute>
     <jsp:body>
-        
+
         <div class="container">
-            
-            <div class="bs-docs-section">
-                
-                <div class="row">
-                    
-                    <div class="col-lg-12" id="Cliente_Alta">
-                        
-                        <div class="page-header">
-                            <h1 id="forms">Alta de Cliente</h1>
-                        </div>
-                        
-                        <div class="row">
-                        
-                            <div class="col-lg-6">
-                                
-                                <div class="well bs-component">
-                                    
-                                    <div class="form-horizontal">
-                                        
-                                        <fieldset>
-                                            
-                                            <div class="form-horizontal">
-                                                
-                                                <h7>Usuario:</h7>
-                                                <span>
-                                                    <input id="element1" name="element1" class="element text" maxlength="30" size="15" value=""/>
-                                                </span>
-                                                
-                                                <h7>Contrasena:</h7>
-                                                <span>
-                                                    <input
-                                                </span>
-                                                
-                                            </div>
-                                            
-                                        </fieldset>
-                                        
-                                    </div>
-                                    
-                                </div>
-                                
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                    
+            <div class="col-lg-12" id="Cliente_Alta">
+                <div class="page-header">
+                    <h1 id="forms">Alta de Cliente</h1>
                 </div>
-                
+                <h7>Usuario:</h7>
+                <span>
+                    <input id="element1" name="element1" class="element text" maxlength="30" size="15" value=""/>
+                </span>
+                &nbsp;
+                &nbsp;
+                <h7>Contraseña:</h7>
+                <span>
+                    <input id="element2" name="element2" class="element text" maxlength="30" size="15" value=""/>
+                </span>
             </div>
-            
         </div>
-        
-        
+                                                
+                                                
+                                                
+
     </jsp:body>
 </t:layout>
         
