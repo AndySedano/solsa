@@ -21,10 +21,10 @@
             <input type="text" name="busqueda" />
 
             <select name="loquequieras">
-                <option value="Empresa.idEmpresa">Empresa</option>
-                <option value="Pedido.Estado">Estado</option>
+                <option value="1">Empresa</option>
+                <option value="2">Estado</option>
             </select>
-            <input type="submit" name="botonCool" value="Buscar" />
+            <input type="submit" name="botonCool"/>
             <br />
             <br />
 
@@ -72,38 +72,38 @@
                         <td>
                             &nbsp;
                             &nbsp;
-                    <c:out value="${al.id}" />
-                    &nbsp;
-                    &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                    <c:out value="${al.empresa}" />
-                    &nbsp;
-                    &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                    <c:out value="${al.fechaEntrega}" />
-                    &nbsp;
-                    &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                    <c:out value="${al.estado}" />
-                    &nbsp;
-                    &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                        <input type="submit" name="${al.id}" value="Ver"/>
-                        &nbsp;
-                        &nbsp;
-                    </td>
+                            <c:out value="${al.id}" />
+                            &nbsp;
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                            &nbsp;
+                            <c:out value="${al.empresa}" />
+                            &nbsp;
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                            &nbsp;
+                            <c:out value="${al.date}" />
+                            &nbsp;
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                            &nbsp;
+                            <c:out value="${al.estado}" />
+                            &nbsp;
+                            &nbsp;
+                        </td>
+                        <td>
+                            &nbsp;
+                            &nbsp;
+                            <input type="submit" name="${al.id}" value="Ver"/>
+                            &nbsp;
+                            &nbsp;
+                        </td>
                     </tr>
                 </c:forEach>
 
