@@ -8,9 +8,9 @@
         Admin
     </jsp:attribute>
     <jsp:body>
-        <form>
+        <form method="POST" action="${pageContext.request.contextPath}/Pedidos">
             <h1>
-                Búsqueda de Pedidos
+                Pedidos
             </h1>
             <br/>
             <br/>
@@ -18,17 +18,16 @@
                 Para buscar un pedido ingrese en el campo de texto y 
                 seleccione el criterio de búsqueda correspondiuente.
             </p>
-            <br />
             <input type="text" name="busqueda" />
-            <select>
-                <option>Empresa</option>
-                <option>Estado</option>
+            
+            <select name="loquequieras">
+                <option value="Empresa.idEmpresa">Empresa</option>
+                <option value="Pedido.Estado">Estado</option>
             </select>
             <input type="submit" name="botonCool" value="Buscar" />
             <br />
             <br />
-            <br />
-            
+                        
             <table border="1px">
                 <tr>
                     <th>
