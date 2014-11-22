@@ -54,7 +54,7 @@
             <button type="submit" class="btn btn-success">Modificar</button>
             <button type="submit" class="btn btn-danger">Cancelar</button>
             <button type="submit" class="btn btn-primary">Volver</button>
-            
                 
-            </form>        </jsp:body>
+            </form>       
+    </jsp:body>
 </t:layout>
