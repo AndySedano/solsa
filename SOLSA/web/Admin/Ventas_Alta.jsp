@@ -3,9 +3,10 @@
 
 <t:layout seccion="admin" activo ="ventas_alta">
     <jsp:attribute name="titulo">
-        Admin
+        Altas Venta
     </jsp:attribute>
     <jsp:body>
         Altas venta
+        
     </jsp:body>
 </t:layout>

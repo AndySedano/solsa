@@ -3,6 +3,7 @@
 <%@ tag description="Diseño base del sitio de SOLSA" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="titulo" fragment="true" %>
+<%@ attribute name="scripts" fragment="true" %>
 <%@ attribute name="seccion" type="java.lang.String" %>
 <%@ attribute name="activo" type="java.lang.String" %>
 
@@ -41,7 +42,7 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="<% out.print(request.getContextPath()); %>/Logout">Logout</a></li>
+                        <li><a href="<%  out.print(request.getContextPath()); %>/Logout">Logout</a></li>
 
                     </ul>
                 </div>
@@ -120,6 +121,6 @@
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+        <jsp:invoke fragment="scripts" />
     </body>
 </html>
