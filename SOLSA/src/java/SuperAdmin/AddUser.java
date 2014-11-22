@@ -41,6 +41,16 @@ public class AddUser extends HttpServlet
         
         try (Connection con = Helpers.DB.newConnection(this))
         {
+            if (request.getParameter("password").length() < 8
+                || !request.getParameter("password").equals(request.getParameter("passwordagain")))
+            {
+                request.setAttribute("error", "true");
+                request.setAttribute("message", "Error de validación");
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/SuperAdmin/AddUser.jsp");
+                disp.include(request, response);
+                return;
+            }
+            
             Pair<String, Integer> hash = Helpers.Login.createNewHash(request.getParameter("password"));
             
             PreparedStatement p = con.prepareStatement("insert into Usuario (username, password, salt, nombre, direccion, telefono, tipo) values (?, ?, ?, ?, ?, ?, ?)");
@@ -54,7 +64,6 @@ public class AddUser extends HttpServlet
             p.executeUpdate();
             
             request.setAttribute("message", "Alta de usuario exitosa");
-            
             RequestDispatcher disp = getServletContext().getRequestDispatcher("/SuperAdmin/AddUser.jsp");
             disp.include(request, response);
         }

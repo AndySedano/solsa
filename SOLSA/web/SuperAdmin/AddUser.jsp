@@ -9,7 +9,12 @@
     <jsp:body>
         <h2>Alta de Administradores</h2>
         <c:if test="${not empty message}">
-            <div class="alert alert-success" role="alert">${message}</div>
+            <c:if test="${not empty error}">
+                <div class="alert alert-warning" role="alert">${message}</div>
+            </c:if>
+            <c:if test="${empty error}">
+                <div class="alert alert-success" role="alert">${message}</div>
+            </c:if>
         </c:if>
         <form class="form-horizontal" method="post" action="AddUser">
             <div class="form-group">
@@ -21,7 +26,13 @@
             <div class="form-group">
                 <label for="password" class="col-md-3 control-label">Contraseña</label>
                 <div class="col-md-9">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="min. 8 caracteres">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="passwordagain" class="col-md-3 control-label">Confirmar contraseña</label>
+                <div class="col-md-9">
+                    <input type="password" class="form-control" id="passwordagain" name="passwordagain" placeholder="min. 8 caracteres">
                 </div>
             </div>
             <div class="form-group">
