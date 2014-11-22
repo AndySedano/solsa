@@ -6,7 +6,7 @@
         Admin
     </jsp:attribute>
     <jsp:body>
-        <h2>Modificar Empresa</h2>
+        <h2>Dar de Alta Producto</h2>
             <form class="form-horizontal" method="post" action="Producto_Alta">
                 
                 <div class="form-group">
@@ -51,7 +51,7 @@
                     </div>
                 </div>                
 
-            <button type="submit" class="btn btn-success">Modificar</button>
+            <button type="submit" class="btn btn-success">Aceptar</button>
             <button type="submit" class="btn btn-danger">Cancelar</button>
             <button type="submit" class="btn btn-primary">Volver</button>
             
