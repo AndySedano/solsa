@@ -39,8 +39,15 @@ public class Cliente_Modificar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        request .setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession();
+        
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("superadmin") == false)
+            response.sendRedirect("../Login");
+
         String url = getInitParameter("url");
         String user = getInitParameter("user");
         String pass = getInitParameter("pass");
@@ -48,8 +55,9 @@ public class Cliente_Modificar extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
+        String departamento = request.getParameter("departamento");
         boolean st = false;
-        String sql = "UPDATE Usuario SET nombre=?, direccion=?, telefono=? WHERE username=?;";
+        String sql = "UPDATE Usuario SET nombre=?, direccion=?, telefono=? departamento=? WHERE username=?;";
 
         try {
             Class.forName("con.mysql.jdbc.Driver");
@@ -58,7 +66,8 @@ public class Cliente_Modificar extends HttpServlet {
                     ps.setString(1, nombre);
                     ps.setString(2, direccion);
                     ps.setString(3, telefono);
-                    ps.setString(4, username);
+                    ps.setString(4, departamento);
+                    ps.setString(5, username);
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         st = true;
@@ -67,12 +76,12 @@ public class Cliente_Modificar extends HttpServlet {
                 }
                 if (st) {
                     request.setAttribute("res", "El usuario " + session.getAttribute("username") + " ha siido modificado.");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Cliente_Modificacion.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
                     rd.include(request, response);
                             
                 } else {
                     request.setAttribute("res", "Lo sentimos, ha ocurrido un error, ingrese los datos nuevamente...");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Cliente_Modificacion.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
                     rd.include(request, response);
                 }
                 con.close();
