@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.javatuples.Pair;
 
 public class Ventas_Alta extends HttpServlet {
 
@@ -41,7 +42,7 @@ public class Ventas_Alta extends HttpServlet {
         
         HttpSession session = request.getSession();
         
-        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("superadmin") == false)
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
             response.sendRedirect("../Login");
 
         String url = getInitParameter("url");
@@ -50,7 +51,7 @@ public class Ventas_Alta extends HttpServlet {
         boolean st = false;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        int salt = Integer.parseInt(request.getParameter("salt"));
+        Pair<String, Integer> salt = Helpers.Login.createNewHash(password);
         String nombre = request.getParameter("nombre");
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
@@ -73,6 +74,7 @@ public class Ventas_Alta extends HttpServlet {
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         st = true;
+                        session.setAttribute("username", session.getAttribute("username"));
                     }
                 }
                 if (st) {
