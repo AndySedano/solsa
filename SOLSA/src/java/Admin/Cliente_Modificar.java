@@ -15,10 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author David
- */
 public class Cliente_Modificar extends HttpServlet {
 
     @Override
@@ -39,49 +35,53 @@ public class Cliente_Modificar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        request .setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession();
+        
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("superadmin") == false)
+            response.sendRedirect("../Login");
+
         String url = getInitParameter("url");
         String user = getInitParameter("user");
         String pass = getInitParameter("pass");
-        String nombre = request.getParameter("nombre");
         String username = request.getParameter("username");
-        // Sobre seleccion pienso que seria bueno hacer una modificacion 
-        // por cada elemento, ya sea dentro de la misma pagina web o en 
-        // una particular para cada modificacion
-        int seleccion = Integer.parseInt(request.getParameter("seleccion"));
+        String nombre = request.getParameter("nombre");
+        String direccion = request.getParameter("direccion");
+        String telefono = request.getParameter("telefono");
+        int departamento = Integer.parseInt(request.getParameter("departamento"));
         boolean st = false;
-        String sql = "UPDATE Usuario SET nombre=? WHERE username=?;";
+        String sql = "UPDATE Usuario SET nombre=?, direccion=?, telefono=? departamento=? WHERE username=?;";
 
         try {
             Class.forName("con.mysql.jdbc.Driver");
             try (Connection con = DriverManager.getConnection(url, user, pass)) {
                 try (PreparedStatement ps = con.prepareStatement(sql)) {
                     ps.setString(1, nombre);
-                    ps.setString(2, username);
+                    ps.setString(2, direccion);
+                    ps.setString(3, telefono);
+                    ps.setInt(4, departamento);
+                    ps.setString(5, username);
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         st = true;
+                        session.setAttribute("username", session.getAttribute("username"));
                     }
                 }
-                switch (seleccion) {
-                    case 1: 
-                        RequestDispatcher rd1 = getServletContext().getRequestDispatcher("Cliente_Modificacion_Nombre.jsp");
-                        rd1.include(request, response);
-                    case 2:
-                        RequestDispatcher rd2 = getServletContext().getRequestDispatcher("Cliente_Modificacion_Salt.jsp");
-                        rd2.include(request, response);
-                    case 3: 
-                        RequestDispatcher rd3 = getServletContext().getRequestDispatcher("Cliente_Modificacion_Direccion.jsp");
-                        rd3.include(request, response);
-                    case 4:
-                        RequestDispatcher rd4 = getServletContext().getRequestDispatcher("Cliente_Modificacion_Telefono.jsp");
-                        rd4.include(request, response);
-                    case 5:
-                        RequestDispatcher rd5 = getServletContext().getRequestDispatcher("Cliente_Modificacion_Tipo.jsp");
-                        rd5.include(request, response);
+                if (st) {
+                    request.setAttribute("res", "El usuario " + session.getAttribute("username") + " ha siido modificado.");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
+                    rd.include(request, response);
+                            
+                } else {
+                    request.setAttribute("res", "Lo sentimos, ha ocurrido un error, ingrese los datos nuevamente...");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
+                    rd.include(request, response);
                 }
-            }
+                con.close();
+            } 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Cliente_Modificar.class.getName()).log(Level.SEVERE, null, ex);
         }

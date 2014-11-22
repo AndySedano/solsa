@@ -3,6 +3,7 @@
 <%@ tag description="Diseño base del sitio de SOLSA" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="titulo" fragment="true" %>
+<%@ attribute name="scripts" fragment="true" %>
 <%@ attribute name="seccion" type="java.lang.String" %>
 <%@ attribute name="activo" type="java.lang.String" %>
 
@@ -40,7 +41,9 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="./Logout">Logout</a></li>
+
+                        <li><a href="<%  out.print(request.getContextPath()); %>/Logout">Logout</a></li>
+
                     </ul>
                 </div>
             </div>
@@ -95,8 +98,8 @@
                                 <img src="../CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
                                 <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="Peticiones">Peticiones</a></li>
+                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
                             </ul> 
                         </c:when>
                         <c:when test="${seccion == 'ventas'}">
@@ -104,8 +107,8 @@
                                 <img src="../CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("productos") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Pedidos">Pedidos</a></li>    
+                                <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
+                                <li class=${activo.equals("pedidos") ? "active" : "none"}><a href="Pedidos">Pedidos</a></li>    
                             </ul> 
                         </c:when>
                     </c:choose>
@@ -118,6 +121,6 @@
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+        <jsp:invoke fragment="scripts" />
     </body>
 </html>

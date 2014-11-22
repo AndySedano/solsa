@@ -15,10 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author EquipoRojo
- */
 public class Cliente_Alta extends HttpServlet {
 
     @Override
@@ -70,6 +66,7 @@ public class Cliente_Alta extends HttpServlet {
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         st = true;
+                        session.setAttribute("username", session.getAttribute("username"));
                     }
                 }
                 if (st) {
