@@ -15,10 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author David
- */
 public class Cliente_Modificar extends HttpServlet {
 
     @Override
@@ -55,7 +51,7 @@ public class Cliente_Modificar extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
-        String departamento = request.getParameter("departamento");
+        int departamento = Integer.parseInt(request.getParameter("departamento"));
         boolean st = false;
         String sql = "UPDATE Usuario SET nombre=?, direccion=?, telefono=? departamento=? WHERE username=?;";
 
@@ -66,7 +62,7 @@ public class Cliente_Modificar extends HttpServlet {
                     ps.setString(1, nombre);
                     ps.setString(2, direccion);
                     ps.setString(3, telefono);
-                    ps.setString(4, departamento);
+                    ps.setInt(4, departamento);
                     ps.setString(5, username);
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
