@@ -111,6 +111,15 @@
         <servlet-name>Carrito</servlet-name>
         <servlet-class>Cliente.Carrito</servlet-class>
     </servlet>
+    <!--Aprobador-->
+    <servlet>
+        <servlet-name>Aprobador_Peticiones</servlet-name>
+        <servlet-class>Aprobador.Peticiones</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Aprobador_Reporte</servlet-name>
+        <servlet-class>Aprobador.Reporte</servlet-class>
+    </servlet>
     
     <!--            Servlet Mapping             -->
     
@@ -185,7 +194,6 @@
         <url-pattern>/Admin/Buscar</url-pattern>
     </servlet-mapping>
     <!--Ventas-->
-    
     <servlet-mapping>
         <servlet-name>Ventas_Buscar</servlet-name>
         <url-pattern>/Ventas/Buscar</url-pattern>
@@ -199,7 +207,6 @@
         <url-pattern>/Ventas/EstadoPedido</url-pattern>
     </servlet-mapping>
     <!--Cliente-->
-    
     <servlet-mapping>
         <servlet-name>Productos</servlet-name>
         <url-pattern>/Cliente/Productos</url-pattern>
@@ -216,6 +223,15 @@
         <servlet-name>Carrito</servlet-name>
         <url-pattern>/Cliente/Carrito</url-pattern>
     </servlet-mapping>
+    <!--Aprobador-->
+    <servlet-mapping>
+        <servlet-name>Aprobador_Peticiones</servlet-name>
+        <url-pattern>/Aprobador/Peticiones</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Aprobador_Reporte</servlet-name>
+        <url-pattern>/Aprobador/Reporte</url-pattern>
+    </servlet-mapping>
   
   
     <!--             Session            -->
@@ -228,7 +244,7 @@
 
     
     &gt;
-    </web-app>
+</web-app>
 <!--?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>

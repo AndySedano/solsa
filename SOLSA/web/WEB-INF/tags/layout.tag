@@ -40,7 +40,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="./Logout">Logout</a></li>
+                        <li><a href="../Logout">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -95,8 +95,8 @@
                                 <img src="../CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
                                 <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="Peticiones">Peticiones</a></li>
+                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
                             </ul> 
                         </c:when>
                         <c:when test="${seccion == 'ventas'}">
@@ -104,8 +104,8 @@
                                 <img src="../CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("productos") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Pedidos">Pedidos</a></li>    
+                                <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
+                                <li class=${activo.equals("pedidos") ? "active" : "none"}><a href="Pedidos">Pedidos</a></li>    
                             </ul> 
                         </c:when>
                     </c:choose>
