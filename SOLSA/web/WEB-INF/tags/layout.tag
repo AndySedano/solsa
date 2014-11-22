@@ -107,7 +107,6 @@
                                 <img src="../CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
                                 <li class=${activo.equals("pedidos") ? "active" : "none"}><a href="Pedidos">Pedidos</a></li>    
                             </ul> 
                         </c:when>
