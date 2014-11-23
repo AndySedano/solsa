@@ -2,7 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:layout seccion="admin" activo="empresa_alta">
+<t:layout seccion="admin" activo="empresas">
     <jsp:attribute name="titulo">
         Alta de Empresas
     </jsp:attribute>
@@ -18,9 +18,6 @@
                 <div class="alert alert-success" role="alert">${message}</div>
             </c:if>
         </c:if>
-        <p>
-            <a href="Empresa_Buscar">Regresar</a>
-        </p>
         <form class="form-horizontal" method="post" action="Empresa_Modificar?id=${empresa.idEmpresa}" enctype="multipart/form-data">
             <input type="hidden" name="idEmpresa" value="${empresa.idEmpresa}">
             
@@ -64,6 +61,7 @@
             
             <div class="form-group"><div class="col-md-offset-3 col-md-9">
             <button type="submit" class="btn btn-primary">Modificar</button>
+            <a class="btn btn-default" href="Empresa_Buscar">Regresar</a>
             </div></div>
         </form>
     </jsp:body>
