@@ -6,6 +6,15 @@
         Admin
     </jsp:attribute>
     <jsp:body>
-        Modificacion Ventas
+        <form>
+            <h1>Modificación del Personal de Ventas</h1>
+            <p>
+                Ingrese el Username en la casilla para desplegar los datos
+                a cambiar:
+            </p>
+            
+            
+            
+        </form>
     </jsp:body>
 </t:layout>

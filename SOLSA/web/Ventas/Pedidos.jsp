@@ -28,85 +28,44 @@
             <br />
             <br />
 
-            <table border="1px">
+            <table class="table table-hover">
                 <tr>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         id
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Empresa
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Fecha de Entrega
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Estado
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Seleccionar
-                        &nbsp;
-                        &nbsp;
                     </th>
                 </tr>
 
                 <c:forEach items="${requestScope.inf}" var="al">
                     <tr>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.id}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.empresa}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.date}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.estado}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
-                            <input type="submit" name="${al.id}" value="Ver"/>
-                            &nbsp;
-                            &nbsp;
+                            <a class=" btn btn-primary btn-sm" href="EstadoPedido?id=${al.id}">Ver</a>
                         </td>
                     </tr>
                 </c:forEach>
-
             </table>
 
         </form>

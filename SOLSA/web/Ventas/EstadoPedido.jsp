@@ -15,86 +15,71 @@
             <br />
 
             <p>
-                id: 
+                id: ${requestScope.bean.id}
                 <br />
-                Empresa:
+                Empresa: ${requestScope.bean.empresa}
                 <br>
-                Fecha de Entrega:
+                Fecha de Entrega: ${requestScope.bean.date}
                 <br />
-                Estado:
+                Estado: ${requestScope.bean.estado}
                 <br />
                 <br />
             </p>
             <p>
             <h4>Elementos Pedidos:</h4>
-            
-            <table>
 
+            <table class="table table-hover">
                 <tr>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        id
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Nombre
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Cantidad
-                        &nbsp;
-                        &nbsp;
-                    </th>
+                    <th>id</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
                 </tr>
 
                 <c:forEach items="${requestScope.inf}" var="al">
                     <tr>
                         <td>
+<<<<<<< HEAD
                             &nbsp;
                             &nbsp;
+                            <c:out value="${al.idProducto}" />
+                            &nbsp;
+                            &nbsp;
+=======
                             <c:out value="${al.id}" />
-                            &nbsp;
-                            &nbsp;
+>>>>>>> origin/master
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.nombre}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
+<<<<<<< HEAD
                             &nbsp;
                             &nbsp;
+                            <c:out value="${al.descripcion}" />
+                            &nbsp;
+                            &nbsp;
+=======
                             <c:out value="${al.cantidad}" />
-                            &nbsp;
-                            &nbsp;
+>>>>>>> origin/master
                         </td>
                     </tr>
                 </c:forEach>
 
             </table>
-            
+
             <br />
             <h4>Estado del Pedido</h4>
-            <input type="radio">&nbsp;Recibido
+            <input type="radio" name="estado">&nbsp;Recibido
             <br />
-            <input type="radio">&nbsp;En Almacen
+            <input type="radio" name="estado">&nbsp;En Almacen
             <br />
-            <input type="radio">&nbsp;En Camino
+            <input type="radio" name="estado">&nbsp;En Camino
             <br />
-            <input type="radio">&nbsp;Entregado
+            <input type="radio" name="estado">&nbsp;Entregado
             <br />
             <br />
             <input type="submit" name="cambiarEstado" value="Cambiar Estado">
-        </p>
-    </form> 
-</jsp:body>
+            </p>
+        </form> 
+    </jsp:body>
 </t:layout>
