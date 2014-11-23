@@ -35,20 +35,22 @@
                     <c:forEach items="${requestScope.inf}" var="al">
                         <tr>
                             <td>
-                        <c:out value="${al.nombre}" />
-                        </td>
-                        <td>
-                        <c:out value="${al.precio}" />
-                        </td>
-                        <td>
-                            <input type="text" value="${al.cantidad}" />
-                        </td>
-                        <td>
-                            PrecioTotal
-                        </td>
-                        <td>
-                            <input type="submit" name="${al.idProducto}" value="Quitar"/>
-                        </td>
+                                <c:out value="${al.nombre}" />
+                            </td>
+                            <td>
+                                <c:out value="${al.precio}" />
+                            </td>
+                            <td>
+                                <input type="text" value="${al.cantidad}" />
+                            </td>
+                            <td id="${al.nombre}">
+                                PrecioTotal 
+                                <input type="button" value="Calcular" onclick="precioTotal('${al.nombre}', ${al.precio})" />
+                            </td>
+                            <td>
+                                <a class=" btn btn-primary btn-sm" href="QuitarCarrito?id_Producto">
+                                    Quitar</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -62,6 +64,14 @@
 
 
         </form>
+
+        <script language="javascript" type="text/javascript">
+            function precioTotal(id, precioUnit) {
+                var cantidad = document.getElementById("quantas").value;
+                var cell = document.getElementById(id);
+                cell.innerHTML = cantidad * precioUnit;
+            }
+        </script>
 
     </jsp:body>
 </t:layout>
