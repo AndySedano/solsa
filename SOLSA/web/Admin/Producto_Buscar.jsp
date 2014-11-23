@@ -2,20 +2,20 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:layout seccion="admin" activo="empresas">
+<t:layout seccion="admin" activo="productos">
     <jsp:attribute name="titulo">
         Admin
     </jsp:attribute>
     <jsp:body>
         <h2>
-            Empresas
+            Productos
         </h2>
         <form class="form-inline" role="form">
             <div class="form-group">
-                <label class="sr-only" for="buscar">Buscar empresa por nombre</label>
+                <label class="sr-only" for="buscar">Buscar producto por nombre</label>
                 <div class="input-group">
                     <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-                    <input type="search" class="form-control" id="buscar" name="buscar" placeholder="Buscar empresa por nombre" value="${buscar}">
+                    <input type="search" class="form-control" id="buscar" name="buscar" placeholder="Buscar producto por nombre" value="${buscar}">
                 </div>
             </div>
         </form>
@@ -25,37 +25,37 @@
                     Nombre
                 </th>
                 <th>
-                    Dirección
+                    Descripción
                 </th>
                 <th>
-                    Teléfono
+                    Precio
                 </th>
                 <th>
-                    RFC
+                    Punto de reorden
                 </th>
             </tr>
-            <tr onclick="location.href = 'Empresa_Alta'" class="text-primary">
+            <tr onclick="location.href = 'Producto_Alta'" class="text-primary">
                 <td>
-                    Nueva empresa...
+                    Nuevo producto...
                 </td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
 
-            <c:forEach items="${empresas}" var="empresa">
-                <tr onclick="location.href = 'Empresa_Modificar?id=${empresa.idEmpresa}'">
+            <c:forEach items="${productos}" var="producto">
+                <tr onclick="location.href = 'Producto_Modificar?id=${producto.idProducto}'">
                     <td>
-                        ${empresa.nombre}
+                        ${producto.nombre}
                     </td>
                     <td style="white-space: pre-wrap;"><!--
-                     -->${empresa.direccion}<!--
+                     -->${producto.descripcion}<!--
                  --></td>
-                    <td>
-                        ${empresa.telefono}
+                    <td style="text-align: right;">
+                        <span style="float: left;">$</span>${producto.precio}
                     </td>
-                    <td>
-                        ${empresa.rfc}
+                    <td style="text-align: right;">
+                        ${producto.puntoDeReorden}
                     </td>
                 </tr>
             </c:forEach>
