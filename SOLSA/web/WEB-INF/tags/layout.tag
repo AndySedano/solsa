@@ -71,11 +71,10 @@
                                 <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("empresas") ? "active" : "none"}><a href="Empresa_Alta">Empresas</a></li>
+                                <li class=${activo.equals("empresas") ? "active" : "none"}><a href="Empresa_Buscar">Empresas</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("producto_alta") ? "active" : "none"}><a href="Producto_Alta">Alta Producto</a></li>
-                                <li class=${activo.equals("producto_modificacion") ? "active" : "none"}><a href="Producto_Modificar">Modificar Producto</a></li>
+                                <li class=${activo.equals("productos") ? "active" : "none"}><a href="Producto_Buscar">Productos</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("ventas_alta") ? "active" : "none"}><a href="Ventas_Alta">Alta Empleado Ventas</a></li>

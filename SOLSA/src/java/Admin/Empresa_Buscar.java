@@ -59,7 +59,7 @@ public class Empresa_Buscar extends HttpServlet
         }
         catch (SQLException ex)
         {
-            Logger.getLogger(Departamento_Alta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Empresa_Buscar.class.getName()).log(Level.SEVERE, null, ex);
         }
             
         request.setAttribute("empresas", empresas);

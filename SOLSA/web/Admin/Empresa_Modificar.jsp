@@ -56,7 +56,7 @@
             </div>
             
             <div class="form-group"><div class="col-md-offset-3 col-md-9">
-            <div id="site-logo" style="width: 100px; height: 100px; background-image: url('${empresa.foto.url}');"></div>
+            <div class="image" style="width: 100px; height: 100px; background-image: url('${empresa.foto.url}');"></div>
             </div></div>
             
             <div class="form-group"><div class="col-md-offset-3 col-md-9">

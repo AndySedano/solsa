@@ -59,7 +59,7 @@ public class Producto_Buscar extends HttpServlet
         }
         catch (SQLException ex)
         {
-            Logger.getLogger(Departamento_Alta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Producto_Buscar.class.getName()).log(Level.SEVERE, null, ex);
         }
             
         request.setAttribute("productos", productos);

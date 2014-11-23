@@ -135,6 +135,13 @@ body {
     height: 100px;
 }
 
+div.image
+{
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .table-hover > tbody > tr:hover[onclick] > td,
 .table-hover > tbody > tr:hover[onclick] > th {
     cursor: pointer;
