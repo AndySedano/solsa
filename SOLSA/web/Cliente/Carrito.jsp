@@ -9,7 +9,7 @@
     </jsp:attribute>
     <jsp:body>
         ${requestScope.mensaje}
-        <form>
+        <form method="post" action="VerCarrito">
 
             <h1>Carrito de Ventas</h1>
             <br />
@@ -42,7 +42,8 @@
                                 <c:out value="${al.precio}" />
                             </td>
                             <td>
-                                <input type="text" value="${al.cantidad}" id="quantas"/>
+                                <input type="hidden" value="${al.idProducto}" id="ids" name="ids"/>
+                                <input type="text" value="${al.cantidad}" id="quantas" name="quantas"/>
                             </td>
                             <td id="${al.idProducto}">
 
