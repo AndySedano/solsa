@@ -51,7 +51,7 @@ public class Ventas_Alta extends HttpServlet {
         boolean st = false;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        Pair<String, Integer> hash  = Helpers.Login.createNewHash(password);
+        Pair<String, Integer> hash = Helpers.Login.createNewHash(password);
         String nombre = request.getParameter("nombre");
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
