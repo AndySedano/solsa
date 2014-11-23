@@ -29,6 +29,7 @@
                         <th>Precio Unitario</th>
                         <th>Cantidad a Pedir</th>
                         <th>Precio Total</th>
+                        <th>Botón</th>
                         <th>Quitar</th>
                     </tr>
 
@@ -41,11 +42,13 @@
                                 <c:out value="${al.precio}" />
                             </td>
                             <td>
-                                <input type="text" value="${al.cantidad}" />
+                                <input type="text" value="${al.cantidad}" id="quantas"/>
                             </td>
-                            <td id="${al.nombre}">
-                                PrecioTotal 
-                                <input type="button" value="Calcular" onclick="precioTotal('${al.nombre}', ${al.precio})" />
+                            <td id="${al.id}">
+                                 
+                            </td>
+                            <td>
+                                <input type="button" value="Calcular" onclick="precioTotal('${al.id}', ${al.precio})" />
                             </td>
                             <td>
                                 <a class=" btn btn-primary btn-sm" href="QuitarCarrito?id_Producto">
