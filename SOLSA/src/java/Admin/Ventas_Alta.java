@@ -26,7 +26,7 @@ public class Ventas_Alta extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Alta.jsp");
         disp.include(request, response);
@@ -42,7 +42,7 @@ public class Ventas_Alta extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         String username = request.getParameter("username");

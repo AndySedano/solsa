@@ -70,4 +70,9 @@ public class File
         }
         return idFoto;
     }
+
+    public static String getFotoUrl(HttpServletRequest request, int idFoto, String name)
+    {
+        return request.getContextPath() + "/Images/" + idFoto + "-" + name;
+    }
 }

@@ -18,7 +18,7 @@ public class Reporte extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("cliente") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Cliente/Reporte.jsp");

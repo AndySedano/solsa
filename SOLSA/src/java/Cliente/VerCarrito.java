@@ -28,7 +28,7 @@ public class VerCarrito extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("cliente") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         if (session.getAttribute("carrito") != null) {
@@ -50,7 +50,7 @@ public class VerCarrito extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("cliente") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         try (Connection con = Helpers.DB.newConnection(this)) {
