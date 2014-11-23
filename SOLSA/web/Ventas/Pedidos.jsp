@@ -10,6 +10,9 @@
     <jsp:body>
         <form method="POST" action="Pedidos">
             <h1>
+                ${requestScope.mensaje} 
+            </h1>
+            <h1>
                 Pedidos
             </h1>
             <br/>
