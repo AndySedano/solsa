@@ -15,13 +15,13 @@
             <br />
 
             <p>
-                id: ${requestScope.id}
+                id: ${requestScope.bean.id}
                 <br />
-                Empresa: ${requestScope.empresa}
+                Empresa: ${requestScope.bean.empresa}
                 <br>
-                Fecha de Entrega: ${requestScope.date}
+                Fecha de Entrega: ${requestScope.bean.date}
                 <br />
-                Estado: ${requestScope.estado}
+                Estado: ${requestScope.bean.estado}
                 <br />
                 <br />
             </p>
@@ -59,7 +59,7 @@
                         <td>
                             &nbsp;
                             &nbsp;
-                            <c:out value="${al.id}" />
+                            <c:out value="${al.idProducto}" />
                             &nbsp;
                             &nbsp;
                         </td>
@@ -73,7 +73,7 @@
                         <td>
                             &nbsp;
                             &nbsp;
-                            <c:out value="${al.cantidad}" />
+                            <c:out value="${al.descripcion}" />
                             &nbsp;
                             &nbsp;
                         </td>
