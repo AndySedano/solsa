@@ -1,14 +1,17 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <t:layout seccion="admin" activo ="cliente_alta">
     <jsp:attribute name="titulo">
-        Admin
+        Alta de Clientes
     </jsp:attribute>
     <jsp:body>  
         <h2>Alta de Clientes</h2>
-        <sql:setDataSource var="db" driver="com.mysql.jdbc,Driver" url="solsa20.caafufvdj2xl.us-west-2.rds.amazonaws.com:3306/solsa2020" user="solsa2020" password="solsa2020"></sql:setDataSource>
-        <slq:query dataSource="${db}" var="result">SELECT idDepartamento, nombre FROM Departamento;s</slq:query>
+        <sql:setDataSource var="db" driver="com.mysql.jdbc,Driver" url="solsa20.caafufvdj2xl.us-west-2.rds.amazonaws.com:3306/solsa2020" user="solsa2020" password="solsa2020" />
+        <sql:query dataSource="${db}" var="result">SELECT idDepartamento, nombre FROM Departamento;
+        </sql:query>
         ${requestScope.res}
             <form class="form-horizontal" method="post" action="Cliente_Alta">
                 <div class="form-group">
