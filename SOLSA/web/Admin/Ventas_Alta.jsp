@@ -55,9 +55,7 @@
                     </div>
                 </div>
                 
-            <button type="submit" class="btn btn-success">Crear</button>
-            <button type="reset" class="btn btn-danger">Cancelar</button>
-            <a href="Inicio" class="btn btn-primary">Continuar</a>                
+            <button type="submit" class="btn btn-primary">Crear</button>          
                 
             </form>
         

@@ -53,16 +53,14 @@
                     </div>
                 </div>      
                 
-                <button type="submit" class="btn btn-success">Aceptar</button>
-                <button type="submit" class="btn btn-danger">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Volver</button>  
+                <button type="submit" class="btn btn-primary">Aceptar</button>
                 <br/>
                 <br/>
             </form>
             
             <form method="GET" action="Cliente_Alta">
                 Departamento:
-                <select name="listaDepartamentos" size="5">
+                <select name="listaDepartamentos" size="1">
                     <c:forEach items="${requestScope.inf}" var="row">
                     <option value ="<c:out value="${row.idDepartamento}" />"><c:out value="${row.nombre}" /> <c:out value="${row.apellidos}" /></option>
                     </c:forEach>
