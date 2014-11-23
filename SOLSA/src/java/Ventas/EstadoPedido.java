@@ -63,14 +63,13 @@ public class EstadoPedido extends HttpServlet {
 
             ArrayList<Producto> beans = new ArrayList<>();
 
-            if (rs2.next()) {
+            while (rs2.next()) {
                 Producto bean = new Producto();
                 bean.setIdProducto(rs2.getInt("id"));
                 bean.setNombre(rs2.getString("nombre"));
                 bean.setDescripcion(Integer.toString(rs2.getInt("cantidad")));
                 beans.add(bean);
             }
-
             request.setAttribute("inf", beans);
 
         } catch (SQLException ex) {
@@ -85,5 +84,31 @@ public class EstadoPedido extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        HttpSession session = request.getSession();
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("ventas") == false) {
+            response.sendRedirect("../Login");
+        }
+        
+        int id = Integer.parseInt(request.getParameter("id"));
+        try (Connection con = Helpers.DB.newConnection(this)) {
+
+            try (PreparedStatement ps = con.prepareStatement("UPDATE Pedido SET estado=? WHERE idPedido = ?;")) {
+                ps.setString(1, request.getParameter("estado"));
+                ps.setInt(2, id);
+
+                ps.executeUpdate();
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EstadoPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        request.setAttribute("mensaje" , "Cambio realizado con exito!");
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Ventas/Pedidos.jsp");
+        disp.include(request, response);
     }
 }

@@ -3,18 +3,19 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:layout seccion="ventas" activo ="null">
+<t:layout seccion="ventas" activo ="pedidos">
     <jsp:attribute name="titulo">
         Admin
     </jsp:attribute>
     <jsp:body>
-        <form method="POST" action="${pageContext.request.contextPath}/">
+        <form method="POST" action="EstadoPedido">
             <h1>
                 Estado de Pedido: 
             </h1>
             <br />
 
             <p>
+                <input type="hidden" value="${requestScope.bean.id}" name="id" id="id">
                 id: ${requestScope.bean.id}
                 <br />
                 Empresa: ${requestScope.bean.empresa}
@@ -38,29 +39,13 @@
                 <c:forEach items="${requestScope.inf}" var="al">
                     <tr>
                         <td>
-<<<<<<< HEAD
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.idProducto}" />
-                            &nbsp;
-                            &nbsp;
-=======
-                            <c:out value="${al.id}" />
->>>>>>> origin/master
                         </td>
                         <td>
                             <c:out value="${al.nombre}" />
                         </td>
                         <td>
-<<<<<<< HEAD
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.descripcion}" />
-                            &nbsp;
-                            &nbsp;
-=======
-                            <c:out value="${al.cantidad}" />
->>>>>>> origin/master
                         </td>
                     </tr>
                 </c:forEach>
@@ -69,16 +54,16 @@
 
             <br />
             <h4>Estado del Pedido</h4>
-            <input type="radio" name="estado">&nbsp;Recibido
+            <input type="radio" name="estado" value="recibido" ${requestScope.bean.estado.equals("recibido") ? "checked" : ""}>&nbsp;Recibido
             <br />
-            <input type="radio" name="estado">&nbsp;En Almacen
+            <input type="radio" name="estado" value="inventario" ${requestScope.bean.estado.equals("inventario") ? "checked" : ""}>&nbsp;En Almacen
             <br />
-            <input type="radio" name="estado">&nbsp;En Camino
+            <input type="radio" name="estado" value="transito" ${requestScope.bean.estado.equals("transito") ? "checked" : ""}>&nbsp;En Camino
             <br />
-            <input type="radio" name="estado">&nbsp;Entregado
+            <input type="radio" name="estado" value="entregado" ${requestScope.bean.estado.equals("entregado") ? "checked" : ""}>&nbsp;Entregado
             <br />
             <br />
-            <input type="submit" name="cambiarEstado" value="Cambiar Estado">
+            <input type="submit" name="cambiarEstado" value="Cambiar">
             </p>
         </form> 
     </jsp:body>
