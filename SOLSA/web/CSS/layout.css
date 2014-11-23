@@ -134,3 +134,8 @@ body {
     width: 100%;
     height: 100px;
 }
+
+.table-hover > tbody > tr:hover[onclick] > td,
+.table-hover > tbody > tr:hover[onclick] > th {
+    cursor: pointer;
+}
