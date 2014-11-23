@@ -1,7 +1,6 @@
 package Admin;
 
 import Beans.Departamento;
-import Beans.Empresa;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -87,7 +86,8 @@ public class Cliente_Alta extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String tipo = "cliente";
         int idDepartamento = Integer.parseInt(request.getParameter("idDepartamento"));
-        String sql = "INSERT INTO Usuario (username, password, salt, nombre, direccion, telefono, tipo, idDepartamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO Usuario (username, password, salt, nombre, direccion, telefono, tipo, idDepartamento) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         try {
             Class.forName("con.mysql.jdbc.Driver");
@@ -109,7 +109,8 @@ public class Cliente_Alta extends HttpServlet {
                     }
                 }
                 if (st) {
-                    request.setAttribute("res", "El ususario " + session.getAttribute("username") + " ha sido registrado exitosamente.");
+                    request.setAttribute("res", "El ususario " + session.getAttribute("username") + 
+                            " ha sido registrado exitosamente.");
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("Cliente_Alta.jsp");
                     rd.include(request, response);
                 } else {
