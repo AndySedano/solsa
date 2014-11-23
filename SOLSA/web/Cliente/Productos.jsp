@@ -20,7 +20,7 @@
 
             <div class="row">
                 <c:forEach items="${requestScope.inf}" var="al">
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <table>
                             <tr><td><center>
 
