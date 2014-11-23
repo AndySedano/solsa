@@ -14,6 +14,7 @@ public class Logout extends HttpServlet
         HttpSession session = request.getSession();
         session.setAttribute("username", null);
         session.setAttribute("tipo", null);
+        session.setAttribute("carrito", null);
         
         response.sendRedirect(request.getContextPath());
     }

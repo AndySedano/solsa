@@ -46,12 +46,12 @@
                 </div>
             </div> 
 
-                <div class="form-group">
-                    <label for="direccion" class="col-md-3 control-label">Dirección</label>
-                    <div class="col-lg-9">
-                        <textarea id="direccion" class="form-control" rows="3" name="direccion" placeholder=""></textarea>
-                    </div>
+            <div class="form-group">
+                <label for="direccion" class="col-md-3 control-label">Dirección</label>
+                <div class="col-lg-9">
+                    <textarea id="direccion" class="form-control" rows="3" name="direccion" placeholder=""></textarea>
                 </div>
+            </div>
 
             <div class="form-group">
                 <label for="telefono" class="col-md-3 control-label">Teléfono</label>

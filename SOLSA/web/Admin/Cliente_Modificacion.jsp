@@ -8,37 +8,42 @@
     </jsp:attribute>
     <jsp:body>
         <h2>Modificación de Usuarios</h2>
-        <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver" url="solsa20.caafufvdj2xl.us-west-2.rds.amazonaws.com/solsa2020" user="solsa2020" password="solsa2020" />
-        <sql:query dataSource="${db}" sql="SELECT idDepartamento, nombre FROM Departamento;" var="result">
-        </sql:query>
+        <p>
+            Ingrese el Username en la casilla para desplegar los datos
+            a cambiar:
+        </p>
+        ${requestScope.res}
         <form class="form-horizontal" method="post" action="Cliente_Modificar">
             <div class="form-group">
                 <label for="username" class="col-md-3 control-label">Usuario</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="max. 20 caracteres">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="">
                 </div>
             </div>
+        </form>
+            
+        <form class="form-horizontal" method="get" action="Cliente_Modificar">
+            
             <div class="form-group">
                 <label for="nombre" class="col-md-3 control-label">Nombre</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre y Apellidos">
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre y Apellidos" value="${requestScope.nombre}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="nombre" class="col-md-3 control-label">Direccion</label>
                 <div class="col-md-9">
-                    <textarea class="form-control" rows="4" id="direccion" name="direccion"></textarea>
+                    <textarea class="form-control" rows="4" id="direccion" name="direccion" value="${requestScope.direccion}"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label for="direccion" class="col-md-3 control-label">Tel&eacute;fono</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Incluyendo LADA">
+                    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="" value="${requestScope.telefono}">
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Modificar</button>
-            <button type="submit" class="btn btn-danger">Borrar</button>
-            <a href="Inicio" class="btn btn-primary">Continuar</a>
+            <button type="submit" class="btn btn-primary" name="submit" value="modficar">Modificar</button>
+            <button type="submit" class="btn btn-danger" name="submit" value="borrar">Borrar</button>
         </form>
     </jsp:body>
 </t:layout>
