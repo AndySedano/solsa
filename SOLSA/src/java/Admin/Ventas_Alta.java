@@ -1,11 +1,15 @@
 package Admin;
 
+import Beans.Pedido;
+import Beans.Producto;
+import Ventas.EstadoPedido;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -28,9 +32,8 @@ public class Ventas_Alta extends HttpServlet {
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
             response.sendRedirect("../Login");
         }
-
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Alta.jsp");
-        disp.include(request, response);
+        
+        
     }
 
     @Override
@@ -62,7 +65,7 @@ public class Ventas_Alta extends HttpServlet {
 
         try {
             Class.forName("con.mysql.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection(url, user, pass)) {
+            try (Connection con = Helpers.DB.newConnection(this)) {
                 try (PreparedStatement ps = con.prepareStatement(sql)) {
                     ps.setString(1, username);
                     ps.setString(2, hash.getValue0());
