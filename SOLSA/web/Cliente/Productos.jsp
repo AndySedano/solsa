@@ -9,41 +9,59 @@
     </jsp:attribute>
     <jsp:body>
         <form>
-            
             <h1>Catálogo de Productos</h1>
-            
-            <table class="table table-hover">
-                <tr>
-                    <th>id</th>
-                    <th>Empresa</th>
-                    <th>Fecha de Entrega</th>
-                    <th>Estado</th>
-                    <th>Seleccionar</th>
-                </tr>
+            <p>
+                Productos disponibles para usted, si desea pedir alguno
+                haga clic en "Agregar al carrito" si desea ordenar varios del
+                mismo tipo puede modificar la cantidad posteriormente en el
+                carrito.
+            </p>
+            <br />
+            <br />
 
+            <div class="row">
                 <c:forEach items="${requestScope.inf}" var="al">
-                    <tr>
-                        <td>
-                            <c:out value="${al.id}" />
-                        </td>
-                        <td>
-                            <c:out value="${al.empresa}" />
-                        </td>
-                        <td>
-                            <c:out value="${al.date}" />
-                        </td>
-                        <td>
-                            <c:out value="${al.estado}" />
-                        </td>
-                        <td>
-                            <a class=" btn btn-primary btn-sm" 
-                               href="EstadoPedido?id=${al.id}">Ver</a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                    <div class="col-md-1">
+                        <table>
+                            <tr><td><center>
+                                
+                                <img src="${al.foto}" />
+                                                                
+                            </center></td></tr>
+                            <tr><td><center>
+                                
+                                <c:out value="${al.nombre}" />
+                                
+                            </center></td></tr>
+                            <tr><td><center>
+                                
+                                <c:out value="${al.descripccion}" />
+                                
+                            </center></td></tr>
+                            <tr><td><center>
+                                
+                                <c:out value="${al.tipo}" />
+                                
+                            </center></td></tr>
+                            <tr><td><center>
+                                
+                                <c:out value="${al.precio}" />
+                                
+                            </center></td></tr>
+                            <tr><td><center>
+                                
+                                <a class=" btn btn-primary btn-sm" 
+                                   accesskey=""
+                                   href="EstadoPedido?id=${al.id}">
+                                    Añadir al Carrito
+                                </a>
+                                    
+                            </center></td></tr>
+                        </table>
+                    </div>
+                </c:forEach> 
+            </div>
 
-            </table>
-            
         </form>
     </jsp:body>
 </t:layout>
