@@ -40,7 +40,7 @@
             </div>
             
             <div class="form-group">    <label class="col-md-3 control-label" for="foto">Foto</label>
-            <div class="col-md-9">      
+            <div class="col-md-9">
             <div class="input-group">
                 <span class="input-group-btn">
                     <span class="btn btn-default btn-file">
