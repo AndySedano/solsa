@@ -11,42 +11,42 @@
             <div class="form-group">
                 <label for="nombre" class="col-md-3 control-label">Nombre del Producto:</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="nombre" placeholder="max. 20 caracteres" />
+                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="max. 20 caracteres" />
                 </div>
             </div> 
 
             <div class="form-group">
                 <label for="textArea" class="col-md-3 control-label">Descripción:</label>
                 <div class="col-lg-9">
-                    <textarea id="text" class="form-control" rows="3" placeholder="max. 50 caracteres"></textarea>
+                    <textarea id="text" class="form-control" name="descripcion" rows="3" placeholder="max. 50 caracteres"></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="precio" class="col-md-3 control-label">Precio:</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="precio" placeholder="max. 8 caracteres"/>
+                    <input type="text" class="form-control" name="precio" id="precio" placeholder="max. 8 caracteres"/>
                 </div>
             </div>    
 
             <div class="form-group">
                 <label for="reorden" class="col-md-3 control-label">Punto de Reorden:</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="reorden" placeholder="max. 10 caracteres"/>
+                    <input type="text" class="form-control" name="puntoDeReorden" id="reorden" placeholder="max. 10 caracteres"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="tipo" class="col-md-3 control-label">Tipo:</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="tipo" placeholder="max. 10 caracteres"/>
+                    <input type="text" class="form-control" name="tipo" id="tipo" placeholder="max. 10 caracteres"/>
                 </div>
             </div> 
             <div class="form-group">
                 <label for="foto" class="col-md-3 control-label">Foto:</label>
                 <div class="col-md-9">
                     <br />
-                    <input type="file" class="form-control" id="foto" />
+                    <input type="file" class="form-control" name="fotografia_idFotografia" id="foto" />
                 </div>
             </div>                
             <button type="submit" class="btn btn-success">Aceptar</button>                
