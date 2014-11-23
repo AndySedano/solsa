@@ -99,6 +99,10 @@
         <servlet-name>Cliente_Peticiones</servlet-name>
         <servlet-class>Cliente.Peticiones</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Carrito</servlet-name>
+        <servlet-class>Cliente.Carrito</servlet-class>
+    </servlet>
     <!--Aprobador-->
     <servlet>
         <servlet-name>Aprobador_Peticiones</servlet-name>
@@ -194,6 +198,10 @@
     <servlet-mapping>
         <servlet-name>Cliente_Peticiones</servlet-name>
         <url-pattern>/Cliente/Peticiones</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Carrito</servlet-name>
+        <url-pattern>/Cliente/Carrito</url-pattern>
     </servlet-mapping>
     <!--Aprobador-->
     <servlet-mapping>

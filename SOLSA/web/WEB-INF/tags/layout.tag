@@ -59,7 +59,7 @@
                                 <li class=${activo.equals("productos") ? "active" : "none"}><a href="Productos">Productos</a></li>
                                 <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
                                 <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="Peticiones">Peticiones</a></li>
-                                <li class=${activo.equals("carrito") ? "active" : "none"}><a href="Carrito">Carrito</a></li>
+                                <li class=${activo.equals("carrito") ? "active" : "none"}><a href="VerCarrito">Carrito</a></li>
                             </ul>
                         </c:when>
                         <c:when test="${seccion == 'admin'}">
