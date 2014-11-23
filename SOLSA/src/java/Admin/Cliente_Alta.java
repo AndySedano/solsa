@@ -1,29 +1,20 @@
 package Admin;
 
-import Beans.Departamento;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.javatuples.Pair;
+import Beans.*;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
+import java.util.logging.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import org.javatuples.*;
 
 public class Cliente_Alta extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+    throws ServletException, IOException
+    {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
@@ -32,28 +23,37 @@ public class Cliente_Alta extends HttpServlet {
             response.sendRedirect("../Login");
         }
         
-        try (Connection con = Helpers.DB.newConnection(this)) {
-            Class.forName("con.mysql.jdbc.Driver");
+        try (Connection con = Helpers.DB.newConnection(this))
+        {
             PreparedStatement ps = con.prepareStatement(
                     "SELECT Departamento.nombre AS nombre, "
-                    + "Departamento.idDepartamento AS idDepartamento, "
-                    + "Empresa.nombre AS empresa "
-                    + "FROM Departamento, Empresa "
-                    + "WHERE Departamento.idEmpresa=Empresa.idEmpresa;");
+                  + "Departamento.idDepartamento AS idDepartamento, "
+                  + "Empresa.nombre AS empresa "
+                  + "FROM Departamento, Empresa "
+                  + "WHERE Departamento.idEmpresa=Empresa.idEmpresa "
+                  + "ORDER BY Empresa.nombre, Departamento.nombre;");
             ResultSet rs = ps.executeQuery();
-            ArrayList<Departamento> beans = new ArrayList<>();
-            
-            if (rs.next()) {
-                Departamento bean = new Departamento();
-                bean.setNombreDepartamento(rs.getString("nombre"));
-                bean.setIdDepartamento(rs.getInt("idDepartamento"));
-                bean.setNombreEmpresa(rs.getString("empresa"));
-                beans.add(bean);
+            Map<String, List<Departamento>> empresas = new LinkedHashMap<>();
+            String empresaActual = "";
+            while (rs.next())
+            {
+                if (!empresaActual.equals(rs.getString("empresa")))
+                    empresaActual = rs.getString("empresa");
+                if (!empresas.containsKey(empresaActual))
+                    empresas.put(empresaActual, new ArrayList<Departamento>());
+                
+                Departamento departamento = new Departamento();
+                departamento.setNombreDepartamento(rs.getString("nombre"));
+                departamento.setIdDepartamento(rs.getInt("idDepartamento"));
+                departamento.setNombreEmpresa(rs.getString("empresa"));
+                empresas.get(empresaActual).add(departamento);
             }
             
-            request.setAttribute("inf", beans);
+            request.setAttribute("empresas", empresas);
             
-        } catch (ClassNotFoundException | SQLException ex) {
+        }
+        catch (SQLException ex)
+        {
             Logger.getLogger(Cliente_Alta.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -63,8 +63,8 @@ public class Cliente_Alta extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+    throws ServletException, IOException
+    {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
@@ -72,6 +72,16 @@ public class Cliente_Alta extends HttpServlet {
 
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
             response.sendRedirect("../Login");
+        }
+        
+        if (request.getParameter("password").length() < 8
+            || !request.getParameter("password").equals(request.getParameter("passwordagain")))
+        {
+            request.setAttribute("error", "true");
+            request.setAttribute("message", "Error de validación");
+            RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Cliente_Alta.jsp");
+            disp.include(request, response);
+            return;
         }
 
         String username = request.getParameter("username");
@@ -82,41 +92,33 @@ public class Cliente_Alta extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String tipo = "cliente";
         int idDepartamento = Integer.parseInt(request.getParameter("idDepartamento"));
-        boolean st = false;
         String sql = "INSERT INTO Usuario (username, password, salt, nombre, direccion, telefono, tipo, idDepartamento) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
-        try {
-            Class.forName("con.mysql.jdbc.Driver");
-            try (Connection con = Helpers.DB.newConnection(this)) {
-                try (PreparedStatement ps = con.prepareStatement(sql)) {
-                    ps.setString(1, username);
-                    ps.setString(2, hash.getValue0());
-                    ps.setInt(3, hash.getValue1());
-                    ps.setString(4, nombre);
-                    ps.setString(5, direccion);
-                    ps.setString(6, telefono);
-                    ps.setString(7, tipo);
-                    ps.setInt(8, idDepartamento);
-                    ResultSet rs = ps.executeQuery();
-                    while (rs.next()) {
-                        st = true;
-                        session.setAttribute("username", session.getAttribute("username"));
-                    }
-                }
-                if (st) {
-                    request.setAttribute("res", "El ususario " + session.getAttribute("username") + 
-                            " ha sido registrado exitosamente.");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("Cliente_Alta.jsp");
-                    rd.include(request, response);
-                } else {
-                    request.setAttribute("res", "Lo sentimos, hubo un error, ingrese los datos nuevamente...");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("Cliente_Alta.jsp");
-                    rd.include(request, response);
-                }
+        try (Connection con = Helpers.DB.newConnection(this))
+        {
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setString(1, username);
+                ps.setString(2, hash.getValue0());
+                ps.setInt(3, hash.getValue1());
+                ps.setString(4, nombre);
+                ps.setString(5, direccion);
+                ps.setString(6, telefono);
+                ps.setString(7, tipo);
+                ps.setInt(8, idDepartamento);
+                ps.executeUpdate();
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+            
+            request.setAttribute("message", "El ususario " + username + " ha sido registrado exitosamente.");
+            doGet(request, response);
+        }
+        catch (SQLException ex)
+        {
             Logger.getLogger(Cliente_Alta.class.getName()).log(Level.SEVERE, null, ex);
+            
+            request.setAttribute("error", "true");
+            request.setAttribute("message", "Lo sentimos, hubo un error, ingrese los datos nuevamente...");
+            doGet(request, response);
         }
     }
 }

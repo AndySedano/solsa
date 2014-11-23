@@ -79,7 +79,7 @@ public class Login
                 rs.next();
                 int idFoto = rs.getInt("idFotografia");
                 String nombre = rs.getString("nombre");
-                return "/Images/" + idFoto + "/" + nombre;
+                return "/Images/" + idFoto + "-" + nombre;
             }
         }
     }

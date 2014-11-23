@@ -101,8 +101,7 @@ public class Departamento_Alta extends HttpServlet
                 }
 
                 request.setAttribute("message", "Alta de departamento exitosa");
-                RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Departamento_Alta.jsp");
-                disp.include(request, response);
+                doGet(request, response);
             }
         }
         catch (SQLException ex)
@@ -111,8 +110,7 @@ public class Departamento_Alta extends HttpServlet
 
             request.setAttribute("error", "true");
             request.setAttribute("message", "Error al dar de alta");
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Departamento_Alta.jsp");
-            disp.include(request, response);
+            doGet(request, response);
         }
     }
 
