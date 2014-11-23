@@ -121,6 +121,14 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.js"></script>
+        <script>
+            $(document).on('change', '.btn-file :file', function() {
+                var $input = $(this);
+                var text = $input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                var $label = $input.closest('.input-group').find(':text');
+                $label.val(text);
+            });
+        </script>
         <jsp:invoke fragment="scripts" />
     </body>
 </html>
