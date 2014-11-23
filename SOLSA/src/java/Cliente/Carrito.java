@@ -1,7 +1,7 @@
 package Cliente;
 
+import Beans.CarritoBean;
 import Beans.Foto;
-import Beans.Pedido;
 import Beans.Producto;
 import Ventas.EstadoPedido;
 import java.io.IOException;
@@ -9,10 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +32,7 @@ public class Carrito extends HttpServlet {
 
         try (Connection con = Helpers.DB.newConnection(this)) {
 
-            try (PreparedStatement ps = con.prepareStatement("SELECT idProducto AS id, nombre, descripcion, precio, tipo, Fotografia_idFotografia AS idFoto, Fotografia.nombre as nombreFoto\n"
+            try (PreparedStatement ps = con.prepareStatement("SELECT idProducto AS id, Producto.nombre, descripcion, precio, tipo, Fotografia_idFotografia AS idFoto, Fotografia.nombre AS nombreFoto\n"
                     + "FROM Producto JOIN Fotografia ON Fotografia.idFotografia = Producto.Fotografia_idFotografia\n"
                     + "WHERE Producto.idProducto = ?;")) {
 
@@ -52,35 +50,30 @@ public class Carrito extends HttpServlet {
                     Foto f = new Foto();
                     f.setNombre(rs.getString("nombreFoto"));
                     f.setUrl(request.getContextPath() + "/Images/" + rs.getString("idFoto") + "-" + f.getNombre());
+                    bean.setCantidad(1);
                     bean.setFoto(f);
+
+                    if (session.getAttribute("carrito") == null) {
+                        CarritoBean c = new CarritoBean();
+                        c.agregar(bean);
+                        session.setAttribute("carrito", c);
+                    } else {
+                        ((CarritoBean)session.getAttribute("carrito")).agregar(bean);
+                    }
                 }
             }
-
-            PreparedStatement ps2 = con.prepareStatement("SELECT Carrito_idCarrito, Producto.idProducto AS id, nombre, cantidad\n"
-                    + "FROM Carrito_Producto JOIN Producto ON Carrito_Producto.idProducto = Producto.idProducto\n"
-                    + "WHERE Carrito_idCarrito = ?;");
-
-            //ps2.setInt(1, idC);
-
-            ResultSet rs2 = ps2.executeQuery();
-
-            ArrayList<Producto> beans = new ArrayList<>();
-
-            while (rs2.next()) {
-                Producto bean = new Producto();
-                bean.setIdProducto(rs2.getInt("id"));
-                bean.setNombre(rs2.getString("nombre"));
-                bean.setDescripcion(Integer.toString(rs2.getInt("cantidad")));
-                beans.add(bean);
+            
+            if(session.getAttribute("carrito") != null){   
+                request.setAttribute("inf", ((CarritoBean)session.getAttribute("carrito")).getProductos());
+            }else{
+                request.setAttribute("mensaje", "Carrito Vacio");
             }
-            request.setAttribute("inf", beans);
 
         } catch (SQLException ex) {
             Logger.getLogger(EstadoPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Cliente/Carrito.jsp");
-        disp.include(request, response);
+        response.sendRedirect("Productos");
     }
 
     @Override

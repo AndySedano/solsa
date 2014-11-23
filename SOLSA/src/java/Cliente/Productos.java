@@ -1,7 +1,6 @@
 package Cliente;
 
 import Beans.Foto;
-import Beans.Pedido;
 import Beans.Producto;
 import Ventas.EstadoPedido;
 import java.io.IOException;
@@ -71,7 +70,7 @@ public class Productos extends HttpServlet {
             request.setAttribute("inf", beans);
 
         } catch (SQLException ex) {
-            Logger.getLogger(EstadoPedido.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Cliente/Productos.jsp");

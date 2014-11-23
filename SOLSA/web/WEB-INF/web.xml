@@ -115,6 +115,10 @@
     
     <!--            Servlet Mapping             -->
     
+    <servlet>
+        <servlet-name>VerCarrito</servlet-name>
+        <servlet-class>Cliente.VerCarrito</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -216,6 +220,10 @@
   
     <!--             Session            -->
     
+    <servlet-mapping>
+        <servlet-name>VerCarrito</servlet-name>
+        <url-pattern>/Cliente/VerCarrito</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

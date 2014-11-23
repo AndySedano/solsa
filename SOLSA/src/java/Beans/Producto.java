@@ -9,6 +9,15 @@ public class Producto {
     private String precio;
     private int puntoDeReorden;
     private Foto foto;
+    private int cantidad;
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cant) {
+        this.cantidad = cant;
+    }
 
     public String getPrecio() {
         return precio;
