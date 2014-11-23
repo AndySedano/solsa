@@ -25,13 +25,9 @@ public class QuitarCarrito extends HttpServlet {
         }
 
         if (session.getAttribute("carrito") != null) {
-            CarritoBean c = (CarritoBean) request.getAttribute("carrito");
+            CarritoBean c = (CarritoBean) session.getAttribute("carrito");
             int id = Integer.parseInt(request.getParameter("id"));
-            for(Producto p : c.getProductos()){
-                if(p.getIdProducto()==id){
-                    c.getProductos().remove(p);
-                }
-            }
+            c.remove(id);
             session.setAttribute("carrito", c);
         } else {
             request.setAttribute("mensaje", "Carrito Vacio");
