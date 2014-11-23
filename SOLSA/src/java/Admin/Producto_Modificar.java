@@ -72,7 +72,7 @@ public class Producto_Modificar extends HttpServlet {
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
                         st = true;
-                        session.setAttribute("username", session.getAttribute("username"));
+                        session.setAttribute("nombre", session.getAttribute("nombre"));
                     }
                 }
                 if (st) {
