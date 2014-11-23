@@ -58,7 +58,7 @@ public class Producto_Alta extends HttpServlet {
         String tipo = request.getParameter("tipo");
         int fotografia_idFotografia = Integer.parseInt(request.getParameter("fotografia_idFotografia"));
         
-        String sql = "INSERT INTO Producto (nombre, descripcion, precio, puntoDeReorden, tipo, fotografia_idFotografia) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO Producto (nombre, descripcion, precio, puntoDeReorden, tipo, fotografia_idFotografia) VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
             Class.forName("con.mysql.jdbc.Driver");
