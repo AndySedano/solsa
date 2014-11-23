@@ -40,30 +40,9 @@ public class Empresa_Alta extends HttpServlet
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
             response.sendRedirect("../Login");
         
-        String path = getServletContext().getRealPath("") + File.separator + "Images";
-        File fileSaveDir = new File(path);
-        if (!fileSaveDir.exists())
-        {
-            fileSaveDir.mkdir();
-        }
-        
         try (Connection con = Helpers.DB.newConnection(this))
         {
-            int idFoto = 0;
-            try (PreparedStatement ps = con.prepareStatement("INSERT INTO Fotografia (nombre, imagen) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS))
-            {
-                Part foto = Helpers.File.getParameter(request, "foto");
-                String fileName = Helpers.File.extractFileName(foto);
-                ps.setString(1, fileName);
-                ps.setBlob(2, (InputStream)null);
-                ps.executeUpdate();
-                try (ResultSet keys = ps.getGeneratedKeys())
-                {
-                    keys.next();
-                    idFoto = keys.getInt(1);
-                    foto.write(path + File.separator + idFoto + "-" + fileName);
-                }
-            }
+            int idFoto = Helpers.File.insertarFoto(this, request, con, "foto");
             try (PreparedStatement ps =
                 con.prepareStatement("INSERT INTO Empresa (nombre, direccion, telefono, RFC, Fotografia_idFotografia) VALUES (?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS))
             {
