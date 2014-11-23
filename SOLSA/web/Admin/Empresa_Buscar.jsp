@@ -44,9 +44,17 @@
                     RFC
                 </th>
             </tr>
+            <tr onclick="location.href = 'Empresa_Alta'" class="text-primary">
+                <td>
+                    Nueva empresa...
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
 
             <c:forEach items="${empresas}" var="empresa">
-                <tr onclick="location.href = 'Empresa_Detalles?id=${empresa.idEmpresa}'">
+                <tr onclick="location.href = 'Empresa_Modificar?id=${empresa.idEmpresa}'">
                     <td>
                         ${empresa.nombre}
                     </td>

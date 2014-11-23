@@ -20,7 +20,7 @@ public class Empresa_Buscar extends HttpServlet
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
         {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
         
         List<Empresa> empresas = new ArrayList<>();

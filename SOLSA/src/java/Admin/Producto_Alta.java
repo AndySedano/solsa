@@ -21,7 +21,9 @@ public class Producto_Alta extends HttpServlet
         
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
-            response.sendRedirect("../Login");
+        {
+            response.sendRedirect("../Login"); return;
+        }
         
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Producto_Alta.jsp");
         disp.include(request, response);
@@ -37,7 +39,7 @@ public class Producto_Alta extends HttpServlet
         HttpSession session = request.getSession();
 
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
         
         String path = Helpers.File.createImageFolder(this);
@@ -69,48 +71,5 @@ public class Producto_Alta extends HttpServlet
             RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Producto_Alta.jsp");
             disp.include(request, response);
         }
-        
-//        String url = getInitParameter("url");
-//        String user = request.getParameter("user");
-//        String pass = request.getParameter("pass");
-//        boolean st = false;
-//        String nombre = request.getParameter("nombre");
-//        String descripcion = request.getParameter("descripcion");
-//        int precio = Integer.parseInt(request.getParameter("precio"));
-//        int puntoDeReorden = Integer.parseInt(request.getParameter("puntoDeReorden"));
-//        String tipo = request.getParameter("tipo");
-//        int fotografia_idFotografia = Integer.parseInt(request.getParameter("fotografia_idFotografia"));
-//        
-//        String sql = "INSERT INTO Producto (nombre, descripcion, precio, puntoDeReorden, tipo, fotografia_idFotografia) VALUES (?, ?, ?, ?, ?, ?)";
-//        
-//        try {
-//            Class.forName("con.mysql.jdbc.Driver");
-//            try (Connection con = DriverManager.getConnection(url, user, pass)) {
-//                try (PreparedStatement ps = con.prepareStatement(sql)) {
-//                    ps.setString(1, nombre);
-//                    ps.setString(2, descripcion);
-//                    ps.setInt(3, precio);
-//                    ps.setInt(4, puntoDeReorden);
-//                    ps.setString(5, tipo);
-//                    ps.setInt(6, fotografia_idFotografia);
-//                    ResultSet rs = ps.executeQuery();
-//                    while (rs.next()) {
-//                        st = true;
-//                        session.setAttribute("nombre", session.getAttribute("nombre"));
-//                    }
-//                }
-//                if (st) {
-//                    request.setAttribute("res", "El producto " + session.getAttribute("nombre") + " ha sido registrado exitosamente.");
-//                    RequestDispatcher rd = getServletContext().getRequestDispatcher("Producto_Alta.jsp");
-//                    rd.include(request, response);
-//                } else {
-//                    request.setAttribute("res", "Lo sentimos, hubo un error, ingrese los datos nuevamente...");
-//                    RequestDispatcher rd = getServletContext().getRequestDispatcher("Producto_Alta.jsp");
-//                    rd.include(request, response);
-//                }
-//            }
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            Logger.getLogger(Producto_Alta.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
 }

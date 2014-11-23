@@ -23,7 +23,7 @@ public class Cliente_Modificar extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
         
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
@@ -40,13 +40,14 @@ public class Cliente_Modificar extends HttpServlet {
         HttpSession session = request.getSession();
         
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("superadmin") == false)
-            response.sendRedirect("../Login");
+        {
+            response.sendRedirect("../Login"); return;
+        }
 
         String username = request.getParameter("username");
         String nombre = request.getParameter("nombre");
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
-        int st;
         int departamento = Integer.parseInt(request.getParameter("departamento"));
         String mob = request.getParameter("submit");
         String sqlModificar = "UPDATE Usuario SET nombre=?, direccion=?, telefono=? departamento=? WHERE username=? AND tipo='cliente';";
@@ -60,31 +61,13 @@ public class Cliente_Modificar extends HttpServlet {
                     ps.setString(3, telefono);
                     ps.setInt(4, departamento);
                     ps.setString(5, username);
-                    st = ps.executeUpdate();
+                    ps.executeUpdate();
                 } 
-                if (st==1) {
-                    request.setAttribute("res", "El usuario " + session.getAttribute("username") + " ha siido modificado.");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
-                    rd.include(request, response);
-                } else {
-                    request.setAttribute("res", "Lo sentimos, ha ocurrido un error, ingrese los datos nuevamente...");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
-                    rd.include(request, response);
-                }
             } else {
                 try (PreparedStatement ps = con.prepareStatement(sqlDelete)) {
                     ps.setString(1, username);
-                    st = ps.executeUpdate();
+                    ps.executeUpdate();
                 } 
-                if (st==1) {
-                    request.setAttribute("res", "El usuario " + session.getAttribute("username") + " ha siido borrado.");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
-                    rd.include(request, response);
-                } else {
-                    request.setAttribute("res", "Lo sentimos, ha ocurrido un error, ingrese los datos nuevamente...");
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
-                    rd.include(request, response);
-                }
             }
         } 
         catch (SQLException ex) {

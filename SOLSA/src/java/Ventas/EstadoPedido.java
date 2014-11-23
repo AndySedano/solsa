@@ -28,7 +28,7 @@ public class EstadoPedido extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("ventas") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         try (Connection con = Helpers.DB.newConnection(this)) {
@@ -88,7 +88,7 @@ public class EstadoPedido extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("ventas") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
         
         int id = Integer.parseInt(request.getParameter("id"));

@@ -22,7 +22,7 @@ public class Empresa_Alta extends HttpServlet
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
         {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Empresa_Alta.jsp");
@@ -38,7 +38,9 @@ public class Empresa_Alta extends HttpServlet
         
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
-            response.sendRedirect("../Login");
+        {
+            response.sendRedirect("../Login"); return;
+        }
         
         try (Connection con = Helpers.DB.newConnection(this))
         {
@@ -54,7 +56,7 @@ public class Empresa_Alta extends HttpServlet
                 ps.executeUpdate();
             }
             
-            request.setAttribute("message", "Alta de empresa exitosa");
+            request.setAttribute("message", "Alta de empresa " + request.getParameter("Nombre") + " exitosa");
             RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Empresa_Alta.jsp");
             disp.include(request, response);
         }

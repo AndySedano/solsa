@@ -39,19 +39,86 @@
                 Fecha de Reporte:
                 <br />
                 <br />
-                Peticiones Aceptados: 
-                <br />
-                Peticiones Canceladas:
-                <br />
-                <br />
-                Pedidos Entregados:
-                <br />
-                Pedidos En Tránsito:
-                <br />
-                <br />
-                Costo Total: MXN
-                <br />
             </div>
+            
+            <table class="table table-striped table-hover ">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th> Empresa</th>
+                  <th>Peticiones Aceptadas</th>
+                  <th>Peticiones Canceladas</th>
+                  <th>Pedidos Entregados</th>
+                  <th>Pedidos En Tránsito</th>
+                  <th>Costo Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                </tr>
+                <tr class="info">
+                  <td>3</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                </tr>
+                <tr class="success">
+                  <td>4</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                </tr>
+                <tr class="danger">
+                  <td>5</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                </tr>
+                <tr class="warning">
+                  <td>6</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                </tr>
+                <tr class="active">
+                  <td>7</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                </tr>
+              </tbody>
+            </table>             
 
         </form>
     </jsp:body>

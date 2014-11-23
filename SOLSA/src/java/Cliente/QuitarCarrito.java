@@ -21,7 +21,7 @@ public class QuitarCarrito extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("cliente") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         if (session.getAttribute("carrito") != null) {

@@ -20,7 +20,7 @@ public class Departamento_Alta extends HttpServlet
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
         {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
         
         List<Empresa> empresas = new ArrayList<>();
@@ -73,7 +73,7 @@ public class Departamento_Alta extends HttpServlet
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
         {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
         
         try (Connection con = Helpers.DB.newConnection(this))

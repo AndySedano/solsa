@@ -25,7 +25,7 @@ public class Producto_Modificar extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Producto_Modificacion.jsp");
@@ -42,7 +42,9 @@ public class Producto_Modificar extends HttpServlet {
         HttpSession session = request.getSession();
         
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("superadmin") == false)
-            response.sendRedirect("../Login");
+        {
+            response.sendRedirect("../Login"); return;
+        }
 
         String url = getInitParameter("url");
         String user = getInitParameter("user");
