@@ -20,10 +20,10 @@
         <link rel="icon" href="../../favicon.ico">
 
         <title>SOLSA - <jsp:invoke fragment="titulo" /></title>
-        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-              rel="stylesheet">
-        <link href="../CSS/layout.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<% out.print(request.getContextPath()); %>/CSS/layout.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.css">
+        <link rel="stylesheet" href="<% out.print(request.getContextPath()); %>/CSS/select2-bootstrap.css">
     </head>
 
     <body>
@@ -119,7 +119,8 @@
         </div>
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.js"></script>
         <jsp:invoke fragment="scripts" />
     </body>
 </html>
