@@ -1,7 +1,6 @@
 package Cliente;
 
 import Beans.Pedido;
-import Beans.Producto;
 import Ventas.EstadoPedido;
 import java.io.IOException;
 import java.sql.Connection;

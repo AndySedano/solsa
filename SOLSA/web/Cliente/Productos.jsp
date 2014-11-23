@@ -24,38 +24,38 @@
                     <div class="col-md-1">
                         <table>
                             <tr><td><center>
-                                
-                                <img src="${al.foto}" />
-                                                                
+
+                                <img src="${al.foto.url}" />
+
                             </center></td></tr>
                             <tr><td><center>
-                                
+
                                 <c:out value="${al.nombre}" />
-                                
+
                             </center></td></tr>
                             <tr><td><center>
-                                
-                                <c:out value="${al.descripccion}" />
-                                
+
+                                <c:out value="${al.descripcion}" />
+
                             </center></td></tr>
                             <tr><td><center>
-                                
+
                                 <c:out value="${al.tipo}" />
-                                
+
                             </center></td></tr>
                             <tr><td><center>
-                                
+
                                 <c:out value="${al.precio}" />
-                                
+
                             </center></td></tr>
                             <tr><td><center>
-                                
+
                                 <a class=" btn btn-primary btn-sm" 
                                    accesskey=""
-                                   href="EstadoPedido?id=${al.id}">
+                                   href="EstadoPedido?id=${al.idProducto}">
                                     Añadir al Carrito
                                 </a>
-                                    
+
                             </center></td></tr>
                         </table>
                     </div>
