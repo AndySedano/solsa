@@ -8,7 +8,7 @@
         Carrito
     </jsp:attribute>
     <jsp:body>
-
+        ${requestScope.mensaje}
         <form>
 
             <h1>Carrito de Ventas</h1>
@@ -44,15 +44,14 @@
                             <td>
                                 <input type="text" value="${al.cantidad}" id="quantas"/>
                             </td>
-                            <td id="${al.id}">
-                                 
+                            <td id="${al.idProducto}">
+
                             </td>
                             <td>
-                                <input type="button" value="Calcular" onclick="precioTotal('${al.id}', ${al.precio})" />
+                                <input type="button" value="Calcular" onclick="precioTotal('${al.idProducto}', ${al.precio})" />
                             </td>
                             <td>
-                                <a class=" btn btn-primary btn-sm" href="QuitarCarrito?${al.idProducto}">
-                                    Quitar</a>
+                                <a class="btn btn-primary btn-sm" href="QuitarCarrito?id=${al.idProducto}">Quitar</a>
                             </td>
                         </tr>
                     </c:forEach>
