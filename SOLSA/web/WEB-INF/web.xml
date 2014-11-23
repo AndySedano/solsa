@@ -127,6 +127,10 @@
         <servlet-name>QuitarCarrito</servlet-name>
         <servlet-class>Cliente.QuitarCarrito</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Producto_Buscar</servlet-name>
+        <servlet-class>Admin.Producto_Buscar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -239,6 +243,10 @@
     <servlet-mapping>
         <servlet-name>QuitarCarrito</servlet-name>
         <url-pattern>/Cliente/QuitarCarrito</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Producto_Buscar</servlet-name>
+        <url-pattern>/Admin/Producto_Buscar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

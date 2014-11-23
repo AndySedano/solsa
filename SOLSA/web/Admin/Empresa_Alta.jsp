@@ -2,7 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:layout seccion="admin" activo="empresa_alta">
+<t:layout seccion="admin" activo="empresas">
     <jsp:attribute name="titulo">
         Alta de Empresas
     </jsp:attribute>
@@ -55,6 +55,7 @@
             
             <div class="form-group"><div class="col-md-offset-3 col-md-9">
             <button type="submit" class="btn btn-primary">Crear</button>
+            <a class="btn btn-default" href="Empresa_Buscar">Regresar</a>
             </div></div>
         </form>
     </jsp:body>
