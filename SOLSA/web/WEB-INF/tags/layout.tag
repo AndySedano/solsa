@@ -55,7 +55,7 @@
                     <c:choose>
                         <c:when test="${seccion == 'cliente'}">
                             <ul class="nav nav-sidebar">
-                                <img src="../CSS/Solsa1.png" height="100" width="200" >
+                                <img src="../CSS/Solsa1.png" height="100" width="250" >
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("productos") ? "active" : "none"}><a href="Productos">Productos</a></li>
