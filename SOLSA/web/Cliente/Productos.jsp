@@ -51,8 +51,7 @@
                             <tr><td><center>
 
                                 <a class=" btn btn-primary btn-sm" 
-                                   accesskey=""
-                                   href="EstadoPedido?id=${al.idProducto}">
+                                   href="Carrito?id=${al.idProducto}">
                                     Añadir al Carrito
                                 </a>
 
