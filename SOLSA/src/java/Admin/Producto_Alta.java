@@ -35,8 +35,18 @@ public class Producto_Alta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         HttpSession session = request.getSession();
+
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
+            response.sendRedirect("../Login");
+        }
+        
+        
         String url = getInitParameter("url");
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
