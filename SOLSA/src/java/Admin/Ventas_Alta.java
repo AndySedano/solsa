@@ -28,6 +28,8 @@ public class Ventas_Alta extends HttpServlet {
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
             response.sendRedirect("../Login");
         }
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Alta.jsp");
+        disp.include(request, response);
     }
 
     @Override

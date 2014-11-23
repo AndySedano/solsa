@@ -62,7 +62,7 @@
             
             <form method="GET" action="Cliente_Alta">
                 Departamento:
-                <select name="listaDepartamentos" size="1">
+                <select name="listaDepartamentos" size="5">
                     <c:forEach items="${requestScope.inf}" var="row">
                     <option value ="<c:out value="${row.idDepartamento}" />"><c:out value="${row.nombre}" /> <c:out value="${row.apellidos}" /></option>
                     </c:forEach>

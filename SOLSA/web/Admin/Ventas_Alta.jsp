@@ -54,12 +54,12 @@
                         <input type="text" class="form-control" id="idDepartamento" name="idDepartamento" placeholder="" required="required"/>
                     </div>
                 </div>
-            <select
                 
             <button type="submit" class="btn btn-success">Crear</button>
             <button type="reset" class="btn btn-danger">Cancelar</button>
             <a href="Inicio" class="btn btn-primary">Continuar</a>                
                 
             </form>
+        
     </jsp:body>
 </t:layout>
