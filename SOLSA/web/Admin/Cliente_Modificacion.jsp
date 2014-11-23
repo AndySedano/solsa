@@ -8,9 +8,11 @@
     </jsp:attribute>
     <jsp:body>
         <h2>Modificación de Usuarios</h2>
-        <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver" url="solsa20.caafufvdj2xl.us-west-2.rds.amazonaws.com/solsa2020" user="solsa2020" password="solsa2020" />
-        <sql:query dataSource="${db}" sql="SELECT idDepartamento, nombre FROM Departamento;" var="result">
-        </sql:query>
+        <p>
+            Ingrese el Username en la casilla para desplegar los datos
+            a cambiar:
+        </p>
+        ${requestScope.res}
         <form class="form-horizontal" method="post" action="Cliente_Modificar">
             <div class="form-group">
                 <label for="username" class="col-md-3 control-label">Usuario</label>
@@ -40,9 +42,8 @@
                     <input type="text" class="form-control" id="direccion" name="direccion" placeholder="" value="${requestScope.telefono}">
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Modificar</button>
-            <button type="submit" class="btn btn-danger">Borrar</button>
-            <a href="Inicio" class="btn btn-primary">Continuar</a>
+            <button type="submit" class="btn btn-primary" name="submit" value="modficar">Modificar</button>
+            <button type="submit" class="btn btn-danger" name="submit" value="borrar">Borrar</button>
         </form>
     </jsp:body>
 </t:layout>

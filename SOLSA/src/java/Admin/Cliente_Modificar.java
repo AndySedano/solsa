@@ -2,7 +2,6 @@ package Admin;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,21 +43,19 @@ public class Cliente_Modificar extends HttpServlet {
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("superadmin") == false)
             response.sendRedirect("../Login");
 
-        String url = getInitParameter("url");
-        String user = getInitParameter("user");
-        String pass = getInitParameter("pass");
         String username = request.getParameter("username");
         String nombre = request.getParameter("nombre");
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
         int departamento = Integer.parseInt(request.getParameter("departamento"));
+        String mob = request.getParameter("submit");
         boolean st = false;
-        String sql = "UPDATE Usuario SET nombre=?, direccion=?, telefono=? departamento=? WHERE username=?;";
+        String sqlModificar = "UPDATE Usuario SET nombre=?, direccion=?, telefono=? departamento=? WHERE username=?;";
+        String sqlDelete = "DELETE FROM Usuario WHERE username=?;";
 
-        try {
-            Class.forName("con.mysql.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection(url, user, pass)) {
-                try (PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Helpers.DB.newConnection(this)) {
+            if (mob.equals("modificar")) {
+                try (PreparedStatement ps = con.prepareStatement(sqlModificar)) {
                     ps.setString(1, nombre);
                     ps.setString(2, direccion);
                     ps.setString(3, telefono);
@@ -69,21 +66,38 @@ public class Cliente_Modificar extends HttpServlet {
                         st = true;
                         session.setAttribute("username", session.getAttribute("username"));
                     }
-                }
+                } 
                 if (st) {
                     request.setAttribute("res", "El usuario " + session.getAttribute("username") + " ha siido modificado.");
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
                     rd.include(request, response);
-                            
                 } else {
                     request.setAttribute("res", "Lo sentimos, ha ocurrido un error, ingrese los datos nuevamente...");
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
                     rd.include(request, response);
                 }
-                con.close();
-            } 
-        } catch (ClassNotFoundException | SQLException ex) {
+            } else {
+                try (PreparedStatement ps = con.prepareStatement(sqlDelete)) {
+                    ps.setString(1, username);
+                    ResultSet rs = ps.executeQuery();
+                    while (rs.next()) {
+                        st = true;
+                        session.setAttribute("username", session.getAttribute("username"));
+                    }
+                } 
+                if (st) {
+                    request.setAttribute("res", "El usuario " + session.getAttribute("username") + " ha siido borrado.");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
+                    rd.include(request, response);
+                } else {
+                    request.setAttribute("res", "Lo sentimos, ha ocurrido un error, ingrese los datos nuevamente...");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
+                    rd.include(request, response);
+                }
+            }
+        } 
+        catch (SQLException ex) {
             Logger.getLogger(Cliente_Modificar.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
-}
+    } 
+}    
