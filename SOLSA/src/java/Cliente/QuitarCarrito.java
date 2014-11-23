@@ -2,16 +2,8 @@ package Cliente;
 /*Quita productos al carrito*/
 
 import Beans.CarritoBean;
-import Beans.Foto;
 import Beans.Producto;
-import Ventas.EstadoPedido;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +25,14 @@ public class QuitarCarrito extends HttpServlet {
         }
 
         if (session.getAttribute("carrito") != null) {
-            request.setAttribute("inf", ((CarritoBean) session.getAttribute("carrito")).getProductos());
+            CarritoBean c = (CarritoBean) request.getAttribute("carrito");
+            int id = Integer.parseInt(request.getParameter("id"));
+            for(Producto p : c.getProductos()){
+                if(p.getIdProducto()==id){
+                    c.getProductos().remove(p);
+                }
+            }
+            session.setAttribute("carrito", c);
         } else {
             request.setAttribute("mensaje", "Carrito Vacio");
         }
