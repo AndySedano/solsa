@@ -6,7 +6,11 @@
         Altas Venta
     </jsp:attribute>
     <jsp:body>
-        Altas venta
-        
+        <form>
+            <h1>Dar de Alta personal de Ventas</h1>
+            <p>
+                
+            </p>
+        </form>
     </jsp:body>
 </t:layout>

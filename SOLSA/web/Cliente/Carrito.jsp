@@ -20,95 +20,37 @@
             <br />
             <br />
 
-
-
-
-
             <center>
-            <table border="1px">
-                <tr>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Nombre
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Precio Unitario
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Cantidad a Pedir
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Precio Total
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Quitar
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                </tr>
-
-                <c:forEach items="${requestScope.inf}" var="al">
+                <table class="table table-hover">
                     <tr>
-                        <td>
-                            &nbsp;
-                            &nbsp;
-                    <c:out value="${al.nombre}" />
-                    &nbsp;
-                    &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                    <c:out value="${al.precio}" />
-                    &nbsp;
-                    &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                        <input type="text" value="1" />
-                        &nbsp;
-                        &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                        PrecioTotal
-                        &nbsp;
-                        &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                        <input type="submit" name="${al.id}" value="Quitar"/>
-                        &nbsp;
-                        &nbsp;
-                    </td>
+                        <th>Nombre</th>
+                        <th>Precio Unitario</th>
+                        <th>Cantidad a Pedir</th>
+                        <th>Precio Total</th>
+                        <th>Quitar</th>
                     </tr>
-                </c:forEach>
 
-            </table>
+                    <c:forEach items="${requestScope.inf}" var="al">
+                        <tr>
+                            <td>
+                        <c:out value="${al.nombre}" />
+                        </td>
+                        <td>
+                        <c:out value="${al.precio}" />
+                        </td>
+                        <td>
+                            <input type="text" value="1" />
+                        </td>
+                        <td>
+                            PrecioTotal
+                        </td>
+                        <td>
+                            <input type="submit" name="${al.id}" value="Quitar"/>
+                        </td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </center>
-
-
-
             <br />
             <br />
             <h3>Estas acciones no se pueden deshacer:</h3>

@@ -19,13 +19,6 @@
                 También puede realizar una búsqueda de las peticiones
             </p>
             
-            
-            
-            
-            
-            
-            
-            
             <input type="text" name="busqueda" />
             
             <select name="loquequieras">
@@ -36,94 +29,35 @@
             <br />
             <br />
                         
-            <table border="1px">
+            <table class="table table-hover">
                 <tr>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        id
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Responsable
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Fecha de Petición
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Estado
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Seleccionar
-                        &nbsp;
-                        &nbsp;
-                    </th>
+                    <th>id</th>
+                    <th>Responsable</th>
+                    <th>Fecha de Petición</th>
+                    <th>Estado</th>
+                    <th>Seleccionar</th>
                 </tr>
                 
                 <c:forEach items="${requestScope.inf}" var="al">
                     <tr>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.id}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.responsable}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.fechaPeticion}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.estado}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
-                            <input type="submit" name="${al.id}" value="Ver/Modificar"/>
-                            &nbsp;
-                            &nbsp;
+                            <a class=" btn btn-primary btn-sm" href="EstadoPedido?id=${al.id}">Ver ó Modificar</a>
                         </td>
                     </tr>
                 </c:forEach>
-                
             </table>
-            
-            
-            
-            
-            
-            
-            
         </form>
-        
     </jsp:body>
 </t:layout>

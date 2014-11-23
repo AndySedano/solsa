@@ -28,54 +28,23 @@
             <p>
             <h4>Elementos Pedidos:</h4>
 
-            <table>
-
+            <table class="table table-hover">
                 <tr>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        id
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Nombre
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Cantidad
-                        &nbsp;
-                        &nbsp;
-                    </th>
+                    <th>id</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
                 </tr>
 
                 <c:forEach items="${requestScope.inf}" var="al">
                     <tr>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.id}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.nombre}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.cantidad}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                     </tr>
                 </c:forEach>
