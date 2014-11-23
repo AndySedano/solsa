@@ -20,10 +20,10 @@
         <link rel="icon" href="../../favicon.ico">
 
         <title>SOLSA - <jsp:invoke fragment="titulo" /></title>
-        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-              rel="stylesheet">
-        <link href="../CSS/layout.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<% out.print(request.getContextPath()); %>/CSS/layout.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.css">
+        <link rel="stylesheet" href="<% out.print(request.getContextPath()); %>/CSS/select2-bootstrap.css">
     </head>
 
     <body>
@@ -42,7 +42,7 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="<%  out.print(request.getContextPath()); %>/Logout">Logout</a></li>
+                        <li><a href="<%  out.print(request.getContextPath());%>/Logout">Logout</a></li>
 
                     </ul>
                 </div>
@@ -69,6 +69,10 @@
                                 <img src="../CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
+                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
+                            </ul>
+                            <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("empresa_alta") ? "active" : "none"}><a href="Empresa_Alta">Alta Empresa</a></li>
                                 <li class=${activo.equals("empresa_modificacion") ? "active" : "none"}><a href="Empresa_Modificar">Modificar Empresa</a></li>
                             </ul>
@@ -82,15 +86,11 @@
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("cliente_alta") ? "active" : "none"}><a href="Cliente_Alta">Alta Cliente</a></li>
-                                <li class=${activo.equals("cliente_Modificacion") ? "active" : "none"}><a href="Cliente_Modificar">Modificacion Clientee</a></li>
+                                <li class=${activo.equals("cliente_Modificacion") ? "active" : "none"}><a href="Cliente_Modificar">Modificacion Cliente</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("departamento_alta") ? "active" : "none"}><a href="Departamento_Alta">Alta Departamento</a></li>
                                 <li class=${activo.equals("departamento_Modificacion") ? "active" : "none"}><a href="Departamento_Modificar">Modificacion Departamento</a></li>
-                            </ul>
-                            <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
                             </ul>
                         </c:when>
                         <c:when test="${seccion == 'aprobador'}">
@@ -107,7 +107,6 @@
                                 <img src="../CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
                                 <li class=${activo.equals("pedidos") ? "active" : "none"}><a href="Pedidos">Pedidos</a></li>    
                             </ul> 
                         </c:when>
@@ -120,7 +119,16 @@
         </div>
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.js"></script>
+        <script>
+            $(document).on('change', '.btn-file :file', function() {
+                var $input = $(this);
+                var text = $input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                var $label = $input.closest('.input-group').find(':text');
+                $label.val(text);
+            });
+        </script>
         <jsp:invoke fragment="scripts" />
     </body>
 </html>

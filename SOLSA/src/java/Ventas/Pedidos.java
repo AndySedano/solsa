@@ -1,10 +1,12 @@
 package Ventas;
 
+import Beans.Pedido;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -47,30 +49,33 @@ public class Pedidos extends HttpServlet {
 
             Class.forName("com.mysql.jdbc.Driver");
 
-            String busqueda = request.getParameter("loquequieras");
-            String dato = request.getParameter("busqueda");
+            String query = request.getParameter("loquequieras").equals("1") ? "Empresa.nombre" : "Pedido.Estado";
 
-            PreparedStatement ps = con.prepareStatement("SELECT Pedido.idPedido AS id, Empresa.nombre AS Empresa, Pedido.fechaDeEntrega, Pedido.estado \n"
-                    + "FROM Pedido, Empresa WHERE Pedido.Empresa_idEmpresa = Empresa.idEMpresa and ? = ?;");
-            ps.setString(1, busqueda);
-            ps.setString(2, dato);
+            PreparedStatement ps = con.prepareStatement("SELECT Pedido.idPEdido AS id, Empresa.nombre AS Empresa, Pedido.fechaDeEntrega, Pedido.estado\n"
+                    + "FROM Pedido, Empresa\n"
+                    + "WHERE Pedido.Empresa_idEmpresa = Empresa.idEMpresa and " + query + " = ?");
+
+            ps.setString(1, request.getParameter("busqueda"));
 
             ResultSet rs = ps.executeQuery();
+            ArrayList<Pedido> beans = new ArrayList<>();
+
             if (rs.next()) {
-                MyBean bean = new MyBean();
-                bean.setName(rs.getString(1));
-                bean.setSurname(rs.getString(2));
-                request.setAttribute("inf", bean);
+                Pedido bean = new Pedido();
+                bean.setId(rs.getInt("id"));
+                bean.setEmpresa(rs.getString("Empresa"));
+                bean.setDate(rs.getDate("fechaDeEntrega").toString());
+                bean.setEstado(rs.getString("estado"));
+                beans.add(bean);
             }
 
-            RequestDispatcher disp = request.getRequestDispatcher("Pedidos.jsp");
-            disp.include(request, response);
+            request.setAttribute("inf", beans);
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Pedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Ventas/Pedidos.jsp");
+        RequestDispatcher disp = request.getRequestDispatcher("Pedidos.jsp");
         disp.include(request, response);
 
     }

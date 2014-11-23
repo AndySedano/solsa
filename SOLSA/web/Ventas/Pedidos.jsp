@@ -10,6 +10,9 @@
     <jsp:body>
         <form method="POST" action="Pedidos">
             <h1>
+                ${requestScope.mensaje} 
+            </h1>
+            <h1>
                 Pedidos
             </h1>
             <br/>
@@ -21,92 +24,51 @@
             <input type="text" name="busqueda" />
 
             <select name="loquequieras">
-                <option value="Empresa.idEmpresa">Empresa</option>
-                <option value="Pedido.Estado">Estado</option>
+                <option value="1">Empresa</option>
+                <option value="2">Estado</option>
             </select>
-            <input type="submit" name="botonCool" value="Buscar" />
+            <input type="submit" name="botonCool"/>
             <br />
             <br />
 
-            <table border="1px">
+            <table class="table table-hover">
                 <tr>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         id
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Empresa
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Fecha de Entrega
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Estado
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Seleccionar
-                        &nbsp;
-                        &nbsp;
                     </th>
                 </tr>
 
                 <c:forEach items="${requestScope.inf}" var="al">
                     <tr>
                         <td>
-                            &nbsp;
-                            &nbsp;
-                    <c:out value="${al.id}" />
-                    &nbsp;
-                    &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                    <c:out value="${al.empresa}" />
-                    &nbsp;
-                    &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                    <c:out value="${al.fechaEntrega}" />
-                    &nbsp;
-                    &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                    <c:out value="${al.estado}" />
-                    &nbsp;
-                    &nbsp;
-                    </td>
-                    <td>
-                        &nbsp;
-                        &nbsp;
-                        <input type="submit" name="${al.id}" value="Ver"/>
-                        &nbsp;
-                        &nbsp;
-                    </td>
+                            <c:out value="${al.id}" />
+                        </td>
+                        <td>
+                            <c:out value="${al.empresa}" />
+                        </td>
+                        <td>
+                            <c:out value="${al.date}" />
+                        </td>
+                        <td>
+                            <c:out value="${al.estado}" />
+                        </td>
+                        <td>
+                            <a class=" btn btn-primary btn-sm" href="EstadoPedido?id=${al.id}">Ver</a>
+                        </td>
                     </tr>
                 </c:forEach>
-
             </table>
 
         </form>

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.javatuples.Pair;
 
 public class Cliente_Alta extends HttpServlet {
 
@@ -35,19 +36,27 @@ public class Cliente_Alta extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
+
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
+            response.sendRedirect("../Login");
+        }
+
         String url = getInitParameter("url");
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
         boolean st = false;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        int salt = Integer.parseInt(request.getParameter("salt"));
+        Pair<String, Integer> hash = Helpers.Login.createNewHash(password);
         String nombre = request.getParameter("nombre");
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
-        String tipo = request.getParameter("tipo");
+        String tipo = "cliente";
         int idDepartamento = Integer.parseInt(request.getParameter("idDepartamento"));
         String sql = "INSERT INTO Usuario (username, password, salt, nombre, direccion, telefono, tipo, idDepartamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
@@ -56,8 +65,9 @@ public class Cliente_Alta extends HttpServlet {
             try (Connection con = DriverManager.getConnection(url, user, pass)) {
                 try (PreparedStatement ps = con.prepareStatement(sql)) {
                     ps.setString(1, username);
-                    ps.setString(2, password);
-                    ps.setInt(3, salt);
+                    ps.setString(2, hash.getValue0());
+                    ps.setInt(3, hash.getValue1());
+                    
                     ps.setString(4, nombre);
                     ps.setString(5, direccion);
                     ps.setString(6, telefono);

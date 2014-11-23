@@ -6,6 +6,60 @@
         Carrito
     </jsp:attribute>
     <jsp:body>
-        carrito
+
+        <form>
+
+            <h1>Carrito de Ventas</h1>
+            <br />
+            <p>
+                Aquí podrá modificar los elementos que agregó a su carrito
+                de compras, al finalizar de editar sus peticiones puede
+                enviarlas al Aprobador de su empresa, revise en su lista
+                de peticiones para saber si ésta fue aprobada o cancelada.
+            </p>
+            <br />
+            <br />
+
+            <center>
+                <table class="table table-hover">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio Unitario</th>
+                        <th>Cantidad a Pedir</th>
+                        <th>Precio Total</th>
+                        <th>Quitar</th>
+                    </tr>
+
+                    <c:forEach items="${requestScope.inf}" var="al">
+                        <tr>
+                            <td>
+                        <c:out value="${al.nombre}" />
+                        </td>
+                        <td>
+                        <c:out value="${al.precio}" />
+                        </td>
+                        <td>
+                            <input type="text" value="1" />
+                        </td>
+                        <td>
+                            PrecioTotal
+                        </td>
+                        <td>
+                            <input type="submit" name="${al.id}" value="Quitar"/>
+                        </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </center>
+            <br />
+            <br />
+            <h3>Estas acciones no se pueden deshacer:</h3>
+            <input type="submit" value="Eliminar Carrito" />&nbsp;&nbsp;
+            <input type="submit" value="Enviar Petición a Aprobador" />
+
+
+
+        </form>
+
     </jsp:body>
 </t:layout>

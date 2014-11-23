@@ -1,54 +1,61 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:layout seccion="admin" activo ="empresa_alta">
+<t:layout seccion="admin" activo="empresa_alta">
     <jsp:attribute name="titulo">
-        Empresa
+        Alta de Empresas
+    </jsp:attribute>
+    <jsp:attribute name="scripts">
     </jsp:attribute>
     <jsp:body>
         <h2>Alta de Empresas</h2>
-            <form class="form-horizontal" method="post" action="Empresa_Alta">
-                
-                <div class="form-group">
-                    <label for="nombre" class="col-md-3 control-label">Nombre:</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" id="nombre" placeholder="max. 20 caracteres"/>
-                    </div>
-                </div> 
-                
-                    <div class="form-group">
-                        <label for="textArea" class="col-md-3 control-label">Dirección:</label>
-                        <div class="col-lg-9">
-                            <textarea id="text" class="form-control" rows="3" placeholder="max. 50 caracteres"></textarea>
-                        </div>
-                    </div>
-                
-                <div class="form-group">
-                    <label for="telefono" class="col-md-3 control-label">Telefono:</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" id="telefono" placeholder="max. 8 caracteres"/>
-                    </div>
-                </div>    
-                
-                <div class="form-group">
-                    <label for="rfc" class="col-md-3 control-label">RFC:</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" id="rfc" placeholder="max. 10 caracteres"/>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="contrato" class="col-md-3 control-label">Contrato (id):</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" id="contrato" placeholder="max. 10 caracteres"/>
-                    </div>
-                </div> 
-
-            <button type="submit" class="btn btn-success">Aceptar</button>
-            <button type="submit" class="btn btn-danger">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Volver</button>
+        <c:if test="${not empty message}">
+            <c:if test="${not empty error}">
+                <div class="alert alert-warning" role="alert">${message}</div>
+            </c:if>
+            <c:if test="${empty error}">
+                <div class="alert alert-success" role="alert">${message}</div>
+            </c:if>
+        </c:if>
+        <form class="form-horizontal" method="post" action="Empresa_Alta" enctype="multipart/form-data">
+            <div class="form-group">    <label class="col-md-3 control-label" for="nombre">Nombre</label>
+            <div class="col-md-9">      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="max. 20 caracteres">
+            </div>
+            </div>
             
-                
-            </form>  
+            <div class="form-group">    <label class="col-md-3 control-label" for="direccion">Dirección</label>
+            <div class="col-md-9">      <textarea class="form-control" rows="4" id="direccion" name="direccion"></textarea>
+            </div>
+            </div>
+            
+            <div class="form-group">    <label class="col-md-3 control-label" for="telefono">Teléfono</label>
+            <div class="col-md-9">      <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Incluyendo LADA">
+            </div>
+            </div>
+            
+            <div class="form-group">    <label class="col-md-3 control-label" for="rfc">RFC</label>
+            <div class="col-md-9">      <input type="text" class="form-control" id="rfc" name="rfc" placeholder="12 o 13 caracteres">
+            </div>
+            </div>
+            
+            <div class="form-group">    <label class="col-md-3 control-label" for="foto">Foto</label>
+            <div class="col-md-9">      
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-default btn-file">
+                        Examinar…
+                        <input type="file" id="foto" name="foto">
+                    </span>
+                </span>
+                <input type="text" class="form-control" readonly>
+            </div>
+            </div>
+            </div>
+            
+            <div class="form-group"><div class="col-md-offset-3 col-md-9">
+            <button type="submit" class="btn btn-primary">Crear</button>
+            </div></div>
+        </form>
     </jsp:body>
 </t:layout>
