@@ -3,7 +3,6 @@ package Admin;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +43,17 @@ public class Ventas_Alta extends HttpServlet {
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
             response.sendRedirect("../Login");
         }
-
+        
+        if (request.getParameter("password").length() < 8
+            || !request.getParameter("password").equals(request.getParameter("passwordagain")))
+        {
+            request.setAttribute("error", "true");
+            request.setAttribute("message", "Error de validación");
+            RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Alta.jsp");
+            disp.include(request, response);
+            return;
+        }
+        
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Pair<String, Integer> hash = Helpers.Login.createNewHash(password);
@@ -52,7 +61,6 @@ public class Ventas_Alta extends HttpServlet {
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
         String tipo = "ventas";
-        boolean st = false;
         String sql = "INSERT INTO Usuario (username, password, salt, nombre, direccion, telefono, tipo) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?);";
 
@@ -65,23 +73,17 @@ public class Ventas_Alta extends HttpServlet {
                 ps.setString(5, direccion);
                 ps.setString(6, telefono);
                 ps.setString(7, tipo);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    st = true;
-                    session.setAttribute("username", session.getAttribute("username"));
-                }
+                ps.executeUpdate();
             }
-            if (st) {
-                request.setAttribute("res", "El ususario " + session.getAttribute("username") + " ha sido registrado exitosamente.");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("Cliente_Alta.jsp");
-                rd.include(request, response);
-            } else {
-                request.setAttribute("res", "Lo sentimos, hubo un error, ingrese los datos nuevamente...");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("Cliente_Alta.jsp");
-                rd.include(request, response);
-            }
+            
+            request.setAttribute("message", "El usuario " + username + " ha sido registrado exitosamente.");
+            doGet(request, response);
+            
         } catch (SQLException ex) {
             Logger.getLogger(Ventas_Alta.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("error", "true");
+            request.setAttribute("message", "Lo sentimos, hubo un error, ingrese los datos nuevamente...");
+            doGet(request, response);
         }
     } 
 }
