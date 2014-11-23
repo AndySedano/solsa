@@ -37,11 +37,7 @@
                 <h3>Reporte General de SOLSA</h3>
 
                 <h4>De Todas las Empresas:</h4>
-                Peticiones Aceptados: 
-                <br />
-                Peticiones Canceladas:
-                <br />
-                <br />
+                
                 Pedidos Entregados:
                 <br />
                 Pedidos En Tránsito:
@@ -49,10 +45,11 @@
                 <br />
                 Ganancias Totales: MXN
                 <br />
+                <br />
 
                 <h4>Por Cada Empresa:</h4>
 
-                <table>
+                <table class="table table-hover">
                     <tr>
                         <th>Nombre de la Empresa</th>
                         <th>Pedidos Realizados</th>
