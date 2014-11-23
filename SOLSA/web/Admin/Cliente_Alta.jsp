@@ -9,7 +9,7 @@
     </jsp:attribute>
     <jsp:body>  
         <h2>Alta de Clientes</h2>
-        <sql:setDataSource var="db" driver="com.mysql.jdbc,Driver" url="solsa20.caafufvdj2xl.us-west-2.rds.amazonaws.com:3306/solsa2020" user="solsa2020" password="solsa2020" />
+        <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver" url="solsa20.caafufvdj2xl.us-west-2.rds.amazonaws.com:3306/solsa2020" user="solsa2020" password="solsa2020" />
         <sql:query dataSource="${db}" var="result">SELECT idDepartamento, nombre FROM Departamento;
         </sql:query>
         ${requestScope.res}
