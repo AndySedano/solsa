@@ -8,6 +8,13 @@
     <jsp:body>
         <h2>Modificar Empresa</h2>
             <form class="form-horizontal" method="post" action="Empresa_Modificacion">
+                <p>Si desconocel el id de la empresa puede enconrarlo realizando
+                una búsqueda en la sección de buscar</p>
+                <input type="text" placeholder="id de la empresa" />
+                <input type="submit" value="Seleccionar" />
+                <br />
+                <br />
+                <br />
                 
                 <div class="form-group">
                     <label for="nombre" class="col-md-3 control-label">Nombre:</label>
@@ -45,10 +52,6 @@
                 </div> 
 
             <button type="submit" class="btn btn-success">Modificar</button>
-            <button type="submit" class="btn btn-danger">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Volver</button>
-            
-                
             </form>      
     </jsp:body>
 </t:layout>

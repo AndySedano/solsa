@@ -9,6 +9,15 @@
         <h2>Modificar Producto</h2>
             <form class="form-horizontal" method="post" action="Producto_Modificacion">
                 
+                <p>Si desconocel el id del producto puede enconrarlo realizando
+                una búsqueda en la sección de buscar</p>
+                <input type="text" placeholder="id del producto" />
+                <input type="submit" value="Seleccionar" />
+                <br />
+                <br />
+                <br />
+                
+                
                 <div class="form-group">
                     <label for="nombre" class="col-md-3 control-label">Nombre del Producto:</label>
                     <div class="col-md-9">
@@ -42,19 +51,9 @@
                     <div class="col-md-9">
                         <input type="text" class="form-control" id="tipo" placeholder="max. 10 caracteres"/>
                     </div>
-                </div> 
-                
-                <div class="form-group">
-                    <label for="foto" class="col-md-3 control-label">Foto:</label>
-                    <div class="col-md-9">
-                        <input type="file" class="form-control" id="foto" />
-                    </div>
-                </div>                
-
+                </div>
             <button type="submit" class="btn btn-success">Modificar</button>
             <button type="submit" class="btn btn-danger">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Volver</button>
-                
             </form>       
     </jsp:body>
 </t:layout>

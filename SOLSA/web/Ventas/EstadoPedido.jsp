@@ -28,54 +28,39 @@
             <p>
             <h4>Elementos Pedidos:</h4>
 
-            <table>
-
+            <table class="table table-hover">
                 <tr>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        id
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Nombre
-                        &nbsp;
-                        &nbsp;
-                    </th>
-                    <th>
-                        &nbsp;
-                        &nbsp;
-                        Cantidad
-                        &nbsp;
-                        &nbsp;
-                    </th>
+                    <th>id</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
                 </tr>
 
                 <c:forEach items="${requestScope.inf}" var="al">
                     <tr>
                         <td>
+<<<<<<< HEAD
                             &nbsp;
                             &nbsp;
                             <c:out value="${al.idProducto}" />
                             &nbsp;
                             &nbsp;
+=======
+                            <c:out value="${al.id}" />
+>>>>>>> origin/master
                         </td>
                         <td>
-                            &nbsp;
-                            &nbsp;
                             <c:out value="${al.nombre}" />
-                            &nbsp;
-                            &nbsp;
                         </td>
                         <td>
+<<<<<<< HEAD
                             &nbsp;
                             &nbsp;
                             <c:out value="${al.descripcion}" />
                             &nbsp;
                             &nbsp;
+=======
+                            <c:out value="${al.cantidad}" />
+>>>>>>> origin/master
                         </td>
                     </tr>
                 </c:forEach>

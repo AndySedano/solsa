@@ -23,33 +23,33 @@
         </c:if>
         <form class="form-horizontal" method="post" action="Departamento_Alta">
             <div class="form-group">    <label class="col-md-3 control-label" for="nombre">Nombre</label>
-            <div class="col-md-9">      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="">
-            </div>
+                <div class="col-md-9">      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="">
+                </div>
             </div>
 
             <div class="form-group">    <label class="col-md-3 control-label" for="idEmpresa">Empresa</label>
-            <div class="col-md-9">      <select class="form-control" id="idEmpresa" name="idEmpresa" data-placeholder="Selecciona una empresa">
-                                            <option></option>
-                                            <c:forEach var="empresa" items="${empresas}">
-                                            <option value="${empresa.idEmpresa}">${empresa.nombre}</option>
-                                            </c:forEach>
-                                        </select>
-            </div>
+                <div class="col-md-9">      <select class="form-control" id="idEmpresa" name="idEmpresa" data-placeholder="Selecciona una empresa">
+                        <option></option>
+                        <c:forEach var="empresa" items="${empresas}">
+                            <option value="${empresa.idEmpresa}">${empresa.nombre}</option>
+                        </c:forEach>
+                    </select>
+                </div>
             </div>
 
             <div class="form-group">    <label class="col-md-3 control-label" for="idProductos">Productos</label>
-            <div class="col-md-9">      <select class="form-control" id="idProductos" name="idProductos" data-placeholder="Selecciona uno o más productos" multiple>
-                                            <option></option>
-                                            <c:forEach var="producto" items="${productos}">
-                                            <option value="${producto.idProducto}">${producto.nombre}</option>
-                                            </c:forEach>
-                                        </select>
+                <div class="col-md-9">      <select class="form-control" id="idProductos" name="idProductos" data-placeholder="Selecciona uno o más productos" multiple>
+                        <option></option>
+                        <c:forEach var="producto" items="${productos}">
+                            <option value="${producto.idProducto}">${producto.nombre}</option>
+                        </c:forEach>
+                    </select>
+                </div>
             </div>
-            </div>
-            
+
             <div class="form-group"><div class="col-md-offset-3 col-md-9">
-            <button type="submit" class="btn btn-primary">Crear</button>
-            </div></div>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </div></div>
         </form>
     </jsp:body>
 </t:layout>

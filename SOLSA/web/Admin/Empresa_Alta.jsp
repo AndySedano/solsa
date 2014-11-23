@@ -36,19 +36,14 @@
                         <input type="text" class="form-control" id="rfc" placeholder="max. 10 caracteres"/>
                     </div>
                 </div>
-                
                 <div class="form-group">
-                    <label for="contrato" class="col-md-3 control-label">Contrato (id):</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" id="contrato" placeholder="max. 10 caracteres"/>
-                    </div>
-                </div> 
-
+                <label for="foto" class="col-md-3 control-label">Logo:</label>
+                <div class="col-md-9">
+                    <br />
+                    <input type="file" class="form-control" id="foto" />
+                </div>
+            </div>
             <button type="submit" class="btn btn-success">Aceptar</button>
-            <button type="submit" class="btn btn-danger">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Volver</button>
-            
-                
             </form>  
     </jsp:body>
 </t:layout>

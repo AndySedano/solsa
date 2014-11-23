@@ -17,16 +17,16 @@
             <br />
             Fecha de Inicio
             <br />
-            <input type="text" value="día">&nbsp;
-            <input type="text" value="mes">&nbsp;
-            <input type="text" value="año">&nbsp;
+            <input type="text" placeholder="día">&nbsp;
+            <input type="text" placeholder="mes">&nbsp;
+            <input type="text" placeholder="año">&nbsp;
             <br />
             <br />
             Fecha de Fin
             <br />
-            <input type="text" value="día">&nbsp;
-            <input type="text" value="mes">&nbsp;
-            <input type="text" value="año">&nbsp;
+            <input type="text" placeholder="día">&nbsp;
+            <input type="text" placeholder="mes">&nbsp;
+            <input type="text" placeholder="año">&nbsp;
             <br />
             <br />
             <input type="submit" value="Realizar Reporte" />
@@ -34,7 +34,6 @@
             <br />
 
             <div>
-
                 <h3>Reporte</h3>
                 <br />
                 Fecha de Reporte:
@@ -52,7 +51,6 @@
                 <br />
                 Costo Total: MXN
                 <br />
-
             </div>
 
         </form>
