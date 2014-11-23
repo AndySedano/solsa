@@ -67,7 +67,6 @@ public class Pedidos extends HttpServlet {
                 bean.setDate(rs.getDate("fechaDeEntrega").toString());
                 bean.setEstado(rs.getString("estado"));
                 beans.add(bean);
-                System.out.println("Funciono");
             }
 
             request.setAttribute("inf", beans);

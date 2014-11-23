@@ -42,7 +42,7 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="<%  out.print(request.getContextPath()); %>/Logout">Logout</a></li>
+                        <li><a href="<%  out.print(request.getContextPath());%>/Logout">Logout</a></li>
 
                     </ul>
                 </div>
@@ -69,6 +69,10 @@
                                 <img src="../CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
+                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
+                            </ul>
+                            <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("empresa_alta") ? "active" : "none"}><a href="Empresa_Alta">Alta Empresa</a></li>
                                 <li class=${activo.equals("empresa_modificacion") ? "active" : "none"}><a href="Empresa_Modificar">Modificar Empresa</a></li>
                             </ul>
@@ -82,15 +86,11 @@
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("cliente_alta") ? "active" : "none"}><a href="Cliente_Alta">Alta Cliente</a></li>
-                                <li class=${activo.equals("cliente_Modificacion") ? "active" : "none"}><a href="Cliente_Modificar">Modificacion Clientee</a></li>
+                                <li class=${activo.equals("cliente_Modificacion") ? "active" : "none"}><a href="Cliente_Modificar">Modificacion Cliente</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("departamento_alta") ? "active" : "none"}><a href="Departamento_Alta">Alta Departamento</a></li>
                                 <li class=${activo.equals("departamento_Modificacion") ? "active" : "none"}><a href="Departamento_Modificar">Modificacion Departamento</a></li>
-                            </ul>
-                            <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
                             </ul>
                         </c:when>
                         <c:when test="${seccion == 'aprobador'}">

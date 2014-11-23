@@ -15,19 +15,19 @@
             <br />
 
             <p>
-                id: 
+                id: ${requestScope.id}
                 <br />
-                Empresa:
+                Empresa: ${requestScope.empresa}
                 <br>
-                Fecha de Entrega:
+                Fecha de Entrega: ${requestScope.date}
                 <br />
-                Estado:
+                Estado: ${requestScope.estado}
                 <br />
                 <br />
             </p>
             <p>
             <h4>Elementos Pedidos:</h4>
-            
+
             <table>
 
                 <tr>
@@ -81,20 +81,20 @@
                 </c:forEach>
 
             </table>
-            
+
             <br />
             <h4>Estado del Pedido</h4>
-            <input type="radio">&nbsp;Recibido
+            <input type="radio" name="estado">&nbsp;Recibido
             <br />
-            <input type="radio">&nbsp;En Almacen
+            <input type="radio" name="estado">&nbsp;En Almacen
             <br />
-            <input type="radio">&nbsp;En Camino
+            <input type="radio" name="estado">&nbsp;En Camino
             <br />
-            <input type="radio">&nbsp;Entregado
+            <input type="radio" name="estado">&nbsp;Entregado
             <br />
             <br />
             <input type="submit" name="cambiarEstado" value="Cambiar Estado">
-        </p>
-    </form> 
-</jsp:body>
+            </p>
+        </form> 
+    </jsp:body>
 </t:layout>

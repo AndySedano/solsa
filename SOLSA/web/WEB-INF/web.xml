@@ -79,10 +79,6 @@
     </servlet>
     <!--Ventas-->
     <servlet>
-        <servlet-name>Ventas_Buscar</servlet-name>
-        <servlet-class>Ventas.Buscar</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Ventas_Pedidos</servlet-name>
         <servlet-class>Ventas.Pedidos</servlet-class>
     </servlet>
@@ -182,10 +178,6 @@
         <url-pattern>/Admin/Buscar</url-pattern>
     </servlet-mapping>
     <!--Ventas-->
-    <servlet-mapping>
-        <servlet-name>Ventas_Buscar</servlet-name>
-        <url-pattern>/Ventas/Buscar</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Ventas_Pedidos</servlet-name>
         <url-pattern>/Ventas/Pedidos</url-pattern>

@@ -28,7 +28,7 @@ public class Ventas_Alta extends HttpServlet {
             response.sendRedirect("../Login");
         }
 
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Cliente_Alta.jsp");
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Alta.jsp");
         disp.include(request, response);
     }
 

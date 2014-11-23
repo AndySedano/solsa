@@ -28,42 +28,22 @@
             <br />
             <br />
 
-            <table border="1px">
+            <table class="table table-hover"border="1px">
                 <tr>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         id
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Empresa
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Fecha de Entrega
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Estado
-                        &nbsp;
-                        &nbsp;
                     </th>
                     <th>
-                        &nbsp;
-                        &nbsp;
                         Seleccionar
-                        &nbsp;
-                        &nbsp;
                     </th>
                 </tr>
 
@@ -100,7 +80,7 @@
                         <td>
                             &nbsp;
                             &nbsp;
-                            <input type="submit" name="${al.id}" value="Ver"/>
+                            <a class=" btn btn-primary btn-sm" href="EstadoPedido?id=${al.id}">Ver</a>
                             &nbsp;
                             &nbsp;
                         </td>
