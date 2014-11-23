@@ -1,11 +1,13 @@
 package Admin;
 
+import Beans.Departamento;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -21,6 +23,7 @@ public class Cliente_Alta extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
@@ -28,11 +31,36 @@ public class Cliente_Alta extends HttpServlet {
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
             response.sendRedirect("../Login");
         }
+        
+        try (Connection con = Helpers.DB.newConnection(this)) {
+            Class.forName("con.mysql.jdbc.Driver");
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT Departamento.nombre AS nombre, "
+                    + "Departamento.idDepartamento AS idDepartamento, "
+                    + "Empresa.nombre AS empresa "
+                    + "FROM Departamento, Empresa "
+                    + "WHERE Departamento.idEmpresa=Empresa.idEmpresa;");
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Departamento> beans = new ArrayList<>();
+            
+            if (rs.next()) {
+                Departamento bean = new Departamento();
+                bean.setNombreDepartamento(rs.getString("nombre"));
+                bean.setIdDepartamento(rs.getInt("idDepartamento"));
+                bean.setNombreEmpresa(rs.getString("empresa"));
+                beans.add(bean);
+            }
+            
+            request.setAttribute("inf", beans);
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Cliente_Alta.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Cliente_Alta.jsp");
         disp.include(request, response);
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,10 +74,6 @@ public class Cliente_Alta extends HttpServlet {
             response.sendRedirect("../Login");
         }
 
-        String url = getInitParameter("url");
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
-        boolean st = false;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Pair<String, Integer> hash = Helpers.Login.createNewHash(password);
@@ -58,11 +82,13 @@ public class Cliente_Alta extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String tipo = "cliente";
         int idDepartamento = Integer.parseInt(request.getParameter("idDepartamento"));
-        String sql = "INSERT INTO Usuario (username, password, salt, nombre, direccion, telefono, tipo, idDepartamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        boolean st = false;
+        String sql = "INSERT INTO Usuario (username, password, salt, nombre, direccion, telefono, tipo, idDepartamento) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         try {
             Class.forName("con.mysql.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection(url, user, pass)) {
+            try (Connection con = Helpers.DB.newConnection(this)) {
                 try (PreparedStatement ps = con.prepareStatement(sql)) {
                     ps.setString(1, username);
                     ps.setString(2, hash.getValue0());
@@ -80,7 +106,8 @@ public class Cliente_Alta extends HttpServlet {
                     }
                 }
                 if (st) {
-                    request.setAttribute("res", "El ususario " + session.getAttribute("username") + " ha sido registrado exitosamente.");
+                    request.setAttribute("res", "El ususario " + session.getAttribute("username") + 
+                            " ha sido registrado exitosamente.");
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("Cliente_Alta.jsp");
                     rd.include(request, response);
                 } else {

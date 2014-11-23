@@ -8,8 +8,8 @@
     </jsp:attribute>
     <jsp:body>
         <h2>Modificación de Usuarios</h2>
-        <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver" url="solsa20.caafufvdj2xl.us-west-2.rds.amazonaws.com:3306/solsa2020" user="solsa2020" password="solsa2020" />
-        <sql:query dataSource="${db}" var="result">SELECT idDepartamento, nombre FROM Departamento;
+        <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver" url="solsa20.caafufvdj2xl.us-west-2.rds.amazonaws.com/solsa2020" user="solsa2020" password="solsa2020" />
+        <sql:query dataSource="${db}" sql="SELECT idDepartamento, nombre FROM Departamento;" var="result">
         </sql:query>
         <form class="form-horizontal" method="post" action="Cliente_Modificar">
             <div class="form-group">

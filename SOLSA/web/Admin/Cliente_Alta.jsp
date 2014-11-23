@@ -9,59 +9,67 @@
     </jsp:attribute>
     <jsp:body>  
         <h2>Alta de Clientes</h2>
-        <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver" url="solsa20.caafufvdj2xl.us-west-2.rds.amazonaws.com:3306/solsa2020" user="solsa2020" password="solsa2020" />
-        <sql:query dataSource="${db}" var="result">SELECT idDepartamento, nombre FROM Departamento;
-        </sql:query>
         ${requestScope.res}
             <form class="form-horizontal" method="post" action="Cliente_Alta">
                 <div class="form-group">
-                    <label for="usuario" class="col-md-3 control-label">Usuario:</label>
+                    <label for="usuario" class="col-md-3 control-label">Usuario</label>
                     <div class="col-md-9">
                         <input type="text" class="form-control" id="usuario" name="username" placeholder="max. 20 caracteres"/>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="contraseña" class="col-md-3 control-label">Contraseña:</label>
+                    <label for="contraseña" class="col-md-3 control-label">Contraseña</label>
                     <div class="col-md-9">
-                        <input type="password" class="form-control" id="contraseña" name="password" placeholder="max. 20 caracteres"/>
+                        <input type="password" class="form-control" id="contraseña" name="password" placeholder=""/>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="nombre" class="col-md-3 control-label">Nombre:</label>
+                    <label for="nombre" class="col-md-3 control-label">Nombre</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="max. 20 caracteres"/>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder=""/>
                     </div>
                 </div> 
                 
                     <div class="form-group">
-                        <label for="textArea" class="col-md-3 control-label">Dirección:</label>
+                        <label for="textArea" class="col-md-3 control-label">Dirección</label>
                         <div class="col-lg-9">
-                            <textarea id="text" class="form-control" rows="3" name="direccion" placeholder="max. 50 caracteres"></textarea>
+                            <textarea id="text" class="form-control" rows="3" name="direccion" placeholder=""></textarea>
                         </div>
                     </div>
                 
                 <div class="form-group">
-                    <label for="telefono" class="col-md-3 control-label">Telefono:</label>
+                    <label for="telefono" class="col-md-3 control-label">Teléfono</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="max. 8 caracteres"/>
+                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Incluyendo LADA"/>
                     </div>
                 </div>    
                 
                 <div class="form-group">
-                    <label for="departamento" class="col-md-3 control-label">Departamento (id):</label>
+                    <label for="departamento" class="col-md-3 control-label">Departamento</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" id="departamento" name="idDepartamento" placeholder="max. 10 caracteres"/>
+                        <input type="text" class="form-control" id="departamento" name="idDepartamento" placeholder=""/>
                     </div>
                 </div>      
                 
-            <button type="submit" class="btn btn-success">Aceptar</button>
-            <button type="submit" class="btn btn-danger">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Volver</button>                
-                
+                <button type="submit" class="btn btn-success">Aceptar</button>
+                <button type="submit" class="btn btn-danger">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Volver</button>  
+                <br/>
+                <br/>
             </form>
-    </jsp:body>
+            
+            <form method="GET" action="Cliente_Alta">
+                Departamento:
+                <select name="listaDepartamentos" size="1">
+                    <c:forEach items="${requestScope.inf}" var="row">
+                    <option value ="<c:out value="${row.idDepartamento}" />"><c:out value="${row.nombre}" /> <c:out value="${row.apellidos}" /></option>
+                    </c:forEach>
+                </select>
+            </form>
+            
+     </jsp:body>
 </t:layout>
         
         
