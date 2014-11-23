@@ -1,5 +1,6 @@
 package Cliente;
 
+import Beans.Foto;
 import Beans.Pedido;
 import Beans.Producto;
 import Ventas.EstadoPedido;
@@ -33,8 +34,8 @@ public class Carrito extends HttpServlet {
 
         try (Connection con = Helpers.DB.newConnection(this)) {
 
-            try (PreparedStatement ps = con.prepareStatement("SELECT idProducto AS id, nombre, descripcion, precio, tipo, Fotografia_idFotografia AS foto\n"
-                    + "FROM Producto\n"
+            try (PreparedStatement ps = con.prepareStatement("SELECT idProducto AS id, nombre, descripcion, precio, tipo, Fotografia_idFotografia AS idFoto, Fotografia.nombre as nombreFoto\n"
+                    + "FROM Producto JOIN Fotografia ON Fotografia.idFotografia = Producto.Fotografia_idFotografia\n"
                     + "WHERE Producto.idProducto = ?;")) {
 
                 ps.setInt(1, Integer.parseInt(request.getParameter("id")));
@@ -43,12 +44,15 @@ public class Carrito extends HttpServlet {
 
                 if (rs.next()) {
                     Producto bean = new Producto();
-                    bean.setId(rs.getInt("id"));
-                    bean.setEmpresa(rs.getString("Empresa"));
-                    bean.setDate(rs.getDate("fechaDeEntrega").toString());
-                    bean.setEstado(rs.getString("estado"));
-                    idC = rs.getInt("idC");
-                    request.setAttribute("bean", bean);
+                    bean.setIdProducto(rs.getInt("id"));
+                    bean.setNombre(rs.getString("nombre"));
+                    bean.setDescripcion(rs.getString("descripcion"));
+                    bean.setPrecio(Helpers.Money.toString(rs.getInt("precio")));
+                    bean.setTipo(rs.getString("tipo"));
+                    Foto f = new Foto();
+                    f.setNombre(rs.getString("nombreFoto"));
+                    f.setUrl(request.getContextPath() + "/Images/" + rs.getString("idFoto") + "-" + f.getNombre());
+                    bean.setFoto(f);
                 }
             }
 
@@ -56,7 +60,7 @@ public class Carrito extends HttpServlet {
                     + "FROM Carrito_Producto JOIN Producto ON Carrito_Producto.idProducto = Producto.idProducto\n"
                     + "WHERE Carrito_idCarrito = ?;");
 
-            ps2.setInt(1, idC);
+            //ps2.setInt(1, idC);
 
             ResultSet rs2 = ps2.executeQuery();
 

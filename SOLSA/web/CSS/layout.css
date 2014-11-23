@@ -124,3 +124,13 @@ body {
     cursor: inherit;
     display: block;
 }
+
+/* more magic: http://stackoverflow.com/a/10016640/1858296 */
+#site-logo
+{
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 250px;
+    height: 100px;
+}
