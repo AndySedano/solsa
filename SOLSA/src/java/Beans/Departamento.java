@@ -14,7 +14,7 @@ public class Departamento {
         this.nombreEmpresa = nombreEmpresa;
     }
     
-    public int getIdDepratamento () {
+    public int getIdDepartamento () {
         return idDepartamento;
     }
     public void setIdDepartamento (int idDepto) {

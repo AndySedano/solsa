@@ -64,7 +64,7 @@
                         </c:when>
                         <c:when test="${seccion == 'admin'}">
                             <ul class="nav nav-sidebar">
-                                <img src="<% out.print(request.getContextPath()); %>/CSS/Solsa1.png" style="max-width: 250px; max-height: 100px;">
+                                <img src="<% out.print(request.getContextPath()); %>/CSS/Solsa1.png" style="max-width: 100%; max-height: 100px;">
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
@@ -93,7 +93,7 @@
                         </c:when>
                         <c:when test="${seccion == 'aprobador'}">
                             <ul class="nav nav-sidebar">
-                                <img src="<% out.print(request.getContextPath()); %>/CSS/Solsa1.png" style="max-width: 250px; max-height: 100px;">
+                                <img src="<% out.print(request.getContextPath()); %>/CSS/Solsa1.png" style="max-width: 100%; max-height: 100px;">
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="Peticiones">Peticiones</a></li>
@@ -102,7 +102,7 @@
                         </c:when>
                         <c:when test="${seccion == 'ventas'}">
                             <ul class="nav nav-sidebar">
-                                <img src="<% out.print(request.getContextPath()); %>/CSS/Solsa1.png" style="max-width: 250px; max-height: 100px;">
+                                <img src="<% out.print(request.getContextPath()); %>/CSS/Solsa1.png" style="max-width: 100%; max-height: 100px;">
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("pedidos") ? "active" : "none"}><a href="Pedidos">Pedidos</a></li>    
@@ -125,6 +125,25 @@
                 var text = $input.val().replace(/\\/g, '/').replace(/.*\//, '');
                 var $label = $input.closest('.input-group').find(':text');
                 $label.val(text);
+            });
+            $(function () {
+                $("select.form-control").select2({
+                    //from http://stackoverflow.com/a/21996758/1858296
+                    matcher: function (term, text, opt) {
+                        return text.toUpperCase().indexOf(term.toUpperCase()) >= 0
+                            || opt.parent("optgroup").length
+                            && opt.parent("optgroup").attr("label")
+                            && opt.parent("optgroup").attr("label").toUpperCase().indexOf(term.toUpperCase()) >= 0;
+                    },
+                    //from http://stackoverflow.com/a/19037918/1858296
+                    formatSelection: function (item) {
+                        og = $(item.element).parent('optgroup');
+                        if (og.length)
+                            return og.attr('label') + ": " + item.text;
+                        else
+                            return item.text;
+                    }
+                });
             });
         </script>
         <jsp:invoke fragment="scripts" />
