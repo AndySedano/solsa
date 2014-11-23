@@ -50,7 +50,7 @@
                             <tr><td><center>
 
                                 <a class=" btn btn-primary btn-sm" 
-                                   href="Carrito?id=${al.idProducto}">
+                                   href="Carrito?id=${al.idProducto}" onclick="uli()">
                                     Añadir al Carrito
                                 </a>
 
@@ -61,5 +61,12 @@
             </div>
 
         </form>
+
+        <script>
+            function uli() {
+                alert("Se está agregando el producto a su carrito");
+            }
+        </script>
+
     </jsp:body>
 </t:layout>

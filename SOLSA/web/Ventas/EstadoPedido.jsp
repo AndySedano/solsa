@@ -63,8 +63,13 @@
             <input type="radio" name="estado" value="entregado" ${requestScope.bean.estado.equals("entregado") ? "checked" : ""}>&nbsp;Entregado
             <br />
             <br />
-            <input type="submit" name="cambiarEstado" value="Cambiar">
+            <input type="submit" name="cambiarEstado" value="Cambiar" onclick="uli()">
             </p>
         </form> 
+        <script>
+            function uli() {
+                alert("Se ha modificado el estado del pedido");
+            }
+        </script>
     </jsp:body>
 </t:layout>
