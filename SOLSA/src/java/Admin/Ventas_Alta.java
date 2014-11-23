@@ -51,7 +51,7 @@ public class Ventas_Alta extends HttpServlet {
         boolean st = false;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        Pair<String, Integer> salt = Helpers.Login.createNewHash(password);
+        Pair<String, Integer> hash = Helpers.Login.createNewHash(password);
         String nombre = request.getParameter("nombre");
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
@@ -64,8 +64,8 @@ public class Ventas_Alta extends HttpServlet {
             try (Connection con = DriverManager.getConnection(url, user, pass)) {
                 try (PreparedStatement ps = con.prepareStatement(sql)) {
                     ps.setString(1, username);
-                    ps.setString(2, password);
-                    ps.setInt(3, salt);
+                    ps.setString(2, hash.getValue0());
+                    ps.setInt(3, hash.getValue1());
                     ps.setString(4, nombre);
                     ps.setString(5, direccion);
                     ps.setString(6, telefono);
