@@ -1,5 +1,8 @@
 package Cliente;
+/*Quita productos al carrito*/
 
+import Beans.CarritoBean;
+import Beans.Producto;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Reporte extends HttpServlet {
+public class QuitarCarrito extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -21,14 +24,17 @@ public class Reporte extends HttpServlet {
             response.sendRedirect("../Login"); return;
         }
 
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Cliente/Reporte.jsp");
-        disp.include(request, response);
-    }
+        if (session.getAttribute("carrito") != null) {
+            CarritoBean c = (CarritoBean) session.getAttribute("carrito");
+            int id = Integer.parseInt(request.getParameter("id"));
+            c.remove(id);
+            session.setAttribute("carrito", c);
+        } else {
+            request.setAttribute("mensaje", "Carrito Vacio");
+        }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Cliente/Carrito.jsp");
+        disp.include(request, response);
     }
 
 }

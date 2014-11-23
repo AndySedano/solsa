@@ -66,7 +66,7 @@
             <!-- Example row of columns -->
             <hr>
             <p>
-                <a href="./index.html">Volver a SOLSA.com</a>
+                <a href="./index.html" class="btn btn-primary">Volver a SOLSA.com</a>
 
             </p>
             <p>

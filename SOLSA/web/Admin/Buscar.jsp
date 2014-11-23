@@ -16,7 +16,7 @@
             </p>
             <br />
             <br />
-            
+
             <h3>Búsqueda de Empresas</h3>
             <input type="text" placeholder="texto" />
             <input type="submit" value="Buscar" />
@@ -32,28 +32,33 @@
                 <c:forEach items="${requestScope.inf}" var="al">
                     <tr>
                         <td>
-                            <c:out value="${al.id}" />
-                        </td>
-                        <td>
-                            <c:out value="${al.nombre}" />
-                        </td>
-                        <td>
-                            <c:out value="${al.direccion}" />
-                        </td>
-                        <td>
-                            <c:out value="${al.telefono}" />
-                        </td>
-                        <td>
-                            <c:out value="${al.rfc}" />
-                        </td>
+                    <c:out value="${al.id}" />
+                    </td>
+                    <td>
+                    <c:out value="${al.nombre}" />
+                    </td>
+                    <td>
+                    <c:out value="${al.direccion}" />
+                    </td>
+                    <td>
+                    <c:out value="${al.telefono}" />
+                    </td>
+                    <td>
+                    <c:out value="${al.rfc}" />
+                    </td>
                     </tr>
                 </c:forEach>
             </table>
-            
-                        
-            
-                        
-                        
+
+
+
+            <br />
+            <br />
+            <br />
+
+
+
+
             <h3>Búsqueda de Personas</h3>
             <input type="text" placeholder="texto" />
             <input type="submit" value="Buscar" />
@@ -68,21 +73,65 @@
                 <c:forEach items="${requestScope.inf}" var="al">
                     <tr>
                         <td>
-                            <c:out value="${al.id}" />
-                        </td>
-                        <td>
-                            <c:out value="${al.nombre}" />
-                        </td>
-                        <td>
-                            <c:out value="${al.username}" />
-                        </td>
-                        <td>
-                            <c:out value="${al.empresa}" />
-                        </td>
+                    <c:out value="${al.id}" />
+                    </td>
+                    <td>
+                    <c:out value="${al.nombre}" />
+                    </td>
+                    <td>
+                    <c:out value="${al.username}" />
+                    </td>
+                    <td>
+                    <c:out value="${al.empresa}" />
+                    </td>
                     </tr>
                 </c:forEach>
             </table>
-            
+
+
+
+
+
+            <br />
+            <br />
+            <br />
+
+
+
+
+            <h3>Búsqueda de Productos</h3>
+            <input type="text" placeholder="texto" />
+            <input type="submit" value="Buscar" />
+            <br /> <br />
+            <table class="table table-hover">
+                <tr>
+                    <th>id</th>
+                    <th>Nombre</th>
+                    <th>Descripcción</th>
+                    <th>Tipo</th>
+                    <th>Precio</th>
+                </tr>
+                <c:forEach items="${requestScope.inf}" var="al">
+                    <tr>
+                        <td>
+                    <c:out value="${al.id}" />
+                    </td>
+                    <td>
+                    <c:out value="${al.nombre}" />
+                    </td>
+                    <td>
+                    <c:out value="${al.descripccion}" />
+                    </td>
+                    <td>
+                    <c:out value="${al.tipo}" />
+                    </td>
+                    <td>
+                    <c:out value="${al.precio}" />
+                    </td>
+                    </tr>
+                </c:forEach>
+            </table>
+
         </form>
     </jsp:body>
 </t:layout>

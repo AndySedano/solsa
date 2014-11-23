@@ -2,9 +2,7 @@ package Admin;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,9 +23,9 @@ public class Cliente_Modificar extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
-
+        
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
         disp.include(request, response);
     }
@@ -42,48 +40,57 @@ public class Cliente_Modificar extends HttpServlet {
         HttpSession session = request.getSession();
         
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("superadmin") == false)
-            response.sendRedirect("../Login");
+        {
+            response.sendRedirect("../Login"); return;
+        }
 
-        String url = getInitParameter("url");
-        String user = getInitParameter("user");
-        String pass = getInitParameter("pass");
         String username = request.getParameter("username");
         String nombre = request.getParameter("nombre");
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
+        int st;
         int departamento = Integer.parseInt(request.getParameter("departamento"));
-        boolean st = false;
-        String sql = "UPDATE Usuario SET nombre=?, direccion=?, telefono=? departamento=? WHERE username=?;";
+        String mob = request.getParameter("submit");
+        String sqlModificar = "UPDATE Usuario SET nombre=?, direccion=?, telefono=? departamento=? WHERE username=? AND tipo='cliente';";
+        String sqlDelete = "DELETE FROM Usuario WHERE username=? AND tipo='cliente';";
 
-        try {
-            Class.forName("con.mysql.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection(url, user, pass)) {
-                try (PreparedStatement ps = con.prepareStatement(sql)) {
+        try (Connection con = Helpers.DB.newConnection(this)) {
+            if (mob.equals("modificar")) {
+                try (PreparedStatement ps = con.prepareStatement(sqlModificar)) {
                     ps.setString(1, nombre);
                     ps.setString(2, direccion);
                     ps.setString(3, telefono);
                     ps.setInt(4, departamento);
                     ps.setString(5, username);
-                    ResultSet rs = ps.executeQuery();
-                    while (rs.next()) {
-                        st = true;
-                        session.setAttribute("username", session.getAttribute("username"));
-                    }
-                }
-                if (st) {
+                    st = ps.executeUpdate();
+                } 
+                if (st==1) {
                     request.setAttribute("res", "El usuario " + session.getAttribute("username") + " ha siido modificado.");
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
                     rd.include(request, response);
-                            
                 } else {
                     request.setAttribute("res", "Lo sentimos, ha ocurrido un error, ingrese los datos nuevamente...");
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
                     rd.include(request, response);
                 }
-                con.close();
-            } 
-        } catch (ClassNotFoundException | SQLException ex) {
+            } else {
+                try (PreparedStatement ps = con.prepareStatement(sqlDelete)) {
+                    ps.setString(1, username);
+                    st = ps.executeUpdate();
+                } 
+                if (st==1) {
+                    request.setAttribute("res", "El usuario " + session.getAttribute("username") + " ha siido borrado.");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
+                    rd.include(request, response);
+                } else {
+                    request.setAttribute("res", "Lo sentimos, ha ocurrido un error, ingrese los datos nuevamente...");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
+                    rd.include(request, response);
+                }
+            }
+        } 
+        catch (SQLException ex) {
             Logger.getLogger(Cliente_Modificar.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
-}
+    } 
+}    

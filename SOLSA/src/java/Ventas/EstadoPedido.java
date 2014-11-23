@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.javatuples.Pair;
 
 public class EstadoPedido extends HttpServlet {
 
@@ -29,7 +28,7 @@ public class EstadoPedido extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("ventas") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         try (Connection con = Helpers.DB.newConnection(this)) {
@@ -89,7 +88,7 @@ public class EstadoPedido extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("ventas") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
         
         int id = Integer.parseInt(request.getParameter("id"));

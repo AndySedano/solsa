@@ -1,12 +1,14 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <t:layout seccion="cliente" activo ="carrito">
     <jsp:attribute name="titulo">
         Carrito
     </jsp:attribute>
     <jsp:body>
-
+        ${requestScope.mensaje}
         <form>
 
             <h1>Carrito de Ventas</h1>
@@ -27,26 +29,30 @@
                         <th>Precio Unitario</th>
                         <th>Cantidad a Pedir</th>
                         <th>Precio Total</th>
+                        <th>Botón</th>
                         <th>Quitar</th>
                     </tr>
 
                     <c:forEach items="${requestScope.inf}" var="al">
                         <tr>
                             <td>
-                        <c:out value="${al.nombre}" />
-                        </td>
-                        <td>
-                        <c:out value="${al.precio}" />
-                        </td>
-                        <td>
-                            <input type="text" value="1" />
-                        </td>
-                        <td>
-                            PrecioTotal
-                        </td>
-                        <td>
-                            <input type="submit" name="${al.id}" value="Quitar"/>
-                        </td>
+                                <c:out value="${al.nombre}" />
+                            </td>
+                            <td>
+                                <c:out value="${al.precio}" />
+                            </td>
+                            <td>
+                                <input type="text" value="${al.cantidad}" id="quantas"/>
+                            </td>
+                            <td id="${al.idProducto}">
+
+                            </td>
+                            <td>
+                                <input type="button" value="Calcular" onclick="precioTotal('${al.idProducto}', ${al.precio})" />
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="QuitarCarrito?id=${al.idProducto}">Quitar</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -60,6 +66,14 @@
 
 
         </form>
+
+        <script language="javascript" type="text/javascript">
+            function precioTotal(id, precioUnit) {
+                var cantidad = document.getElementById("quantas").value;
+                var cell = document.getElementById(id);
+                cell.innerHTML = cantidad * precioUnit;
+            }
+        </script>
 
     </jsp:body>
 </t:layout>

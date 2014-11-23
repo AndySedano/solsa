@@ -61,4 +61,26 @@ public class Login
         
         return res.getString("tipo");
     }
+
+    public static String getLogoForClient(Connection con, String username)
+    throws SQLException
+    {
+        String sql = "select Fotografia.idFotografia, Fotografia.nombre\n"
+                   + "from Usuario\n"
+                   + "join Departamento on Usuario.idDepartamento = Departamento.idDepartamento\n"
+                   + "join Empresa on Departamento.idEmpresa = Empresa.idEmpresa\n"
+                   + "join Fotografia on Empresa.Fotografia_idFotografia = Fotografia.idFotografia\n"
+                   + "where username = ?;";
+        try (PreparedStatement ps = con.prepareStatement(sql))
+        {
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery())
+            {
+                rs.next();
+                int idFoto = rs.getInt("idFotografia");
+                String nombre = rs.getString("nombre");
+                return "/Images/" + idFoto + "-" + nombre;
+            }
+        }
+    }
 }

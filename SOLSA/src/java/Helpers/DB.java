@@ -6,7 +6,6 @@
 package Helpers;
 
 import java.sql.*;
-import java.util.logging.*;
 import javax.servlet.http.*;
 
 /**

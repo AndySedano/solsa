@@ -115,6 +115,18 @@
     
     <!--            Servlet Mapping             -->
     
+    <servlet>
+        <servlet-name>VerCarrito</servlet-name>
+        <servlet-class>Cliente.VerCarrito</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Empresa_Buscar</servlet-name>
+        <servlet-class>Admin.Empresa_Buscar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QuitarCarrito</servlet-name>
+        <servlet-class>Cliente.QuitarCarrito</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -216,6 +228,18 @@
   
     <!--             Session            -->
     
+    <servlet-mapping>
+        <servlet-name>VerCarrito</servlet-name>
+        <url-pattern>/Cliente/VerCarrito</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Empresa_Buscar</servlet-name>
+        <url-pattern>/Admin/Empresa_Buscar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QuitarCarrito</servlet-name>
+        <url-pattern>/Cliente/QuitarCarrito</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

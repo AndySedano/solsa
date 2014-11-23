@@ -1,6 +1,7 @@
 package Helpers;
 
 import java.io.*;
+import java.sql.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -35,5 +36,43 @@ public class File
                 return part;
         }
         return null;
+    }
+
+    public static String createImageFolder(HttpServlet servlet)
+    {
+        String path = servlet.getServletContext().getRealPath("") + java.io.File.separator + "Images";
+        java.io.File fileSaveDir = new java.io.File(path);
+        if (!fileSaveDir.exists())
+        {
+            fileSaveDir.mkdir();
+        }
+        return path;
+    }
+
+    public static int insertarFoto(HttpServlet servlet, HttpServletRequest request, Connection con, String name)
+    throws SQLException, IOException, ServletException
+    {
+        String path = Helpers.File.createImageFolder(servlet);
+        int idFoto;
+        try (PreparedStatement ps = con.prepareStatement("INSERT INTO Fotografia (nombre, imagen) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS))
+        {
+            Part file = Helpers.File.getParameter(request, name);
+            String fileName = Helpers.File.extractFileName(file);
+            ps.setString(1, fileName);
+            ps.setBlob(2, (InputStream)null);
+            ps.executeUpdate();
+            try (ResultSet keys = ps.getGeneratedKeys())
+            {
+                keys.next();
+                idFoto = keys.getInt(1);
+                file.write(path + java.io.File.separator + idFoto + "-" + fileName);
+            }
+        }
+        return idFoto;
+    }
+
+    public static String getFotoUrl(HttpServletRequest request, int idFoto, String name)
+    {
+        return request.getContextPath() + "/Images/" + idFoto + "-" + name;
     }
 }

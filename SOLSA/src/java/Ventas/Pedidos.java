@@ -26,7 +26,7 @@ public class Pedidos extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("ventas") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Ventas/Pedidos.jsp");
@@ -42,7 +42,7 @@ public class Pedidos extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("ventas") == false) {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         try (Connection con = Helpers.DB.newConnection(this)) {

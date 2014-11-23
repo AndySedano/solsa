@@ -1,13 +1,39 @@
 package Beans;
 
-public class Producto
-{
+public class Producto {
+
     private int idProducto;
     private String nombre;
     private String descripcion;
-    private int precio;
+    private String tipo;
+    private String precio;
     private int puntoDeReorden;
     private Foto foto;
+    private int cantidad;
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cant) {
+        this.cantidad = cant;
+    }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
     public int getIdProducto() {
         return idProducto;
@@ -31,14 +57,6 @@ public class Producto
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public int getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(int precio) {
-        this.precio = precio;
     }
 
     public int getPuntoDeReorden() {

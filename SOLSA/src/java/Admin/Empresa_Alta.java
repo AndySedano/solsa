@@ -22,7 +22,7 @@ public class Empresa_Alta extends HttpServlet
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
         {
-            response.sendRedirect("../Login");
+            response.sendRedirect("../Login"); return;
         }
 
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Empresa_Alta.jsp");
@@ -38,32 +38,13 @@ public class Empresa_Alta extends HttpServlet
         
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
-            response.sendRedirect("../Login");
-        
-        String path = getServletContext().getRealPath("") + File.separator + "Images";
-        File fileSaveDir = new File(path);
-        if (!fileSaveDir.exists())
         {
-            fileSaveDir.mkdir();
+            response.sendRedirect("../Login"); return;
         }
         
         try (Connection con = Helpers.DB.newConnection(this))
         {
-            int idFoto = 0;
-            try (PreparedStatement ps = con.prepareStatement("INSERT INTO Fotografia (nombre, imagen) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS))
-            {
-                Part foto = Helpers.File.getParameter(request, "foto");
-                String fileName = Helpers.File.extractFileName(foto);
-                ps.setString(1, fileName);
-                ps.setBlob(2, (InputStream)null);
-                ps.executeUpdate();
-                try (ResultSet keys = ps.getGeneratedKeys())
-                {
-                    keys.next();
-                    idFoto = keys.getInt(1);
-                    foto.write(path + File.separator + idFoto + "-" + fileName);
-                }
-            }
+            int idFoto = Helpers.File.insertarFoto(this, request, con, "foto");
             try (PreparedStatement ps =
                 con.prepareStatement("INSERT INTO Empresa (nombre, direccion, telefono, RFC, Fotografia_idFotografia) VALUES (?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS))
             {
@@ -75,7 +56,7 @@ public class Empresa_Alta extends HttpServlet
                 ps.executeUpdate();
             }
             
-            request.setAttribute("message", "Alta de empresa exitosa");
+            request.setAttribute("message", "Alta de empresa " + request.getParameter("Nombre") + " exitosa");
             RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Empresa_Alta.jsp");
             disp.include(request, response);
         }
