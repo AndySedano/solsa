@@ -55,7 +55,7 @@
                     <c:choose>
                         <c:when test="${seccion == 'cliente'}">
                             <ul class="nav nav-sidebar">
-                                <img src="../CSS/Solsa1.png" height="100" width="200" >
+                                <div id="site-logo" style="background-image: url('<% out.print(request.getContextPath()); %><% out.print(session.getAttribute("logo")); %>');"></div>
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("productos") ? "active" : "none"}><a href="Productos">Productos</a></li>
@@ -66,7 +66,7 @@
                         </c:when>
                         <c:when test="${seccion == 'admin'}">
                             <ul class="nav nav-sidebar">
-                                <img src="../CSS/Solsa1.png" height="100" width="200" >
+                                <img src="<% out.print(request.getContextPath()); %>/CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
@@ -95,7 +95,7 @@
                         </c:when>
                         <c:when test="${seccion == 'aprobador'}">
                             <ul class="nav nav-sidebar">
-                                <img src="../CSS/Solsa1.png" height="100" width="200" >
+                                <img src="<% out.print(request.getContextPath()); %>/CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("peticiones") ? "active" : "none"}><a href="Peticiones">Peticiones</a></li>
@@ -104,7 +104,7 @@
                         </c:when>
                         <c:when test="${seccion == 'ventas'}">
                             <ul class="nav nav-sidebar">
-                                <img src="../CSS/Solsa1.png" height="100" width="200" >
+                                <img src="<% out.print(request.getContextPath()); %>/CSS/Solsa1.png" height="100" width="200" >
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("pedidos") ? "active" : "none"}><a href="Pedidos">Pedidos</a></li>    

@@ -34,6 +34,7 @@ public class Login extends HttpServlet {
                 } else {
                     session.setAttribute("username", username);
                     session.setAttribute("tipo", tipo);
+                    session.setAttribute("logo", null);
                     // enum('admin','aprobador','cliente','superadmin','ventas')
                     switch (tipo) {
                         case ("superadmin"): {
@@ -49,6 +50,7 @@ public class Login extends HttpServlet {
                             break;
                         }
                         case ("cliente"): {
+                            session.setAttribute("logo", Helpers.Login.getLogoForClient(con, username));
                             jspUrl = "Cliente/Productos";
                             break;
                         }
