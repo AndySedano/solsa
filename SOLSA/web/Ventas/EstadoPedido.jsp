@@ -15,13 +15,13 @@
             <br />
 
             <p>
-                id: ${requestScope.id}
+                id: ${requestScope.bean.id}
                 <br />
-                Empresa: ${requestScope.empresa}
+                Empresa: ${requestScope.bean.empresa}
                 <br>
-                Fecha de Entrega: ${requestScope.date}
+                Fecha de Entrega: ${requestScope.bean.date}
                 <br />
-                Estado: ${requestScope.estado}
+                Estado: ${requestScope.bean.estado}
                 <br />
                 <br />
             </p>
@@ -38,13 +38,29 @@
                 <c:forEach items="${requestScope.inf}" var="al">
                     <tr>
                         <td>
+<<<<<<< HEAD
+                            &nbsp;
+                            &nbsp;
+                            <c:out value="${al.idProducto}" />
+                            &nbsp;
+                            &nbsp;
+=======
                             <c:out value="${al.id}" />
+>>>>>>> origin/master
                         </td>
                         <td>
                             <c:out value="${al.nombre}" />
                         </td>
                         <td>
+<<<<<<< HEAD
+                            &nbsp;
+                            &nbsp;
+                            <c:out value="${al.descripcion}" />
+                            &nbsp;
+                            &nbsp;
+=======
                             <c:out value="${al.cantidad}" />
+>>>>>>> origin/master
                         </td>
                     </tr>
                 </c:forEach>
