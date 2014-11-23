@@ -1,5 +1,5 @@
 package Cliente;
-
+/*Agrega productos al carrito*/
 import Beans.CarritoBean;
 import Beans.Foto;
 import Beans.Producto;

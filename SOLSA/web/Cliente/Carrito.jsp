@@ -51,7 +51,7 @@
                                 <input type="button" value="Calcular" onclick="precioTotal('${al.id}', ${al.precio})" />
                             </td>
                             <td>
-                                <a class=" btn btn-primary btn-sm" href="QuitarCarrito?id_Producto">
+                                <a class=" btn btn-primary btn-sm" href="QuitarCarrito?${al.idProducto}">
                                     Quitar</a>
                             </td>
                         </tr>
