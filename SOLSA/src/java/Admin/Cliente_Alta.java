@@ -74,10 +74,6 @@ public class Cliente_Alta extends HttpServlet {
             response.sendRedirect("../Login");
         }
 
-        String url = getInitParameter("url");
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
-        boolean st = false;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Pair<String, Integer> hash = Helpers.Login.createNewHash(password);
@@ -86,12 +82,13 @@ public class Cliente_Alta extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String tipo = "cliente";
         int idDepartamento = Integer.parseInt(request.getParameter("idDepartamento"));
+        boolean st = false;
         String sql = "INSERT INTO Usuario (username, password, salt, nombre, direccion, telefono, tipo, idDepartamento) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         try {
             Class.forName("con.mysql.jdbc.Driver");
-            try (Connection con = DriverManager.getConnection(url, user, pass)) {
+            try (Connection con = Helpers.DB.newConnection(this)) {
                 try (PreparedStatement ps = con.prepareStatement(sql)) {
                     ps.setString(1, username);
                     ps.setString(2, hash.getValue0());
