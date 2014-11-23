@@ -51,7 +51,8 @@ public class Ventas_Alta extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String tipo = "ventas";
         boolean st = false;
-        String sql = "INSERT INTO Usuario (username, password, salt, nombre, direccion, telefono, tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO Usuario (username, password, salt, nombre, direccion, telefono, tipo) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?);";
 
         try (Connection con = Helpers.DB.newConnection(this)) {
             try (PreparedStatement ps = con.prepareStatement(sql)) {

@@ -6,6 +6,6 @@
         Admin
     </jsp:attribute>
     <jsp:body>
-        <h1>Bienvenido ${requestScope.nombre} ! </h1>
+        <h1>Bienvenido ${requestScope.nombre}! </h1>
     </jsp:body>
 </t:layout>

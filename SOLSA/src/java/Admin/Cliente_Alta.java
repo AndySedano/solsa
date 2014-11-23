@@ -93,7 +93,6 @@ public class Cliente_Alta extends HttpServlet {
                     ps.setString(1, username);
                     ps.setString(2, hash.getValue0());
                     ps.setInt(3, hash.getValue1());
-                    
                     ps.setString(4, nombre);
                     ps.setString(5, direccion);
                     ps.setString(6, telefono);
