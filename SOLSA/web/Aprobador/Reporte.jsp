@@ -50,11 +50,13 @@
                   <th>Peticiones Canceladas</th>
                   <th>Pedidos Entregados</th>
                   <th>Pedidos En Tránsito</th>
+                  <th>Costo Total</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>1</td>
+                  <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
@@ -68,9 +70,11 @@
                   <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
+                  <td>Column content</td>
                 </tr>
                 <tr class="info">
                   <td>3</td>
+                  <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
@@ -84,9 +88,11 @@
                   <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
+                  <td>Column content</td>
                 </tr>
                 <tr class="danger">
                   <td>5</td>
+                  <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
@@ -100,9 +106,11 @@
                   <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
+                  <td>Column content</td>
                 </tr>
                 <tr class="active">
                   <td>7</td>
+                  <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
