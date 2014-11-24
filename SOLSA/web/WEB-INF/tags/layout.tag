@@ -79,10 +79,12 @@
                                 <li class=${activo.equals("departamentos") ? "active" : "none"}><a href="Departamento_Buscar">Departamentos</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("ventas_buscar") ? "active" : "none"}><a href="Ventas_Buscar">Ventas</a></li>
                                 <li class=${activo.equals("ventas_alta") ? "active" : "none"}><a href="Ventas_Alta">Alta Empleado Ventas</a></li>
                                 <li class=${activo.equals("ventas_modificacion") ? "active" : "none"}><a href="Ventas_Modificar">Modificacion Empleado Ventas</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
+                                <li class=${activo.equesl("cliente_buscar") ? "active" : "none"}><a href="Cliente_Buscar">Clientes</a></li>
                                 <li class=${activo.equals("cliente_alta") ? "active" : "none"}><a href="Cliente_Alta">Alta Cliente</a></li>
                                 <li class=${activo.equals("cliente_Modificacion") ? "active" : "none"}><a href="Cliente_Modificar">Modificacion Cliente</a></li>
                             </ul>
