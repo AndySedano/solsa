@@ -29,7 +29,7 @@ public class Ventas_Modificar extends HttpServlet {
             response.sendRedirect("../Login"); return;
         }
         
-        /*try (Connection con = Helpers.DB.newConnection(this)) {
+        try (Connection con = Helpers.DB.newConnection(this)) {
             PreparedStatement ps = con.prepareStatement("SELECT nombre, direccion, telefono "
                     + "FROM Usuario WHERE username=? AND tipo='ventas';");
             ps.setString(1, request.getParameter("username"));
@@ -48,7 +48,7 @@ public class Ventas_Modificar extends HttpServlet {
         }
                 
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Modificacion.jsp");
-        disp.include(request, response);*/
+        disp.include(request, response);
     }
 
     @Override
@@ -74,6 +74,7 @@ public class Ventas_Modificar extends HttpServlet {
         String sqlDelete = "DELETE FROM Usuario WHERE username=? AND tipo='ventas';";
 
         try (Connection con = Helpers.DB.newConnection(this)) {
+            int query;
             switch (mob) {
                 case "modificar":
                     try (PreparedStatement ps = con.prepareStatement(sqlModificar)) {
@@ -81,19 +82,27 @@ public class Ventas_Modificar extends HttpServlet {
                         ps.setString(2, direccion);
                         ps.setString(3, telefono);
                         ps.setString(4, username);
-                        ps.executeUpdate();
+                        query = ps.executeUpdate();
+                    }
+                    if (query==1){
+                        request.setAttribute("message", "El usuario " + username + " ha sido modificado.");
+                        doGet(request, response);
                     }
                 break;
                 case "borrar":
                     try (PreparedStatement ps = con.prepareStatement(sqlDelete)) {
                         ps.setString(1, username);
-                        ps.executeUpdate();
-                    } 
+                        query = ps.executeUpdate();
+                    }
+                    if (query==1){
+                        request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
+                        doGet(request, response);
+                    }
                 break;
             }
             
-            request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
-            doGet(request, response);
+//            request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
+//            doGet(request, response);
             
         }
         catch (SQLException ex) {

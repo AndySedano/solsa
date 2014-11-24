@@ -83,17 +83,21 @@ public class Cliente_Modificar extends HttpServlet {
                         ps.setString(4, username);
                         ps.executeUpdate();
                     }
-                break;
+                    request.setAttribute("message", "El usuario " + username + " ha sido modificado.");
+                    doGet(request, response);                
+                    break;
                 case "borrar":
                     try (PreparedStatement ps = con.prepareStatement(sqlDelete)) {
                         ps.setString(1, username);
                         ps.executeUpdate();
-                    } 
+                    }
+                    request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
+                    doGet(request, response);                
                 break;
             }
             
-            request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
-            doGet(request, response);
+//            request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
+//            doGet(request, response);
             
         }
         catch (SQLException ex) {

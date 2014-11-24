@@ -36,7 +36,7 @@ public class Ventas_Buscar extends HttpServlet
             }
             else
             {
-                sql = "SELECT * FROM Usuario WHERE tipo='ventas';";
+                sql = "SELECT username, nombre, direccion, telefono FROM Usuario WHERE tipo='ventas';";
             }
             try (PreparedStatement ps = con.prepareStatement(sql))
             {
@@ -51,7 +51,7 @@ public class Ventas_Buscar extends HttpServlet
                     venta.setUsername(rs.getString("username"));
                     venta.setNombre(rs.getString("nombre"));
                     venta.setDireccion(rs.getString("direccion"));
-                    venta.setTelefono("telefono");
+                    venta.setTelefono(rs.getString("telefono"));
                     ventas.add(venta);
                 }
             }
