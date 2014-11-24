@@ -49,9 +49,9 @@ public class Pedidos extends HttpServlet {
 
             Class.forName("com.mysql.jdbc.Driver");
 
-            String query = request.getParameter("loquequieras").equals("1") ? "Empresa.nombre" : "Pedido.Estado";
+            String query = request.getParameter("loquequieras").equals("1") ? "Empresa.nombre" : "Pedido.estado";
 
-            PreparedStatement ps = con.prepareStatement("SELECT Pedido.idPEdido AS id, Empresa.nombre AS Empresa, Pedido.fechaDeEntrega, Pedido.estado\n"
+            PreparedStatement ps = con.prepareStatement("SELECT Pedido.idPedido AS id, Empresa.nombre AS Empresa, Pedido.fechaDeEntrega, Pedido.estado\n"
                     + "FROM Pedido, Empresa\n"
                     + "WHERE Pedido.Empresa_idEmpresa = Empresa.idEMpresa and " + query + " = ?");
 
@@ -59,12 +59,18 @@ public class Pedidos extends HttpServlet {
 
             ResultSet rs = ps.executeQuery();
             ArrayList<Pedido> beans = new ArrayList<>();
-
-            if (rs.next()) {
+            
+            Object date;
+            while (rs.next()) {
                 Pedido bean = new Pedido();
                 bean.setId(rs.getInt("id"));
                 bean.setEmpresa(rs.getString("Empresa"));
-                bean.setDate(rs.getDate("fechaDeEntrega").toString());
+                date = rs.getDate("fechaDeEntrega");
+                if(rs.wasNull()){
+                    bean.setDate("indeterminado");
+                }else{
+                    bean.setDate(date.toString());
+                }
                 bean.setEstado(rs.getString("estado"));
                 beans.add(bean);
             }

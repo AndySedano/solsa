@@ -2,7 +2,6 @@ package Ventas;
 
 import Beans.Pedido;
 import Beans.Producto;
-import SuperAdmin.AddUser;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,28 +27,52 @@ public class EstadoPedido extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("ventas") == false) {
-            response.sendRedirect("../Login"); return;
+            response.sendRedirect("../Login");
+            return;
         }
 
         try (Connection con = Helpers.DB.newConnection(this)) {
 
             PreparedStatement ps = con.prepareStatement("SELECT Pedido.idPedido AS id, Empresa.nombre AS Empresa, Pedido.fechaDeEntrega, Pedido.estado, Carrito_idCarrito as idC\n"
                     + "FROM Pedido, Empresa\n"
-                    + "WHERE Pedido.Empresa_idEmpresa = Empresa.idEmpresa and Empresa.idEmpresa = ?");
+                    + "WHERE Pedido.Empresa_idEmpresa = Empresa.idEmpresa and Pedido.idPedido = ?");
 
             ps.setInt(1, Integer.parseInt(request.getParameter("id")));
 
             ResultSet rs = ps.executeQuery();
 
+            Object date;
             int idC = 0;
             if (rs.next()) {
                 Pedido bean = new Pedido();
                 bean.setId(rs.getInt("id"));
                 bean.setEmpresa(rs.getString("Empresa"));
-                bean.setDate(rs.getDate("fechaDeEntrega").toString());
+                date = rs.getDate("fechaDeEntrega");
+                if (rs.wasNull()) {
+                    bean.setDate("indeterminado");
+                } else {
+                    bean.setDate(date.toString());
+                }
                 bean.setEstado(rs.getString("estado"));
                 idC = rs.getInt("idC");
                 request.setAttribute("bean", bean);
+
+                int estado = 0;
+                switch (bean.getEstado()) {
+                    case "recibido":
+                        estado = 1;
+                        break;
+                    case "inventario":
+                        estado = 2;
+                        break;
+                    case "transito":
+                        estado = 3;
+                        break;
+                    case "entregado":
+                        estado = 4;
+                        break;
+                }
+                request.setAttribute("estado", estado);
             }
 
             PreparedStatement ps2 = con.prepareStatement("SELECT Carrito_idCarrito, Producto.idProducto AS id, nombre, cantidad\n"
@@ -66,7 +89,7 @@ public class EstadoPedido extends HttpServlet {
                 Producto bean = new Producto();
                 bean.setIdProducto(rs2.getInt("id"));
                 bean.setNombre(rs2.getString("nombre"));
-                bean.setDescripcion(Integer.toString(rs2.getInt("cantidad")));
+                bean.setCantidad(rs2.getInt("cantidad"));
                 beans.add(bean);
             }
             request.setAttribute("inf", beans);
@@ -88,25 +111,34 @@ public class EstadoPedido extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("ventas") == false) {
-            response.sendRedirect("../Login"); return;
+            response.sendRedirect("../Login");
+            return;
         }
-        
+
         int id = Integer.parseInt(request.getParameter("id"));
         try (Connection con = Helpers.DB.newConnection(this)) {
 
-            try (PreparedStatement ps = con.prepareStatement("UPDATE Pedido SET estado=? WHERE idPedido = ?;")) {
-                ps.setString(1, request.getParameter("estado"));
-                ps.setInt(2, id);
+            if (request.getParameter("estado").equals("entregado")) {
+                try (PreparedStatement ps = con.prepareStatement("UPDATE Pedido SET estado=?, fechaDeEntrega=curdate() WHERE idPedido = ?;")) {
+                    ps.setString(1, "entregado");
+                    ps.setInt(2, id);
 
-                ps.executeUpdate();
+                    ps.executeUpdate();
+                }
+            } else {
+                try (PreparedStatement ps = con.prepareStatement("UPDATE Pedido SET estado=? WHERE idPedido = ?;")) {
+                    ps.setString(1, request.getParameter("estado"));
+                    ps.setInt(2, id);
 
+                    ps.executeUpdate();
+                }
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(EstadoPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        request.setAttribute("mensaje" , "Cambio realizado con exito!");
+
+        request.setAttribute("mensaje", "Cambio realizado con exito!");
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Ventas/Pedidos.jsp");
         disp.include(request, response);
     }
