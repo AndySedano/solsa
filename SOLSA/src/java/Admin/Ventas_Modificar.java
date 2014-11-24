@@ -29,7 +29,7 @@ public class Ventas_Modificar extends HttpServlet {
             response.sendRedirect("../Login"); return;
         }
         
-        try (Connection con = Helpers.DB.newConnection(this)) {
+        /*try (Connection con = Helpers.DB.newConnection(this)) {
             PreparedStatement ps = con.prepareStatement("SELECT nombre, direccion, telefono "
                     + "FROM Usuario WHERE username=? AND tipo='ventas';");
             ps.setString(1, request.getParameter("username"));
@@ -48,7 +48,7 @@ public class Ventas_Modificar extends HttpServlet {
         }
                 
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Modificacion.jsp");
-        disp.include(request, response);
+        disp.include(request, response);*/
     }
 
     @Override
