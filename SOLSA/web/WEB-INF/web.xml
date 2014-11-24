@@ -146,7 +146,12 @@
     <servlet>
         <servlet-name>Reportes</servlet-name>
         <servlet-class>Admin.Reportes</servlet-class>
-    </servlet><servlet-mapping>
+    </servlet>
+    <servlet>
+        <servlet-name>Aprobador_Alta</servlet-name>
+        <servlet-class>Admin.Aprobador_Alta</servlet-class>
+    </servlet>
+    <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
@@ -278,6 +283,10 @@
     <servlet-mapping>
         <servlet-name>Reportes</servlet-name>
         <url-pattern>/Admin/Reportes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Aprobador_Alta</servlet-name>
+        <url-pattern>/Admin/Aprobador_Alta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
