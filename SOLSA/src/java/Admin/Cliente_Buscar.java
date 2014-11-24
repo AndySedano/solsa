@@ -32,14 +32,17 @@ public class Cliente_Buscar extends HttpServlet
             if ((buscar = request.getParameter("buscar")) != null)
             {
                 request.setAttribute("buscar", buscar);
-                sql = "SELECT Usuario.username AS username, Usuario.nombre AS user, Empresa.nombre AS Empresa, Departamento.nombre AS nombreDepartamento FROM Usuario\n" +
-                    "INNER JOIN Departamento ON Usuario.idDepartamento=Departamento.idDepartamento \n" +
-                    "INNER JOIN Empresa ON Departamento.idEmpresa=Empresa.idEmpresa \n" +
-                    "WHERE username=? AND tipo='cliente';";
+                sql = "SELECT Usuario.username AS username, Usuario.nombre AS nombre, Empresa.nombre AS nombreEmpresa, Departamento.nombre AS nombreDepartamento FROM Empresa \n" +
+                        "JOIN Departamento ON Empresa.idEmpresa=Departamento.idEmpresa\n" +
+                        "JOIN Usuario ON Departamento.idDepartamento=Usuario.idDepartamento\n" +
+                        "WHERE Usuario.username=? AND tipo='cliente';";
             }
             else
             {
-                sql = "SELECT Usuario.username AS username, Usuario.nombre AS nombre, Empresa.nombre AS Empresa, Departamento.nombre AS Departamento FROM Usuario, Departamento, Empresa WHERE Usuario.tipo='cliente';";
+                sql = "SELECT Usuario.username AS username, Usuario.nombre AS nombre, Empresa.nombre AS nombreEmpresa, Departamento.nombre AS nombreDepartamento FROM Empresa \n" +
+                        "JOIN Departamento ON Empresa.idEmpresa=Departamento.idEmpresa\n" +
+                        "JOIN Usuario ON Departamento.idDepartamento=Usuario.idDepartamento\n" +
+                        "WHERE tipo='cliente';";
             }
             try (PreparedStatement ps = con.prepareStatement(sql))
             {
@@ -53,8 +56,8 @@ public class Cliente_Buscar extends HttpServlet
                     Cliente cliente = new Cliente();
                     cliente.setUsername(rs.getString("username"));
                     cliente.setNombre(rs.getString("nombre"));
-                    cliente.setNombreEmpresa(rs.getString("Empresa"));
-                    cliente.setNombreDepartamento("Departamento");
+                    cliente.setNombreEmpresa(rs.getString("nombreEmpresa"));
+                    cliente.setNombreDepartamento(rs.getString("nombreDepartamento"));
                     clientes.add(cliente);
                 }
             }

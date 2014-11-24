@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:layout seccion="admin" activo ="cliente_buscar">
     <jsp:attribute name="titulo">
@@ -30,7 +31,7 @@
                     Empresa
                 </th>
                 <th>
-                    Departmento
+                    Departamento
                 </th>
             </tr>
             <tr onclick="location.href = 'Cliente_Alta'" class="text-primary">
@@ -47,14 +48,14 @@
                     <td>
                         ${cliente.username}
                     </td>
-                    <td style="white-space: pre-wrap;"><!--
-                     -->${cliente.nombre}<!--
-                 --></td>
                     <td>
-                        ${cliente.Empresa}
+                        ${cliente.nombre}
                     </td>
                     <td>
-                        ${cliente.Departamento}
+                        ${cliente.nombreEmpresa}
+                    </td>
+                    <td>
+                        ${cliente.nombreDepartamento}
                     </td>
                 </tr>
             </c:forEach>
