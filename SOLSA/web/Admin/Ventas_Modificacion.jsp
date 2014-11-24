@@ -20,16 +20,11 @@
             Ingrese el Username en la casilla para desplegar los datos
             a cambiar:
         </p>
-        <form class="form-horizontal" method="post" action="Ventas_Modificar">
+        <form class="form-horizontal" method="post" action="Ventas_Modificar?username=${venta.username}">
             <div class="form-group">
                 <label for="username" class="col-md-3 control-label">Usuario</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="" >
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-3 col-md-9">
-                    <button type="submit" name="submit" class="btn btn-primary">Buscar</button>
+                    <p class="form-control-static" >${venta.username}</p>
                 </div>
             </div>
             <div class="form-group">
