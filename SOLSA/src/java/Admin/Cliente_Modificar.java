@@ -1,6 +1,6 @@
 package Admin;
 
-import Beans.Cliente;
+import Beans.ClienteModifica;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,7 +36,7 @@ public class Cliente_Modificar extends HttpServlet {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                Cliente cliente = new Cliente();
+                ClienteModifica cliente = new ClienteModifica();
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setDireccion(rs.getString("direccion"));
                 cliente.setTelefono(rs.getString("telefono"));

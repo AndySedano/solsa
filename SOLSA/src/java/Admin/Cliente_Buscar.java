@@ -39,7 +39,7 @@ public class Cliente_Buscar extends HttpServlet
             }
             else
             {
-                sql = "SELECT Usuario.username AS username, Usuario.nombre AS user, Empresa.nombre AS Empresa, Departamento.nombre AS nombreDepartamento FROM Usuario, Departamento, Empresa;";
+                sql = "SELECT Usuario.username AS username, Usuario.nombre AS nombre, Empresa.nombre AS Empresa, Departamento.nombre AS Departamento FROM Usuario, Departamento, Empresa WHERE Usuario.tipo='cliente';";
             }
             try (PreparedStatement ps = con.prepareStatement(sql))
             {
@@ -51,9 +51,10 @@ public class Cliente_Buscar extends HttpServlet
                 while (rs.next())
                 {
                     Cliente cliente = new Cliente();
+                    cliente.setUsername(rs.getString("username"));
                     cliente.setNombre(rs.getString("nombre"));
-                    cliente.setDireccion(rs.getString("direccion"));
-                    cliente.setTelefono(rs.getString("telefono"));
+                    cliente.setNombreEmpresa(rs.getString("Empresa"));
+                    cliente.setNombreDepartamento("Departamento");
                     clientes.add(cliente);
                 }
             }
