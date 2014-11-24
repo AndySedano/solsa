@@ -45,7 +45,7 @@
                             <c:out value="${al.nombre}" />
                         </td>
                         <td>
-                            <c:out value="${al.descripcion}" />
+                            <c:out value="${al.cantidad}" />
                         </td>
                     </tr>
                 </c:forEach>
@@ -54,13 +54,13 @@
 
             <br />
             <h4>Estado del Pedido</h4>
-            <input type="radio" name="estado" value="recibido" ${requestScope.bean.estado.equals("recibido") ? "checked" : ""}>&nbsp;Recibido
+            <input type="radio" name="estado" value="recibido" ${bean.estado.equals("recibido") ? "checked" : ""} ${estado > 1 ?"disabled" : "" }>&nbsp;Recibido
             <br />
-            <input type="radio" name="estado" value="inventario" ${requestScope.bean.estado.equals("inventario") ? "checked" : ""}>&nbsp;En Almacen
+            <input type="radio" name="estado" value="inventario" ${bean.estado.equals("inventario") ? "checked" : ""} ${estado > 2 ?"disabled" : "" }>&nbsp;En Almacen
             <br />
-            <input type="radio" name="estado" value="transito" ${requestScope.bean.estado.equals("transito") ? "checked" : ""}>&nbsp;En Camino
+            <input type="radio" name="estado" value="transito" ${bean.estado.equals("transito") ? "checked" : ""} ${estado > 3 ?"disabled" : "" }>&nbsp;En Camino
             <br />
-            <input type="radio" name="estado" value="entregado" ${requestScope.bean.estado.equals("entregado") ? "checked" : ""}>&nbsp;Entregado
+            <input type="radio" name="estado" value="entregado" ${bean.estado.equals("entregado") ? "checked" : ""} ${estado > 4 ?"disabled" : "" }>&nbsp;Entregado
             <br />
             <br />
             <input type="submit" name="cambiarEstado" value="Cambiar" onclick="uli()">

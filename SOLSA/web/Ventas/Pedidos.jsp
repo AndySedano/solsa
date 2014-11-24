@@ -21,7 +21,7 @@
                 Para buscar un pedido ingrese en el campo de texto y 
                 seleccione el criterio de búsqueda correspondiuente.
             </p>
-            <input type="text" name="busqueda" />
+            <input type="search" name="busqueda" id="busqueda"/>
 
             <select name="loquequieras">
                 <option value="1">Empresa</option>
