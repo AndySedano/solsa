@@ -5,6 +5,32 @@
     <jsp:attribute name="titulo">
         Admin
     </jsp:attribute>
+    <jsp:attribute name="scripts">
+        <script>
+            $("#reportador").on("click", function (event) {
+                var d1 = document.getElementById("diaA").value;
+                var m1 = document.getElementById("mesA").value;
+                var a1 = document.getElementById("añoA").value;
+
+                var d2 = document.getElementById("diaB").value;
+                var m2 = document.getElementById("mesB").value;
+                var a2 = document.getElementById("añoB").value;
+
+                if (a1 > a2) {
+                    alert("El año de fin debe ser mayor al de inicio");
+                } else if (a1 == a2) {
+                    if (m1 > m2) {
+                        alert("El mes de fin debe ser mayor que el de inicio");
+                    } else if (m1 == m2) {
+                        if (d1 > d2) {
+                            alert("El día de fin debe ser menor al de inicio");
+                        }
+                    }
+                }
+            });
+        </script>
+    </jsp:attribute>
+
     <jsp:body>
         <h1>Bienvenido ${requestScope.nombre} ! </h1>
         <form>
@@ -29,7 +55,7 @@
             <input type="text" placeholder="año" id="añoB">&nbsp;
             <br />
             <br />
-            <input type="submit" value="Realizar Reporte" onclic="validauli()"/>
+            <input type="submit" value="Realizar Reporte" id="reportador"/>
             <br />
             <br />
 
@@ -52,27 +78,27 @@
                 Costo Total: MXN
                 <br />
             </div>
-            
-            
+
+
         </form>
-        
+
         <script>
-            function validauli(){
+            function validauli() {
                 var d1 = document.getElementById("diaA").value;
                 var m1 = document.getElementById("mesA").value;
                 var a1 = document.getElementById("añoA").value;
-                
+
                 var d2 = document.getElementById("diaB").value;
                 var m2 = document.getElementById("mesB").value;
                 var a2 = document.getElementById("añoB").value;
-                
-                if( a1 > a2 ){
+
+                if (a1 > a2) {
                     alert("El año de fin debe ser mayor al de inicio");
-                }else if( a1 == a2 ){
-                    if( m1 > m2 ){
+                } else if (a1 == a2) {
+                    if (m1 > m2) {
                         alert("El mes de fin debe ser mayor que el de inicio");
-                    }else if( m1 == m2){
-                        if( d1 > d2 ){
+                    } else if (m1 == m2) {
+                        if (d1 > d2) {
                             alert("El día de fin debe ser menor al de inicio");
                         }
                     }

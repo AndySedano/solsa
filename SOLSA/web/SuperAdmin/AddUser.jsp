@@ -4,8 +4,35 @@
 
 <t:layout seccion="superadmin" activo="">
     <jsp:attribute name="titulo">
-        Alta de Administradores
+        Alta de Administradores    
     </jsp:attribute>
+    <jsp:attribute name="scripts">
+        <script>
+            $("#crear").on("click", function (event) {
+                var username = document.getElementById("username").value.toString();
+                var pssw1 = document.getElementById("password").value.toString();
+                var pssw2 = document.getElementById("passwordagain").value.toString();
+                var nombre = document.getElementById("nombre").value.toString();
+
+                if (valor == null || valor.length == 0) {//username
+                    event.preventDefault();
+                    alert("Username vacio! Por favor ingrese un username válido");
+                } else if (!(pssw1 == pssw2)) {//comprobas passwords no hay .equals() :( cara triste
+                    event.preventDefault();
+                    alert("las contraseñas no coinciden");
+                }
+                //comprobar nombre no numérico
+
+                for (int i = 0; i < nombre.length; i++) {
+                    if (isNaN(nombre.charAt(i)) == false) {
+                        event.preventDefault();
+                        alert("No ingrese números en el nombre");
+                    }
+                }
+            });
+        </script>
+    </jsp:attribute>
+
     <jsp:body>
         <h2>Alta de Administradores</h2>
         <c:if test="${not empty message}">
@@ -53,28 +80,7 @@
                     <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Incluyendo LADA">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" onclic="validauli()">Crear</button>
+            <button type="submit" class="btn btn-primary" id="crear">Crear</button>
         </form>
-        <script>
-                function validauli(){
-                    var username = document.getElementById("username").value.toString();
-                    var pssw1 = document.getElementById("password").value.toString();
-                    var pssw2 = document.getElementById("passwordagain").value.toString();
-                    var nombre = document.getElementById("nombre").value.toString();
-                    
-                    if( valor == null || valor.length == 0){//username
-                        alert("Username vacio! Por favor ingrese un username válido");
-                    }else if( !pssw1.equals(pssw2) ){//comprobas passwords
-                        alert("las contraseñas no coinciden");
-                    }
-                    //comprobar nombre no numérico
-                    
-                    for(int i=0; i<nombre.length; i++){
-                        if( isNaN(nombre.charAt(i)) == false ){
-                            alert("No ingrese números en el nombre");
-                        }
-                    }
-                }
-        </script>
     </jsp:body>
 </t:layout>
