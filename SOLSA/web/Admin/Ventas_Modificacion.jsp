@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="form-group"><div class="col-md-offset-3 col-md-9">
-            <button type="submit" class="btn btn-primary" name="submit" value="modficar">Modificar</button>
+            <button type="submit" class="btn btn-primary" name="submit" value="modificar">Modificar</button>
             <button type="submit" class="btn btn-danger" name="submit" value="borrar">Borrar</button></div></div>
         </form>
     </jsp:body>
