@@ -66,7 +66,7 @@
                                 <img src="<% out.print(request.getContextPath()); %>/CSS/Solsa1.png" style="max-width: 100%; max-height: 100px;">
                             </ul>
                             <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
+                                <!--<li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>-->
                                 <li class=${activo.equals("reportes") ? "active" : "none"}><a href="Reportes">Reportes</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
