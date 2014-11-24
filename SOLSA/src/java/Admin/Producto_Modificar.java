@@ -58,7 +58,7 @@ public class Producto_Modificar extends HttpServlet
         }
         catch (SQLException ex)
         {
-            Logger.getLogger(Departamento_Alta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Producto_Modificar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

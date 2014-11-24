@@ -10,6 +10,15 @@ public class Producto {
     private int puntoDeReorden;
     private Foto foto;
     private int cantidad;
+    private int idDepartamento;
+
+    public int getIdDepartamento() {
+        return idDepartamento;
+    }
+
+    public void setIdDepartamento(int idDepartamento) {
+        this.idDepartamento = idDepartamento;
+    }
 
     public int getCantidad() {
         return cantidad;

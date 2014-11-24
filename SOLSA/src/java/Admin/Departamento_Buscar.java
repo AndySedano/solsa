@@ -1,86 +1,89 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Admin;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import Beans.*;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
+import java.util.logging.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
-/**
- *
- * @author Arturo
- */
-public class Departamento_Buscar extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Departamento_Buscar</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Departamento_Buscar at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+public class Departamento_Buscar extends HttpServlet
+{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    throws ServletException, IOException
+    {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        HttpSession session = request.getSession();
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
+        {
+            response.sendRedirect("../Login"); return;
+        }
+        
+        Map<String, List<Departamento>> empresas = new LinkedHashMap<>();
+        
+        try (Connection con = Helpers.DB.newConnection(this))
+        {
+            String buscar;
+            String sql;
+            if ((buscar = request.getParameter("buscar")) != null)
+            {
+                request.setAttribute("buscar", buscar);
+                sql = "select Departamento.idDepartamento, Departamento.nombre as nombreDepartamento, Empresa.nombre as nombreEmpresa, COUNT(*) as numProductos "
+                    + "from ProductoDepartamento "
+                    + "join Departamento on ProductoDepartamento.idDepartamento = Departamento.idDepartamento "
+                    + "join Empresa on Departamento.idEmpresa = Empresa.idEmpresa "
+                    + "where Departamento.nombre like ? "
+                    + "or Empresa.nombre like ? "
+                    + "group by idDepartamento "
+                    + "order by nombreEmpresa";
+            }
+            else
+            {
+                sql = "select Departamento.idDepartamento, Departamento.nombre as nombreDepartamento, Empresa.nombre as nombreEmpresa, COUNT(*) as numProductos "
+                    + "from ProductoDepartamento "
+                    + "join Departamento on ProductoDepartamento.idDepartamento = Departamento.idDepartamento "
+                    + "join Empresa on Departamento.idEmpresa = Empresa.idEmpresa "
+                    + "group by idDepartamento "
+                    + "order by nombreEmpresa";
+            }
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                if (buscar != null)
+                {
+                    ps.setString(1, "%" + buscar + "%");
+                    ps.setString(2, "%" + buscar + "%");
+                }
+                ResultSet rs = ps.executeQuery();
+                String empresaActual = "";
+                while (rs.next())
+                {
+                    if (!empresaActual.equals(rs.getString("nombreEmpresa")))
+                        empresaActual = rs.getString("nombreEmpresa");
+                    if (!empresas.containsKey(empresaActual))
+                        empresas.put(empresaActual, new ArrayList<Departamento>());
+
+                    Departamento departamento = new Departamento();
+                    departamento.setIdDepartamento(rs.getInt("idDepartamento"));
+                    departamento.setNombreDepartamento(rs.getString("nombreDepartamento"));
+                    departamento.setNombreEmpresa(rs.getString("nombreEmpresa"));
+                    departamento.setNumProductos(rs.getInt("numProductos"));
+                    empresas.get(empresaActual).add(departamento);
+                }
+
+                request.setAttribute("empresas", empresas);
+            }
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(Departamento_Buscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        request.setAttribute("empresas", empresas);
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Departamento_Buscar.jsp");
+        disp.include(request, response);
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

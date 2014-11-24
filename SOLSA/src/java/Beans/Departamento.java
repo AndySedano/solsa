@@ -5,6 +5,24 @@ public class Departamento {
     private int idDepartamento;
     private String nombreDepartamento;
     private String nombreEmpresa;
+    private int numProductos;
+    private int idEmpresa;
+
+    public int getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public int getNumProductos() {
+        return numProductos;
+    }
+
+    public void setNumProductos(int numProductos) {
+        this.numProductos = numProductos;
+    }
     
     public Departamento () {}
     
