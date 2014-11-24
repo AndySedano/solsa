@@ -143,6 +143,10 @@
         <servlet-name>Cliente_Buscar</servlet-name>
         <servlet-class>Admin.Cliente_Buscar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Ventas_Buscar</servlet-name>
+        <servlet-class>Admin.Ventas_Buscar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -271,6 +275,10 @@
     <servlet-mapping>
         <servlet-name>Cliente_Buscar</servlet-name>
         <url-pattern>/Admin/Cliente_Buscar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Ventas_Buscar</servlet-name>
+        <url-pattern>/Admin/Ventas_Buscar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
