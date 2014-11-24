@@ -135,6 +135,10 @@
         <servlet-name>Departamento_Buscar</servlet-name>
         <servlet-class>Admin.Departamento_Buscar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Peticion</servlet-name>
+        <servlet-class>Aprobador.Peticion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -255,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>Departamento_Buscar</servlet-name>
         <url-pattern>/Admin/Departamento_Buscar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Peticion</servlet-name>
+        <url-pattern>/Aprobador/Peticion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
