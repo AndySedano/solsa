@@ -9,8 +9,7 @@
     </jsp:attribute>
     <jsp:body>
         <form method="POST" action="${pageContext.request.contextPath}/">
-            <a class=" btn btn-primary btn-sm" href="EstadoPedido?id=${al.id}">
-                <-- Volver</a>
+            <a class=" btn btn-primary btn-sm" href="Peticiones"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a>
             <h1>
                Petición: 
             </h1>

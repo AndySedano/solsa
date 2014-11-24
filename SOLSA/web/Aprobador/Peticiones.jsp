@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:layout seccion="aprobador" activo ="peticiones">
     <jsp:attribute name="titulo">
@@ -7,13 +8,15 @@
     </jsp:attribute>
     <jsp:attribute name="scripts">
         <script>
-           $("#pedir").on("click", function (event) {
+            $("#pedir").on("click", function (event) {
                 var a = document.getElementById("entrada").value.toString();
 
-                for (int i = 0; i < nombre.length; i++) {
-                    if (isNaN(nombre.charAt(i)) == false) {
-                        alert("No ingrese números");
-                    }
+                for (int i = 0; i < nombre.length;
+                i++
+                        ) {
+                if (isNaN(nombre.charAt(i)) == false) {
+                    alert("No ingrese números");
+                }
                 }
             }
         </script>
@@ -21,7 +24,7 @@
     <jsp:body>
         <h1>Bienvenido ${requestScope.nombre} ! </h1>
 
-        <form>
+        <form method="post" action="Peticiones">
 
             <h2>Peticiones de los empleados</h2>
             <p>
@@ -32,11 +35,11 @@
                 También puede realizar una búsqueda de las peticiones
             </p>
 
-            <input type="text" name="busqueda" id="entrada"/>
+            <input type="search" name="buscar" id="buscar" value="${buscar}"/>
 
             <select name="loquequieras">
-                <option value="">Pedidor</option>
-                <option value="">Estado</option>
+                <option value="1">Pedidor</option>
+                <option value="2">Estado</option>
             </select>
             <input type="submit" name="botonCool" value="Buscar" id="pedir"/>
             <br />
@@ -51,23 +54,23 @@
                     <th>Seleccionar</th>
                 </tr>
 
-                <c:forEach items="${requestScope.inf}" var="al">
+                <c:forEach items="${requestScope.peticiones}" var="al">
                     <tr>
                         <td>
-                    <c:out value="${al.id}" />
-                    </td>
-                    <td>
-                    <c:out value="${al.responsable}" />
-                    </td>
-                    <td>
-                    <c:out value="${al.fechaPeticion}" />
-                    </td>
-                    <td>
-                    <c:out value="${al.estado}" />
-                    </td>
-                    <td>
-                        <a class=" btn btn-primary btn-sm" href="EstadoPedido?id=${al.id}">Ver ó Modificar</a>
-                    </td>
+                            <c:out value="${al.id}" />
+                        </td>
+                        <td>
+                            <c:out value="${al.responsable}" />
+                        </td>
+                        <td>
+                            <c:out value="${al.date}" />
+                        </td>
+                        <td>
+                            <c:out value="${al.estado}" />
+                        </td>
+                        <td>
+                            <a class=" btn btn-primary btn-sm" href="Peticion?id=${al.id}">Ver ó Modificar</a>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
