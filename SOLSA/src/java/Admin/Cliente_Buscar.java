@@ -32,11 +32,14 @@ public class Cliente_Buscar extends HttpServlet
             if ((buscar = request.getParameter("buscar")) != null)
             {
                 request.setAttribute("buscar", buscar);
-                sql = "SELECT Usuario.username, Usuario.nombre, Empresa.nombre, Departamento.idDepartamento, Departamento.nombre WHERE nombre LIKE ?;";
+                sql = "SELECT Usuario.username AS username, Usuario.nombre AS user, Empresa.nombre AS Empresa, Departamento.nombre AS nombreDepartamento FROM Usuario\n" +
+                    "INNER JOIN Departamento ON Usuario.idDepartamento=Departamento.idDepartamento \n" +
+                    "INNER JOIN Empresa ON Departamento.idEmpresa=Empresa.idEmpresa \n" +
+                    "WHERE username=?;";
             }
             else
             {
-                sql = "select * from Empresa";
+                sql = "SELECT Usuario.username AS username, Usuario.nombre AS user, Empresa.nombre AS Empresa, Departamento.nombre AS nombreDepartamento FROM Usuario, Departamento, Empresa;";
             }
             try (PreparedStatement ps = con.prepareStatement(sql))
             {
@@ -47,13 +50,11 @@ public class Cliente_Buscar extends HttpServlet
                 ResultSet rs = ps.executeQuery();
                 while (rs.next())
                 {
-                    Empresa empresa = new Empresa();
-                    empresa.setIdEmpresa(rs.getInt("idEmpresa"));
-                    empresa.setNombre(rs.getString("nombre"));
-                    empresa.setDireccion(rs.getString("direccion"));
-                    empresa.setTelefono(rs.getString("telefono"));
-                    empresa.setRfc(rs.getString("RFC"));
-                    empresas.add(empresa);
+                    Cliente cliente = new Cliente();
+                    cliente.setNombre(rs.getString("nombre"));
+                    cliente.setDireccion(rs.getString("direccion"));
+                    cliente.setTelefono(rs.getString("telefono"));
+                    clientes.add(cliente);
                 }
             }
         }
@@ -62,7 +63,7 @@ public class Cliente_Buscar extends HttpServlet
             Logger.getLogger(Cliente_Buscar.class.getName()).log(Level.SEVERE, null, ex);
         }
             
-        request.setAttribute("empresas", empresas);
+        request.setAttribute("clientes", clientes);
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Empresa_Buscar.jsp");
         disp.include(request, response);
     }

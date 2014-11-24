@@ -24,7 +24,7 @@
                         <table>
                             <tr><td><center>
 
-                                <img src="${al.foto.url}" />
+                                <div class="image" style="background-image: url('${al.foto.url}'); width: 100px; height: 100px;"></div>
 
                             </center></td></tr>
                             <tr><td><center>
