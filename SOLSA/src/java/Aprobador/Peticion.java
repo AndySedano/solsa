@@ -1,6 +1,6 @@
 package Aprobador;
 
-import Beans.Pedido;
+import Beans.Producto;
 import Ventas.Pedidos;
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,22 +18,62 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class Peticion extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException
-    {
-        request .setCharacterEncoding("UTF-8");
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        
+
         HttpSession session = request.getSession();
-        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("aprobador") == false)
-        {
-            response.sendRedirect("../Login"); return;
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("aprobador") == false) {
+            response.sendRedirect("../Login");
+            return;
         }
-        
+
+        try (Connection con = Helpers.DB.newConnection(this)) {
+
+            int idCarrito = 0;
+            try (PreparedStatement ps = con.prepareStatement("select * from Peticion where idPeticion = ?;")) {
+                ps.setInt(1, Integer.parseInt(request.getParameter("id")));
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    Beans.Peticion peticion = new Beans.Peticion();
+                    peticion.setId(rs.getInt("idPeticion"));
+                    peticion.setDate(rs.getString("fecha"));
+                    peticion.setEstado(rs.getString("estado"));
+                    idCarrito = rs.getInt("Carrito_idCarrito");
+                    peticion.setIdCarrito(idCarrito);
+                    request.setAttribute("peticion", peticion);
+                }
+            }
+
+            try (PreparedStatement ps = con.prepareStatement("SELECT Producto.idProducto AS id, Producto.nombre, cantidad\n"
+                    + "FROM Producto JOIN Carrito_Producto ON Producto.idProducto = Carrito_Producto.idProducto\n"
+                    + "WHERE Carrito_Producto.Carrito_idCarrito = ?;")) {
+
+                ps.setInt(1, idCarrito);
+                ResultSet rs = ps.executeQuery();
+                
+                ArrayList<Producto> productos = new ArrayList<>();
+
+                while (rs.next()) {
+                    Producto producto = new Producto();
+                    producto.setIdProducto(rs.getInt("id"));
+                    producto.setNombre(rs.getString("nombre"));
+                    producto.setCantidad(Integer.parseInt(rs.getString("cantidad")));
+                    productos.add(producto);
+                }
+                request.setAttribute("productos", productos);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Peticion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         RequestDispatcher disp = getServletContext().getRequestDispatcher("/Aprobador/Peticion.jsp");
         disp.include(request, response);
+
     }
 
     @Override
@@ -44,8 +84,9 @@ public class Peticion extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
-        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("ventas") == false) {
-            response.sendRedirect("../Login"); return;
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("aprobador") == false) {
+            response.sendRedirect("../Login");
+            return;
         }
 
         try (Connection con = Helpers.DB.newConnection(this)) {
@@ -54,7 +95,7 @@ public class Peticion extends HttpServlet {
 
             String query = request.getParameter("loquequieras").equals("1") ? "Empresa.nombre" : "Pedido.Estado";
 
-            PreparedStatement ps = con.prepareStatement("SELECT Pedido.idPEdido AS id, Empresa.nombre AS Empresa, Pedido.fechaDeEntrega, Pedido.estado\n"
+            /*PreparedStatement ps = con.prepareStatement("SELECT Pedido.idPEdido AS id, Empresa.nombre AS Empresa, Pedido.fechaDeEntrega, Pedido.estado\n"
                     + "FROM Pedido, Empresa\n"
                     + "WHERE Pedido.Empresa_idEmpresa = Empresa.idEMpresa and " + query + " = ?");
 
@@ -72,7 +113,7 @@ public class Peticion extends HttpServlet {
                 beans.add(bean);
             }
 
-            request.setAttribute("inf", beans);
+            request.setAttribute("inf", beans);*/
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Pedidos.class.getName()).log(Level.SEVERE, null, ex);

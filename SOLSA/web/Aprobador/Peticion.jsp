@@ -8,25 +8,25 @@
         Admin
     </jsp:attribute>
     <jsp:body>
-        <form method="POST" action="${pageContext.request.contextPath}/">
+        <form method="POST" action="Peticion">
             <a class=" btn btn-primary btn-sm" href="Peticiones"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a>
             <h1>
-               Petición: 
+                Petición: 
             </h1>
             <br />
 
             <p>
-                id: 
+                id: ${peticion.id}
                 <br>
-                Fecha de Petición:
+                Fecha de Petición: ${peticion.date}
                 <br />
-                Estado:
+                Estado: ${peticion.estado}
                 <br />
                 <br />
             </p>
             <p>
             <h4>Elementos Pedidos:</h4>
-            
+
             <table class="table table-hover">
                 <tr>
                     <th>
@@ -40,10 +40,10 @@
                     </th>
                 </tr>
 
-                <c:forEach items="${requestScope.inf}" var="al">
+                <c:forEach items="${requestScope.productos}" var="al">
                     <tr>
                         <td>
-                            <c:out value="${al.id}" />
+                            <c:out value="${al.idProducto}" />
                         </td>
                         <td>
                             <c:out value="${al.nombre}" />
@@ -56,9 +56,9 @@
             </table>
             <br />
             <h4>Estado del Pedido</h4>
-            <input type="submit" name="cambiarEstado" value="Aceptar">
-            <input type="submit" name="cambiarEstado" value="Cancelar">
-        </p>
-    </form> 
-</jsp:body>
+            <input class="btn btn-success" type="submit" name="cambiarEstado" value="Aceptar">
+            <input class="btn btn-warning" type="submit" name="cambiarEstado" value="Rechazar">
+            </p>
+        </form> 
+    </jsp:body>
 </t:layout>

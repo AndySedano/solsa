@@ -6,6 +6,15 @@ public class Peticion {
     private String responsable;
     private String date;
     private String estado;
+    private int idCarrito;
+
+    public int getIdCarrito() {
+        return idCarrito;
+    }
+
+    public void setIdCarrito(int idCarrito) {
+        this.idCarrito = idCarrito;
+    }
 
     public int getId() {
         return id;
