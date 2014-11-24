@@ -54,7 +54,7 @@ public class Peticion extends HttpServlet {
 
                 ps.setInt(1, idCarrito);
                 ResultSet rs = ps.executeQuery();
-                
+
                 ArrayList<Producto> productos = new ArrayList<>();
 
                 while (rs.next()) {
@@ -93,33 +93,60 @@ public class Peticion extends HttpServlet {
 
             Class.forName("com.mysql.jdbc.Driver");
 
-            String query = request.getParameter("loquequieras").equals("1") ? "Empresa.nombre" : "Pedido.Estado";
+            int id = Integer.parseInt(request.getParameter("id"));
 
-            /*PreparedStatement ps = con.prepareStatement("SELECT Pedido.idPEdido AS id, Empresa.nombre AS Empresa, Pedido.fechaDeEntrega, Pedido.estado\n"
-                    + "FROM Pedido, Empresa\n"
-                    + "WHERE Pedido.Empresa_idEmpresa = Empresa.idEMpresa and " + query + " = ?");
+            if (request.getParameter("cambiarEstado").equals("Aceptar")) {
 
-            ps.setString(1, request.getParameter("busqueda"));
+                //Query para cambiar el estado a aceptado
+                try (PreparedStatement ps = con.prepareStatement("UPDATE Peticion SET estado=? WHERE idPeticion = ?;")) {
+                    ps.setString(1, "aprobado");
+                    ps.setInt(2, id);
+                    ps.executeUpdate();
+                }
 
-            ResultSet rs = ps.executeQuery();
-            ArrayList<Pedido> beans = new ArrayList<>();
+                //Query para conseguir el idEmpresa
+                int idEmpresa = 0;
+                try (PreparedStatement ps = con.prepareStatement("Select idEmpresa from Usuario where username = ?;")) {
+                    ps.setString(1, session.getAttribute("username").toString());
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) {
+                        idEmpresa = rs.getInt("idEmpresa");
+                    }
+                }
+                
+                int idCarrito = 0;
+                try (PreparedStatement ps = con.prepareStatement("Select Carrito_idCarrito as idCarrito from Peticion where idPeticion = ?;")) {
+                    ps.setInt(1, id);
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) {
+                        idCarrito = rs.getInt("idCarrito");
+                    }
+                }
 
-            if (rs.next()) {
-                Pedido bean = new Pedido();
-                bean.setId(rs.getInt("id"));
-                bean.setEmpresa(rs.getString("Empresa"));
-                bean.setDate(rs.getDate("fechaDeEntrega").toString());
-                bean.setEstado(rs.getString("estado"));
-                beans.add(bean);
+                //Query para crear el pedido
+                try (PreparedStatement ps = con.prepareStatement("INSERT INTO Pedido (estado, Carrito_idCarrito, Empresa_idEmpresa, Peticion_idPeticion) values ('recibido', ?, ?, ?);")) {
+                    ps.setInt(1, idCarrito);
+                    ps.setInt(2, idEmpresa);
+                    ps.setInt(3, id);
+
+                    ps.executeUpdate();
+                }
+
+            } else {
+
+                try (PreparedStatement ps = con.prepareStatement("UPDATE Peticion SET estado=? WHERE idPeticion = ?;")) {
+                    ps.setString(1, "rechazado");
+                    ps.setInt(2, id);
+                    ps.executeUpdate();
+                }
+
             }
-
-            request.setAttribute("inf", beans);*/
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Pedidos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        RequestDispatcher disp = request.getRequestDispatcher("Pedidos.jsp");
+        RequestDispatcher disp = request.getRequestDispatcher("Peticiones.jsp");
         disp.include(request, response);
 
     }

@@ -16,6 +16,7 @@
             <br />
 
             <p>
+                <input type="hidden" value="${peticion.id}" name="id" id="id"/>
                 id: ${peticion.id}
                 <br>
                 Fecha de Petición: ${peticion.date}
