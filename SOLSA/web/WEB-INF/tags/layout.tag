@@ -77,16 +77,15 @@
                                 <li class=${activo.equals("productos") ? "active" : "none"}><a href="Producto_Buscar">Productos</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("departamentos") ? "active" : "none"}><a href="Departamento_Buscar">Departamentos</a></li>
+                            </ul>
+                            <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("ventas_alta") ? "active" : "none"}><a href="Ventas_Alta">Alta Empleado Ventas</a></li>
                                 <li class=${activo.equals("ventas_modificacion") ? "active" : "none"}><a href="Ventas_Modificar">Modificacion Empleado Ventas</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("cliente_alta") ? "active" : "none"}><a href="Cliente_Alta">Alta Cliente</a></li>
                                 <li class=${activo.equals("cliente_Modificacion") ? "active" : "none"}><a href="Cliente_Modificar">Modificacion Cliente</a></li>
-                            </ul>
-                            <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("departamento_alta") ? "active" : "none"}><a href="Departamento_Alta">Alta Departamento</a></li>
-                                <li class=${activo.equals("departamento_Modificacion") ? "active" : "none"}><a href="Departamento_Modificar">Modificacion Departamento</a></li>
                             </ul>
                         </c:when>
                         <c:when test="${seccion == 'aprobador'}">

@@ -7,7 +7,7 @@
         Admin
     </jsp:attribute>
     <jsp:body>
-        <h2>Modificar Departamento</h2>
+        <h2>Alta de Departamento</h2>
         <c:if test="${not empty message}">
             <c:if test="${not empty error}">
                 <div class="alert alert-warning" role="alert">${message}</div>
