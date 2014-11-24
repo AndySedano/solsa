@@ -8,6 +8,24 @@ public class Empresa
     private String telefono;
     private String rfc;
     private Foto foto;
+    private int numPedidos;
+    private String ingresoTotal;
+
+    public String getIngresoTotal() {
+        return ingresoTotal;
+    }
+
+    public void setIngresoTotal(String ingresoTotal) {
+        this.ingresoTotal = ingresoTotal;
+    }
+
+    public int getNumPedidos() {
+        return numPedidos;
+    }
+
+    public void setNumPedidos(int numPedidos) {
+        this.numPedidos = numPedidos;
+    }
 
     public int getIdEmpresa() {
         return idEmpresa;

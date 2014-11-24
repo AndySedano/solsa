@@ -1,75 +1,87 @@
-
 package Admin;
 
+import Beans.*;
 import java.io.*;
+import java.sql.*;
+import java.util.*;
+import java.util.logging.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class Reportes extends HttpServlet
 {
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Reportes</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Reportes at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+    throws ServletException, IOException
+    {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+        HttpSession session = request.getSession();
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("admin") == false)
+        {
+            response.sendRedirect("../Login"); return;
+        }
+        
+        List<Empresa> empresas = new ArrayList<>();
+        try (Connection con = Helpers.DB.newConnection(this))
+        {/*
+
+*/
+            try (PreparedStatement ps = con.prepareStatement("select count(*) as numEntregados from Pedido where estado = 'entregado';"))
+            {
+                ResultSet rs = ps.executeQuery();
+                rs.next();
+                request.setAttribute("numEntregados", rs.getInt("numEntregados"));
+            }
+            try (PreparedStatement ps = con.prepareStatement("select count(*) as numTransito from Pedido where estado = 'transito';"))
+            {
+                ResultSet rs = ps.executeQuery();
+                rs.next();
+                request.setAttribute("numTransito", rs.getInt("numTransito"));
+            }
+            try (PreparedStatement ps = con.prepareStatement("select sum(precioTotal) as total from Pedido_PrecioTotal where estado = 'entregado';"))
+            {
+                ResultSet rs = ps.executeQuery();
+                rs.next();
+                request.setAttribute("total", Helpers.Money.toString(rs.getInt("total")));
+            }
+            String sql = "select Empresa.nombre, Empresa.idEmpresa, count(Entregado.precioTotal) as numPedidos, sum(Entregado.precioTotal) as ingresoTotal "
+                       + "from Empresa left join "
+                       + "(select * from Pedido_PrecioTotal where estado = 'entregado') as Entregado "
+                       + "on Empresa.idEmpresa = Entregado.idEmpresa "
+                       + "group by Empresa.idEmpresa;";
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                ResultSet rs = ps.executeQuery();
+                
+                while(rs.next())
+                {
+                    Empresa empresa = new Empresa();
+                    empresa.setIdEmpresa(rs.getInt("idEmpresa"));
+                    empresa.setNombre(rs.getString("nombre"));
+                    empresa.setNumPedidos(rs.getInt("numPedidos"));
+                    empresa.setIngresoTotal(Helpers.Money.toString(rs.getInt("ingresoTotal")));
+                    
+                    empresas.add(empresa);
+                }
+            }
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        request.setAttribute("empresas", empresas);
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Reportes.jsp");
+        disp.include(request, response);
+    }
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    throws ServletException, IOException
+    {
+        //processRequest(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
