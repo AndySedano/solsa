@@ -30,25 +30,29 @@ public class Ventas_Modificar extends HttpServlet {
         }
         
         try (Connection con = Helpers.DB.newConnection(this)) {
-            PreparedStatement ps = con.prepareStatement("SELECT nombre, direccion, telefono "
-                    + "FROM Usuario WHERE username=? AND tipo='ventas';");
-            ps.setString(1, request.getParameter("username"));
-            ResultSet rs = ps.executeQuery();
+            String sql = "SELECT username, nombre, direccion, telefono "
+                    + "FROM Usuario WHERE username=? AND tipo='ventas';";
             
-            if (rs.next()) {
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setString(1, request.getParameter("username"));
+                ResultSet rs = ps.executeQuery();
+                rs.next();
+                
                 Venta venta = new Venta();
+                venta.setUsername(rs.getString("username"));
                 venta.setNombre(rs.getString("nombre"));
                 venta.setDireccion(rs.getString("direccion"));
                 venta.setTelefono(rs.getString("telefono"));
                 request.setAttribute("venta", venta);
+                
+                request.setAttribute("venta", venta);
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Modificacion.jsp");
+                disp.include(request, response);
             }
-            
+        
         } catch (SQLException ex) {
             Logger.getLogger(Ventas_Modificar.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Modificacion.jsp");
-        disp.include(request, response);
     }
 
     @Override
@@ -81,28 +85,24 @@ public class Ventas_Modificar extends HttpServlet {
                         ps.setString(2, direccion);
                         ps.setString(3, telefono);
                         ps.setString(4, username);
-                        ps.executeUpdate();
+                        int st = ps.executeUpdate();
+                        if (st==1) {
+                            request.setAttribute("message", "El usuario " + username + " ha sido modificado.");
+                            doGet(request, response);
+                        }
                     }
-                    
-                        request.setAttribute("message", "El usuario " + username + " ha sido modificado.");
-                        doGet(request, response);
-                    
                 break;
                 case "borrar":
                     try (PreparedStatement ps = con.prepareStatement(sqlDelete)) {
                         ps.setString(1, username);
-                        ps.executeUpdate();
+                        int st = ps.executeUpdate();
+                        if (st==1) {
+                            request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
+                            doGet(request, response);
+                        }
                     }
-                    
-                        request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
-                        doGet(request, response);
-                    
                 break;
             }
-            
-//            request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
-//            doGet(request, response);
-            
         }
         catch (SQLException ex) {
             Logger.getLogger(Ventas_Modificar.class.getName()).log(Level.SEVERE, null, ex);

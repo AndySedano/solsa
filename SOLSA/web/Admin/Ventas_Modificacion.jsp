@@ -15,11 +15,9 @@
                 <div class="alert alert-success" role="alert">${message}</div>
             </c:if>
         </c:if>
-        <p>
-            Ingrese el Username en la casilla para desplegar los datos
-            a cambiar:
-        </p>
         <form class="form-horizontal" method="post" action="Ventas_Modificar?username=${venta.username}">
+            <input type="hidden" name="username" value="${venta.username}">
+
             <div class="form-group">
                 <label for="username" class="col-md-3 control-label">Usuario</label>
                 <div class="col-md-9">
@@ -33,13 +31,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="nombre" class="col-md-3 control-label">Direccion</label>
+                <label for="direccion" class="col-md-3 control-label">Direccion</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="direccion" name="direccion" value="${venta.direccion}" />
+                    <textarea class="form-control" id="direccion" name="direccion" placeholder="">${venta.direccion}</textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label for="direccion" class="col-md-3 control-label">Tel&eacute;fono</label>
+                <label for="telefono" class="col-md-3 control-label">Tel&eacute;fono</label>
                 <div class="col-md-9">
                     <input type="text" class="form-control" id="direccion" name="telefono" placeholder="" value="${venta.telefono}">
                 </div>

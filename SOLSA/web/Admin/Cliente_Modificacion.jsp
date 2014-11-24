@@ -15,10 +15,6 @@
                 <div class="alert alert-success" role="alert">${message}</div>
             </c:if>
         </c:if>
-        <p>
-            Ingrese el Username en la casilla para desplegar los datos
-            a cambiar:
-        </p>
         <form class="form-horizontal" method="post" action="Cliente_Modificar?username=${cliente.username}">
             <div class="form-group">
                 <label for="username" class="col-md-3 control-label">Usuario</label>
