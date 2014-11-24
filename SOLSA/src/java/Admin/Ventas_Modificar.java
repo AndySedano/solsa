@@ -74,7 +74,6 @@ public class Ventas_Modificar extends HttpServlet {
         String sqlDelete = "DELETE FROM Usuario WHERE username=? AND tipo='ventas';";
 
         try (Connection con = Helpers.DB.newConnection(this)) {
-            int query;
             switch (mob) {
                 case "modificar":
                     try (PreparedStatement ps = con.prepareStatement(sqlModificar)) {
@@ -82,22 +81,22 @@ public class Ventas_Modificar extends HttpServlet {
                         ps.setString(2, direccion);
                         ps.setString(3, telefono);
                         ps.setString(4, username);
-                        query = ps.executeUpdate();
+                        ps.executeUpdate();
                     }
-                    if (query==1){
+                    
                         request.setAttribute("message", "El usuario " + username + " ha sido modificado.");
                         doGet(request, response);
-                    }
+                    
                 break;
                 case "borrar":
                     try (PreparedStatement ps = con.prepareStatement(sqlDelete)) {
                         ps.setString(1, username);
-                        query = ps.executeUpdate();
+                        ps.executeUpdate();
                     }
-                    if (query==1){
+                    
                         request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
                         doGet(request, response);
-                    }
+                    
                 break;
             }
             
@@ -112,7 +111,5 @@ public class Ventas_Modificar extends HttpServlet {
             request.setAttribute("message", "Lo sentimos, hubo un error, ingrese los datos nuevamente...");
             doGet(request, response);
         }
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Modificacion.jsp");
-        disp.include(request, response);    
     } 
 }    
