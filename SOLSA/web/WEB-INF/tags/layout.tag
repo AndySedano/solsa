@@ -87,6 +87,9 @@
                                 <li class=${activo.equals("cliente_alta") ? "active" : "none"}><a href="Cliente_Alta">Alta Cliente</a></li>
                                 <li class=${activo.equals("cliente_Modificacion") ? "active" : "none"}><a href="Cliente_Modificar">Modificacion Cliente</a></li>
                             </ul>
+                            <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("aprobador_alta") ? "active" : "none"}><a href="Aprobador_Alta">Alta Aprobador</a></li>
+                            </ul>
                         </c:when>
                         <c:when test="${seccion == 'aprobador'}">
                             <ul class="nav nav-sidebar">
