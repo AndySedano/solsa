@@ -5,8 +5,6 @@
 <%@ attribute name="seccion" type="java.lang.String" %>
 <%@ attribute name="activo" type="java.lang.String" %>
 
-<%@ attribute name="urlimagen" fragment="true" %>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,6 +20,7 @@
         <link rel="stylesheet" href="<% out.print(request.getContextPath()); %>/CSS/layout.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.css">
         <link rel="stylesheet" href="<% out.print(request.getContextPath()); %>/CSS/select2-bootstrap.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css">
     </head>
 
     <body>
@@ -119,6 +118,8 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/locales/bootstrap-datepicker.es.min.js"></script>
         <script>
             $(document).on('change', '.btn-file :file', function() {
                 var $input = $(this);
@@ -144,6 +145,10 @@
                             return item.text;
                     }
                 });
+                
+                $.fn.datepicker.defaults.format = "yyyy-mm-dd";
+                $.fn.datepicker.defaults.language = "es";
+                $('.input-daterange').datepicker();
             });
         </script>
         <jsp:invoke fragment="scripts" />

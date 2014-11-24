@@ -3,6 +3,7 @@ package Admin;
 import Beans.*;
 import java.io.*;
 import java.sql.*;
+import java.text.*;
 import java.util.*;
 import java.util.logging.*;
 import javax.servlet.*;
@@ -25,34 +26,115 @@ public class Reportes extends HttpServlet
         
         List<Empresa> empresas = new ArrayList<>();
         try (Connection con = Helpers.DB.newConnection(this))
-        {/*
-
-*/
-            try (PreparedStatement ps = con.prepareStatement("select count(*) as numEntregados from Pedido where estado = 'entregado';"))
+        {
+            java.sql.Date fechaInicio = null;
+            java.sql.Date fechaFin = null;
+            String sql;
+            
+            if (request.getParameter("fechaInicio") != null && request.getParameter("fechaFin") != null)
             {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                request.setAttribute("fechaInicio", request.getParameter("fechaInicio"));
+                request.setAttribute("fechaFin", request.getParameter("fechaFin"));
+                request.setAttribute("conFechas", true);
+                fechaInicio = new java.sql.Date(format.parse(request.getParameter("fechaInicio")).getTime());
+                fechaFin = new java.sql.Date(format.parse(request.getParameter("fechaFin")).getTime());
+            }
+            
+            
+            
+            if (fechaInicio != null)
+            {
+                sql = "select count(*) as numEntregados from Pedido where estado = 'entregado' "
+                    + "and fechaDeEntrega > ? and fechaDeEntrega < ?;";
+            }
+            else
+            {
+                sql = "select count(*) as numEntregados from Pedido where estado = 'entregado';";
+            }
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                if (fechaInicio != null)
+                {
+                    ps.setDate(1, fechaInicio);
+                    ps.setDate(2, fechaFin);
+                }
                 ResultSet rs = ps.executeQuery();
                 rs.next();
                 request.setAttribute("numEntregados", rs.getInt("numEntregados"));
             }
-            try (PreparedStatement ps = con.prepareStatement("select count(*) as numTransito from Pedido where estado = 'transito';"))
+            
+            
+            
+            if (fechaInicio != null)
             {
+                sql = "select count(*) as numTransito from Pedido where estado = 'transito' "
+                    + "and fechaDeEntrega > ? and fechaDeEntrega < ?;";
+            }
+            else
+            {
+                sql = "select count(*) as numTransito from Pedido where estado = 'transito';";
+            }
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                if (fechaInicio != null)
+                {
+                    ps.setDate(1, fechaInicio);
+                    ps.setDate(2, fechaFin);
+                }
                 ResultSet rs = ps.executeQuery();
                 rs.next();
                 request.setAttribute("numTransito", rs.getInt("numTransito"));
             }
-            try (PreparedStatement ps = con.prepareStatement("select sum(precioTotal) as total from Pedido_PrecioTotal where estado = 'entregado';"))
+            
+            
+            
+            if (fechaInicio != null)
             {
+                sql = "select sum(precioTotal) as total from Pedido_PrecioTotal where estado = 'entregado' "
+                    + "and fechaDeEntrega > ? and fechaDeEntrega < ?;";
+            }
+            else
+            {
+                sql = "select sum(precioTotal) as total from Pedido_PrecioTotal where estado = 'entregado';";
+            }
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                if (fechaInicio != null)
+                {
+                    ps.setDate(1, fechaInicio);
+                    ps.setDate(2, fechaFin);
+                }
                 ResultSet rs = ps.executeQuery();
                 rs.next();
                 request.setAttribute("total", Helpers.Money.toString(rs.getInt("total")));
             }
-            String sql = "select Empresa.nombre, Empresa.idEmpresa, count(Entregado.precioTotal) as numPedidos, sum(Entregado.precioTotal) as ingresoTotal "
-                       + "from Empresa left join "
-                       + "(select * from Pedido_PrecioTotal where estado = 'entregado') as Entregado "
-                       + "on Empresa.idEmpresa = Entregado.idEmpresa "
-                       + "group by Empresa.idEmpresa;";
+            
+            
+            
+            if (fechaInicio != null)
+            {
+                sql = "select Empresa.nombre, Empresa.idEmpresa, count(Entregado.precioTotal) as numPedidos, sum(Entregado.precioTotal) as ingresoTotal "
+                    + "from Empresa left join "
+                    + "(select * from Pedido_PrecioTotal where estado = 'entregado' and fechaDeEntrega > ? and fechaDeEntrega < ?) as Entregado "
+                    + "on Empresa.idEmpresa = Entregado.idEmpresa "
+                    + "group by Empresa.idEmpresa;";
+            }
+            else
+            {
+                sql = "select Empresa.nombre, Empresa.idEmpresa, count(Entregado.precioTotal) as numPedidos, sum(Entregado.precioTotal) as ingresoTotal "
+                    + "from Empresa left join "
+                    + "(select * from Pedido_PrecioTotal where estado = 'entregado') as Entregado "
+                    + "on Empresa.idEmpresa = Entregado.idEmpresa "
+                    + "group by Empresa.idEmpresa;";
+            }
             try (PreparedStatement ps = con.prepareStatement(sql))
             {
+                if (fechaInicio != null)
+                {
+                    ps.setDate(1, fechaInicio);
+                    ps.setDate(2, fechaFin);
+                }
                 ResultSet rs = ps.executeQuery();
                 
                 while(rs.next())
@@ -67,7 +149,7 @@ public class Reportes extends HttpServlet
                 }
             }
         }
-        catch (SQLException ex)
+        catch (ParseException | SQLException ex)
         {
             Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
         }
