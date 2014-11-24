@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </form>
-            <table class="table table-hover">
+            <table id="table" class="table table-hover">
             <tr>
                 <th>
                     Username
