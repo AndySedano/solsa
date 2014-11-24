@@ -53,7 +53,7 @@
                     <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Incluyendo LADA">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" onclick="validauli()">Crear</button>
+            <button type="submit" class="btn btn-primary" onclic="validauli()">Crear</button>
         </form>
         <script>
                 function validauli(){

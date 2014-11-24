@@ -28,7 +28,7 @@
             <input type="text" placeholder="año" id="añoB">&nbsp;
             <br />
             <br />
-            <input type="submit" value="Realizar Reporte" onclick="validauli()" />
+            <input type="submit" value="Realizar Reporte" onclic="validauli()" />
             <br />
             <br />
 

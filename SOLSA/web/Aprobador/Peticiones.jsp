@@ -25,7 +25,7 @@
                 <option value="">Pedidor</option>
                 <option value="">Estado</option>
             </select>
-            <input type="submit" name="botonCool" value="Buscar" onclick="validauli()"/>
+            <input type="submit" name="botonCool" value="Buscar" onclic="validauli()"/>
             <br />
             <br />
                         
