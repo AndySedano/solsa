@@ -37,6 +37,7 @@ public class Cliente_Modificar extends HttpServlet {
             
             if (rs.next()) {
                 ClienteModifica cliente = new ClienteModifica();
+                cliente.setUsername(request.getParameter("username"));
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setDireccion(rs.getString("direccion"));
                 cliente.setTelefono(rs.getString("telefono"));
@@ -100,7 +101,7 @@ public class Cliente_Modificar extends HttpServlet {
 //            doGet(request, response);
             
         }
-        catch (SQLException ex) {
+        catch (Exception ex) {
             Logger.getLogger(Cliente_Modificar.class.getName()).log(Level.SEVERE, null, ex);
             
             request.setAttribute("error", "true");

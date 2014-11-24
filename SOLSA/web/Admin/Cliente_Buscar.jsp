@@ -44,7 +44,7 @@
             </tr>
 
             <c:forEach items="${clientes}" var="cliente">
-                <tr onclick="location.href = 'Cliente_Modificar?id=${cliente.username}'">
+                <tr onclick="location.href = 'Cliente_Modificar?username=${cliente.username}'">
                     <td>
                         ${cliente.username}
                     </td>
