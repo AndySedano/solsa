@@ -19,13 +19,13 @@
                 También puede realizar una búsqueda de las peticiones
             </p>
             
-            <input type="text" name="busqueda" />
+            <input type="text" name="busqueda" id="entrada"/>
             
             <select name="loquequieras">
                 <option value="">Pedidor</option>
                 <option value="">Estado</option>
             </select>
-            <input type="submit" name="botonCool" value="Buscar" />
+            <input type="submit" name="botonCool" value="Buscar" onclick="validauli()"/>
             <br />
             <br />
                         
@@ -59,5 +59,17 @@
                 </c:forEach>
             </table>
         </form>
+                                      
+        <script>
+                function validauli(){
+                    var a = document.getElementById("entrada").value.toString();
+                                        
+                    for(int i=0; i<nombre.length; i++){
+                        if( isNaN(nombre.charAt(i)) == false ){
+                            alert("No ingrese números");
+                        }
+                    }
+                }
+        </script>
     </jsp:body>
 </t:layout>
