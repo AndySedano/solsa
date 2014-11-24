@@ -79,8 +79,7 @@ public class Cliente_Alta extends HttpServlet {
         {
             request.setAttribute("error", "true");
             request.setAttribute("message", "Error de validación");
-            RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Cliente_Alta.jsp");
-            disp.include(request, response);
+            doGet(request, response);
             return;
         }
 
@@ -109,7 +108,7 @@ public class Cliente_Alta extends HttpServlet {
                 ps.executeUpdate();
             }
             
-            request.setAttribute("message", "El ususario " + username + " ha sido registrado exitosamente.");
+            request.setAttribute("message", "El usuario " + username + " ha sido registrado exitosamente.");
             doGet(request, response);
         }
         catch (SQLException ex)

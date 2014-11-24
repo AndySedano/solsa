@@ -144,16 +144,19 @@
         <servlet-class>Admin.Cliente_Buscar</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>Ventas_Buscar</servlet-name>
         <servlet-class>Admin.Ventas_Buscar</servlet-class>
     </servlet>
     <servlet-mapping>
-=======
         <servlet-name>Reportes</servlet-name>
         <servlet-class>Admin.Reportes</servlet-class>
     </servlet><servlet-mapping>
->>>>>>> origin/master
+    </servlet>
+    <servlet>
+        <servlet-name>Aprobador_Alta</servlet-name>
+        <servlet-class>Admin.Aprobador_Alta</servlet-class>
+    </servlet>
+    <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
@@ -283,13 +286,16 @@
         <url-pattern>/Admin/Cliente_Buscar</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>Ventas_Buscar</servlet-name>
         <url-pattern>/Admin/Ventas_Buscar</url-pattern>
-=======
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Reportes</servlet-name>
         <url-pattern>/Admin/Reportes</url-pattern>
->>>>>>> origin/master
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Aprobador_Alta</servlet-name>
+        <url-pattern>/Admin/Aprobador_Alta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

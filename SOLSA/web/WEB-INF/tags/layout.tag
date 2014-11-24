@@ -68,7 +68,7 @@
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("buscar") ? "active" : "none"}><a href="Buscar">Buscar</a></li>
-                                <li class=${activo.equals("reporte") ? "active" : "none"}><a href="Reporte">Reporte</a></li>
+                                <li class=${activo.equals("reportes") ? "active" : "none"}><a href="Reportes">Reportes</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("empresas") ? "active" : "none"}><a href="Empresa_Buscar">Empresas</a></li>
@@ -86,6 +86,9 @@
                             <ul class="nav nav-sidebar">
                                 <li class=${activo.equals("cliente_alta") ? "active" : "none"}><a href="Cliente_Alta">Alta Cliente</a></li>
                                 <li class=${activo.equals("cliente_Modificacion") ? "active" : "none"}><a href="Cliente_Modificar">Modificacion Cliente</a></li>
+                            </ul>
+                            <ul class="nav nav-sidebar">
+                                <li class=${activo.equals("aprobador_alta") ? "active" : "none"}><a href="Aprobador_Alta">Alta Aprobador</a></li>
                             </ul>
                         </c:when>
                         <c:when test="${seccion == 'aprobador'}">

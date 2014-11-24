@@ -1,7 +1,8 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:layout seccion="admin" activo ="reporte">
+<t:layout seccion="admin" activo ="reportes">
     <jsp:attribute name="titulo">
         Admin
     </jsp:attribute>
@@ -38,12 +39,12 @@
 
                 <h4>De Todas las Empresas:</h4>
                 
-                Pedidos Entregados:
+                Pedidos Entregados: ${numEntregados}
                 <br />
-                Pedidos En Tránsito:
+                Pedidos En Tránsito: ${numTransito}
                 <br />
                 <br />
-                Ganancias Totales: MXN
+                Ingresos Totales: $ ${total}
                 <br />
                 <br />
 
@@ -57,16 +58,16 @@
                     </tr>
 
 
-                    <c:forEach items="${requestScope.inf}" var="empresa">
+                    <c:forEach items="${empresas}" var="empresa">
                         <tr>
                             <td>
-                                <c:out value="${empresa.nombre}" />
+                                ${empresa.nombre}
                             </td>
                             <td>
-                                <c:out value="${empresa.pedidos}" />
+                                ${empresa.numPedidos}
                             </td>
-                            <td>
-                                <c:out value="${empresa.dineros}" />
+                            <td style="text-align: right;">
+                                <span style="float: left;">$</span>${empresa.ingresoTotal}
                             </td>
                         </tr>
                     </c:forEach>
