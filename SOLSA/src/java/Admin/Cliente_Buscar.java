@@ -35,7 +35,7 @@ public class Cliente_Buscar extends HttpServlet
                 sql = "SELECT Usuario.username AS username, Usuario.nombre AS user, Empresa.nombre AS Empresa, Departamento.nombre AS nombreDepartamento FROM Usuario\n" +
                     "INNER JOIN Departamento ON Usuario.idDepartamento=Departamento.idDepartamento \n" +
                     "INNER JOIN Empresa ON Departamento.idEmpresa=Empresa.idEmpresa \n" +
-                    "WHERE username=?;";
+                    "WHERE username=? AND tipo='cliente';";
             }
             else
             {
@@ -64,7 +64,7 @@ public class Cliente_Buscar extends HttpServlet
         }
             
         request.setAttribute("clientes", clientes);
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Empresa_Buscar.jsp");
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Cliente_Buscar.jsp");
         disp.include(request, response);
     }
 }
