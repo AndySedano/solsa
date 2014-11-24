@@ -143,7 +143,10 @@
         <servlet-name>Cliente_Buscar</servlet-name>
         <servlet-class>Admin.Cliente_Buscar</servlet-class>
     </servlet>
-    <servlet-mapping>
+    <servlet>
+        <servlet-name>Reportes</servlet-name>
+        <servlet-class>Admin.Reportes</servlet-class>
+    </servlet><servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
@@ -272,8 +275,14 @@
         <servlet-name>Cliente_Buscar</servlet-name>
         <url-pattern>/Admin/Cliente_Buscar</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Reportes</servlet-name>
+        <url-pattern>/Admin/Reportes</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout>
+            30
+        </session-timeout>
     </session-config>
 
     
