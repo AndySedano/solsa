@@ -32,7 +32,7 @@ public class Ventas_Buscar extends HttpServlet
             if ((buscar = request.getParameter("buscar")) != null)
             {
                 request.setAttribute("buscar", buscar);
-                sql = "SELECT username, nombre, direccion, telefono FROM Usuario WHERE tipo='ventas' AND username LIKE ?;";
+                sql = "SELECT username, nombre, direccion, telefono FROM Usuario WHERE (username LIKE ? OR nombre LIKE ?) AND tipo='ventas';";
             }
             else
             {
@@ -43,6 +43,7 @@ public class Ventas_Buscar extends HttpServlet
                 if (buscar != null)
                 {
                     ps.setString(1, "%" + buscar + "%");
+                    ps.setString(2, "%" + buscar + "%");
                 }
                 ResultSet rs = ps.executeQuery();
                 while (rs.next())

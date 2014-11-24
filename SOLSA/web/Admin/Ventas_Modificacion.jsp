@@ -1,8 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<t:layout seccion="admin" activo ="cliente_modificacion">
+<t:layout seccion="admin" activo ="ventas_modificacion">
     <jsp:attribute name="titulo">
         Modificaciön de Empleados de Ventas
     </jsp:attribute>
@@ -24,7 +23,7 @@
             <div class="form-group">
                 <label for="username" class="col-md-3 control-label">Usuario</label>
                 <div class="col-md-9">
-                    <p class="form-control-static" >${venta.username}</p>
+                    <p class="form-control-static">${venta.username}</p>
                 </div>
             </div>
             <div class="form-group">
