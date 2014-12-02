@@ -85,7 +85,7 @@
                                 <li class=${activo.equals("clientes") ? "active" : "none"}><a href="Cliente_Buscar">Clientes</a></li>
                             </ul>
                             <ul class="nav nav-sidebar">
-                                <li class=${activo.equals("aprobadores") ? "active" : "none"}><a href="Aprobador_Alta">Aprobadores</a></li>
+                                <li class=${activo.equals("aprobadores") ? "active" : "none"}><a href="Aprobador_Buscar">Aprobadores</a></li>
                             </ul>
                         </c:when>
                         <c:when test="${seccion == 'aprobador'}">

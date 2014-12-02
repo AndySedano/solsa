@@ -2,7 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<t:layout seccion="admin" activo ="aprobador_alta">
+<t:layout seccion="admin" activo ="aprobadores">
     <jsp:attribute name="titulo">
         Alta de Aprobadores
     </jsp:attribute>

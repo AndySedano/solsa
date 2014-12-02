@@ -64,5 +64,9 @@ public class Ventas_Buscar extends HttpServlet
             request.setAttribute("message", "Lo sentimos, hubo un error, ingrese los datos nuevamente...");
             doGet(request, response);
         }
+            
+        request.setAttribute("ventas", ventas);
+        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Buscar.jsp");
+        disp.include(request, response);
     }
 }
