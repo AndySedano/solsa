@@ -60,10 +60,9 @@ public class Ventas_Buscar extends HttpServlet
         catch (SQLException ex)
         {
             Logger.getLogger(Ventas_Buscar.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("error", "true");
+            request.setAttribute("message", "Lo sentimos, hubo un error, ingrese los datos nuevamente...");
+            doGet(request, response);
         }
-            
-        request.setAttribute("ventas", ventas);
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Ventas_Buscar.jsp");
-        disp.include(request, response);
     }
 }
