@@ -33,7 +33,7 @@
                         <th>Quitar</th>
                     </tr>
 
-                    <c:forEach items="${requestScope.inf}" var="al">
+                    <c:forEach items="${sessionScope.carrito.productos}" var="al">
                         <tr>
                             <td>
                                 <c:out value="${al.nombre}" />
@@ -61,8 +61,9 @@
             <br />
             <br />
             <h3>Estas acciones no se pueden deshacer:</h3>
-            <input type="submit" value="Eliminar Carrito" />&nbsp;&nbsp;
-            <input type="submit" value="Enviar Petición a Aprobador" />
+            <button type="submit" name="send" value="delete">Eliminar Carrito</button>
+            &nbsp;&nbsp;
+            <button type="submit" name="send" value="add">Enviar Petición a Aprobador</button>
 
 
 
