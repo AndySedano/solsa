@@ -15,7 +15,7 @@
                     <label class="sr-only" for="buscar">Buscar cliente por usuario</label>
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-                        <input type="search" class="form-control" id="buscar" name="buscar" placeholder="Buscar empresa por nombre" value="${buscar}">
+                        <input type="search" class="form-control" id="buscar" name="buscar" placeholder="Buscar cliente por usuario" value="${buscar}">
                     </div>
                 </div>
             </form>

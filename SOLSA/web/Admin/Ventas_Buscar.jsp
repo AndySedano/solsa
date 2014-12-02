@@ -2,7 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:layout seccion="admin" activo ="ventas_buscar">
+<t:layout seccion="admin" activo ="ventas">
     <jsp:attribute name="titulo">
         Búsqueda de Personal de Ventas
     </jsp:attribute>

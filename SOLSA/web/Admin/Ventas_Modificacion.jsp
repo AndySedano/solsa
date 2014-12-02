@@ -1,7 +1,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<t:layout seccion="admin" activo ="ventas_modificacion">
+<t:layout seccion="admin" activo ="ventas">
     <jsp:attribute name="titulo">
         Modificaciön de Empleados de Ventas
     </jsp:attribute>
