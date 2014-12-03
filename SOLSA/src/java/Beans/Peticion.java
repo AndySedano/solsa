@@ -7,6 +7,7 @@ public class Peticion {
     private String date;
     private String estado;
     private int idCarrito;
+    private String nombreEmpresa;
     private int numAprobadas;
     private int numRechazadas;
     private int numRealizadas;
@@ -75,5 +76,11 @@ public class Peticion {
         this.numRealizadas = numRealizadas;
     }    
             
+    public String getNombreEpresa(){
+        return nombreEmpresa;
+    }
     
+    public void setNombreEmpresa(String nombreEmpresa){
+        this.nombreEmpresa = nombreEmpresa;
+    }
 }

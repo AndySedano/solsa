@@ -1,7 +1,7 @@
 package Aprobador;
 
 
-import Beans.*;
+import Beans.Peticion;
 import java.io.*;
 import java.sql.*;
 import java.text.*;
@@ -45,7 +45,7 @@ public class Reporte extends HttpServlet
             
             if (fechaInicio != null)
             {
-                sql = "select count(*) as numAprobados from Pedido where estado = 'aprobado' "
+                sql = "select count(*) as numAprobados from Peticion where estado = 'aprobado' "
                     + "and fecha > ? and fecha < ?;";
             }
             else
@@ -86,7 +86,42 @@ public class Reporte extends HttpServlet
                 request.setAttribute("numEspera", rs.getInt("numEspera"));
             }
             
-            
+            if (fechaInicio != null)
+            {
+                sql = "select Empresa.nombre, Empresa.idEmpresa, count(Entregado.precioTotal) as numPedidos, sum(Entregado.precioTotal) as ingresoTotal "
+                    + "from Empresa left join "
+                    + "(select * from Pedido_PrecioTotal where estado = 'entregado' and fechaDeEntrega > ? and fechaDeEntrega < ?) as Entregado "
+                    + "on Empresa.idEmpresa = Entregado.idEmpresa "
+                    + "group by Empresa.idEmpresa;";
+            }
+            else
+            {
+                sql = "select Empresa.nombre, Empresa.idEmpresa, count(Entregado.precioTotal) as numPedidos, sum(Entregado.precioTotal) as ingresoTotal "
+                    + "from Empresa left join "
+                    + "(select * from Pedido_PrecioTotal where estado = 'entregado') as Entregado "
+                    + "on Empresa.idEmpresa = Entregado.idEmpresa "
+                    + "group by Empresa.idEmpresa;";
+            }
+            try (PreparedStatement ps = con.prepareStatement(sql))
+            {
+                if (fechaInicio != null)
+                {
+                    ps.setDate(1, fechaInicio);
+                    ps.setDate(2, fechaFin);
+                }
+                ResultSet rs = ps.executeQuery();
+                
+                while(rs.next())
+                {
+                    Peticion peticion = new Peticion();
+                    peticion.setNombreEmpresa(rs.getString("nombreEmpresa"));
+                    peticion.setNumRealizadas(rs.getInt("numRealizadas"));
+                    peticion.setNumAprobadas(rs.getInt("numAprobados"));
+                    peticion.setNumRechazadas(rs.getInt("nunRechazadas"));
+                    
+                    peticiones.add(peticion);
+                }
+            }
             
             
         }catch (ParseException | SQLException ex)
