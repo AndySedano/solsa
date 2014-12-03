@@ -7,6 +7,9 @@ public class Peticion {
     private String date;
     private String estado;
     private int idCarrito;
+    private int numAprobadas;
+    private int numRechazadas;
+    private int numRealizadas;
 
     public int getIdCarrito() {
         return idCarrito;
@@ -47,5 +50,30 @@ public class Peticion {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+    
+    public int getNumAprobadas(){
+        return numAprobadas;
+    }
+    
+    public void setNumAprobadas(int numAprobadas){
+        this.numAprobadas = numAprobadas;
+    }
+    
+    public int getNumRechazadas(){
+        return numRechazadas;
+    }
+    
+    public void setNumRechazadas(int numRechazadas){
+        this.numRechazadas = numRechazadas;
+    }    
+    
+    public int getNumRealizadas(){
+        return numRealizadas;
+    }
+    
+    public void setNumRealizadas(int numRealizadas){
+        this.numRealizadas = numRealizadas;
+    }    
+            
     
 }

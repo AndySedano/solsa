@@ -1,109 +1,77 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:layout seccion="aprobador" activo ="reporte">
     <jsp:attribute name="titulo">
-        Admin
-    </jsp:attribute>
-    <jsp:attribute name="scripts">
-        <script>
-            $("#reportador").on("click", function (event) {
-                var d1 = document.getElementById("diaA").value;
-                var m1 = document.getElementById("mesA").value;
-                var a1 = document.getElementById("añoA").value;
-
-                var d2 = document.getElementById("diaB").value;
-                var m2 = document.getElementById("mesB").value;
-                var a2 = document.getElementById("añoB").value;
-
-                if (a1 > a2) {
-                    alert("El año de fin debe ser mayor al de inicio");
-                } else if (a1 == a2) {
-                    if (m1 > m2) {
-                        alert("El mes de fin debe ser mayor que el de inicio");
-                    } else if (m1 == m2) {
-                        if (d1 > d2) {
-                            alert("El día de fin debe ser menor al de inicio");
-                        }
-                    }
-                }
-            });
-        </script>
+        Aprobador
     </jsp:attribute>
 
     <jsp:body>
-        <h1>Bienvenido ${requestScope.nombre} ! </h1>
-        <form>
-
-            <h3>Reportes de Pedidos</h3>
-            <p>
-                Para hacer un reporte ingrese las fechas en el formato
-                correspondiente.
-            </p>
-            <br />
-            Fecha de Inicio
-            <br />
-            <input type="text" placeholder="día" id="diaA">&nbsp;
-            <input type="text" placeholder="mes" id="mesA">&nbsp;
-            <input type="text" placeholder="año" id="añoA">&nbsp;
-            <br />
-            <br />
-            Fecha de Fin
-            <br />
-            <input type="text" placeholder="día" id="diaB">&nbsp;
-            <input type="text" placeholder="mes" id="mesB">&nbsp;
-            <input type="text" placeholder="año" id="añoB">&nbsp;
-            <br />
-            <br />
-            <input type="submit" value="Realizar Reporte" id="reportador"/>
-            <br />
-            <br />
-
-            <div>
-                <h3>Reporte</h3>
-                <br />
-                Fecha de Reporte:
-                <br />
-                <br />
-                Peticiones Aceptados: 
-                <br />
-                Peticiones Canceladas:
-                <br />
-                <br />
-                Pedidos Entregados:
-                <br />
-                Pedidos En Tránsito:
-                <br />
-                <br />
-                Costo Total: MXN
-                <br />
+        <h1>Reportes de SOLSA</h1>
+        <h3>Reportes de Peticiones</h3>
+        <p>
+            Para generar un reporte ingrese las fechas en los siguientes campos.
+        </p>    
+        <form class="form-inline" role="form">
+            <div class="form-group" style="width: 300px;">
+                <div class="input-daterange input-group">
+                    <input type="text" class="input-sm form-control" name="fechaInicio" value="${fechaInicio}" />
+                    <span class="input-group-addon">a</span>
+                    <input type="text" class="input-sm form-control" name="fechaFin" value="${fechaFin}"/>
+                </div>
             </div>
+            <button type="submit" class="btn btn-default">Generar</button>
+        </form> 
+                
+                <div>
+                    <h3>Reporte General</h3>
+                    <h4>De Todas las Peticiones:</h4>
+                    
+                    Peticiones Aprobadas: ${numAprobados}
+                    <br />
+                    Pedidos en Espera: ${numEspera}
+                    <br />
+                    <br />
+                    
+                    
+         
+       
+            <br />
+            <br />
+            
+            <h4>Por Cada Empresa:</h4>
 
 
-        </form>
+            <table class="table table-hover">
+                <tr>
+                    <th>Nombre de la Empresa</th>
+                    <th>Peticiones Realizadas</th>
+                    <th>Peticiones Aprobadas</th>
+                    <th>Peticiones Rechazadas</th>
+                </tr>
 
-        <script>
-            function validauli() {
-                var d1 = document.getElementById("diaA").value;
-                var m1 = document.getElementById("mesA").value;
-                var a1 = document.getElementById("añoA").value;
 
-                var d2 = document.getElementById("diaB").value;
-                var m2 = document.getElementById("mesB").value;
-                var a2 = document.getElementById("añoB").value;
+                <c:forEach items="${peticiones}" var="peticion">
+                    <tr>
+                        <td>
+                            ${peticion.nombre}
+                        </td>
+                        <td>
+                            ${peticion.idPeticion}
+                        </td>
+                        <td>
+                            ${peticion.numAprobadas}
+                        </td>
+                        <td>
+                            ${peticion.numRechazadas}
+                        </td>
+                       
+                    </tr>
+                </c:forEach>
 
-                if (a1 > a2) {
-                    alert("El año de fin debe ser mayor al de inicio");
-                } else if (a1 == a2) {
-                    if (m1 > m2) {
-                        alert("El mes de fin debe ser mayor que el de inicio");
-                    } else if (m1 == m2) {
-                        if (d1 > d2) {
-                            alert("El día de fin debe ser menor al de inicio");
-                        }
-                    }
-                }
-            }
-        </script>
+            </table>            
+
+        </div>
     </jsp:body>
 </t:layout>
