@@ -19,3 +19,5 @@ SOLSA/nbproject/*
 *.swp
 *.DS_Store
 *.lock
+/NumberAddition/nbproject/private/
+/JavaApplication2/nbproject/private/
