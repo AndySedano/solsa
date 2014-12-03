@@ -55,10 +55,10 @@
                 <c:forEach items="${peticiones}" var="peticion">
                     <tr>
                         <td>
-                            ${peticion.nombre}
+                            ${peticion.nombreEmpresa}
                         </td>
                         <td>
-                            ${peticion.idPeticion}
+                            ${peticion.numRealizadas}
                         </td>
                         <td>
                             ${peticion.numAprobadas}
