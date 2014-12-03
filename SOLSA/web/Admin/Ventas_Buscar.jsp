@@ -2,7 +2,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:layout seccion="admin" activo ="ventas_buscar">
+<t:layout seccion="admin" activo ="ventas">
     <jsp:attribute name="titulo">
         Búsqueda de Personal de Ventas
     </jsp:attribute>
@@ -44,7 +44,7 @@
             </tr>
 
             <c:forEach items="${ventas}" var="venta">
-                <tr onclick="location.href = 'Ventas_Modificacion?id=${venta.username}'">
+                <tr onclick="location.href ='Ventas_Modificar?username=${venta.username}'">
                     <td>
                         ${venta.username}
                     </td>

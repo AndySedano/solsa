@@ -35,7 +35,7 @@ public class Cliente_Buscar extends HttpServlet
                 sql = "SELECT Usuario.username AS username, Usuario.nombre AS nombre, Empresa.nombre AS nombreEmpresa, Departamento.nombre AS nombreDepartamento FROM Empresa \n" +
                         "JOIN Departamento ON Empresa.idEmpresa=Departamento.idEmpresa\n" +
                         "JOIN Usuario ON Departamento.idDepartamento=Usuario.idDepartamento\n" +
-                        "WHERE Usuario.username=? AND tipo='cliente';";
+                        "WHERE (Usuario.username LIKE ? OR Usuario.nombre LIKE ?) AND tipo='cliente';";
             }
             else
             {
@@ -49,6 +49,7 @@ public class Cliente_Buscar extends HttpServlet
                 if (buscar != null)
                 {
                     ps.setString(1, "%" + buscar + "%");
+                    ps.setString(2, "%" + buscar + "%");
                 }
                 ResultSet rs = ps.executeQuery();
                 while (rs.next())

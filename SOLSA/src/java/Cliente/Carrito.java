@@ -53,19 +53,22 @@ public class Carrito extends HttpServlet {
                     bean.setCantidad(1);
                     bean.setFoto(f);
 
-                    if (session.getAttribute("carrito") == null) {
-                        CarritoBean c = new CarritoBean();
-                        c.agregar(bean);
-                        session.setAttribute("carrito", c);
-                    } else {
-                        ((CarritoBean)session.getAttribute("carrito")).agregar(bean);
+                    CarritoBean c;
+                    if (session.getAttribute("carrito") == null)
+                    {
+                        c = new CarritoBean();
                     }
+                    else
+                    {
+                        c = (CarritoBean)session.getAttribute("carrito");
+                    }
+                    c.agregar(bean);
+                    session.setAttribute("carrito", c);
                 }
             }
             
-            if(session.getAttribute("carrito") != null){   
-                request.setAttribute("inf", ((CarritoBean)session.getAttribute("carrito")).getProductos());
-            }else{
+            if(session.getAttribute("carrito") == null)
+            {
                 request.setAttribute("mensaje", "Carrito Vacio");
             }
 

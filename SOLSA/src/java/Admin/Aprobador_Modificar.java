@@ -1,6 +1,6 @@
 package Admin;
 
-import Beans.ClienteModifica;
+import Beans.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Cliente_Modificar extends HttpServlet {
+public class Aprobador_Modificar extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -30,26 +30,28 @@ public class Cliente_Modificar extends HttpServlet {
         }
         
         try (Connection con = Helpers.DB.newConnection(this)) {
-            PreparedStatement ps = con.prepareStatement("SELECT nombre, direccion, telefono "
-                    + "FROM Usuario WHERE username=? AND tipo='cliente';");
-            ps.setString(1, request.getParameter("username"));
-            ResultSet rs = ps.executeQuery();
+            String sql = "SELECT username, nombre, direccion, telefono "
+                    + "FROM Usuario WHERE username=? AND tipo='aprobador';";
             
-            if (rs.next()) {
-                ClienteModifica cliente = new ClienteModifica();
-                cliente.setUsername(request.getParameter("username"));
-                cliente.setNombre(rs.getString("nombre"));
-                cliente.setDireccion(rs.getString("direccion"));
-                cliente.setTelefono(rs.getString("telefono"));
-                request.setAttribute("cliente", cliente);
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Cliente_Modificar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setString(1, request.getParameter("username"));
+                ResultSet rs = ps.executeQuery();
+                rs.next();
                 
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Cliente_Modificacion.jsp");
-        disp.include(request, response);
+                Aprobador aprobador = new Aprobador();
+                aprobador.setUsername(rs.getString("username"));
+                aprobador.setNombre(rs.getString("nombre"));
+                aprobador.setDireccion(rs.getString("direccion"));
+                aprobador.setTelefono(rs.getString("telefono"));
+                request.setAttribute("aprobador", aprobador);
+                
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/Admin/Aprobador_Modificacion.jsp");
+                disp.include(request, response);
+            }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(Aprobador_Modificar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -71,8 +73,8 @@ public class Cliente_Modificar extends HttpServlet {
         String direccion = request.getParameter("direccion");
         String telefono = request.getParameter("telefono");
         String mob = request.getParameter("submit");
-        String sqlModificar = "UPDATE Usuario SET nombre=?, direccion=?, telefono=? WHERE username=? AND tipo='cliente';";
-        String sqlDelete = "DELETE FROM Usuario WHERE username=? AND tipo='cliente';";
+        String sqlModificar = "UPDATE Usuario SET nombre=?, direccion=?, telefono=? WHERE username=? AND tipo='aprobador';";
+        String sqlDelete = "DELETE FROM Usuario WHERE username=? AND tipo='aprobador';";
 
         try (Connection con = Helpers.DB.newConnection(this)) {
             switch (mob) {
@@ -82,27 +84,27 @@ public class Cliente_Modificar extends HttpServlet {
                         ps.setString(2, direccion);
                         ps.setString(3, telefono);
                         ps.setString(4, username);
-                        ps.executeUpdate();
+                        int st = ps.executeUpdate();
+                        if (st==1) {
+                            request.setAttribute("message", "El usuario " + username + " ha sido modificado.");
+                            doGet(request, response);
+                        }
                     }
-                    request.setAttribute("message", "El usuario " + username + " ha sido modificado.");
-                    doGet(request, response);                
-                    break;
+                break;
                 case "borrar":
                     try (PreparedStatement ps = con.prepareStatement(sqlDelete)) {
                         ps.setString(1, username);
-                        ps.executeUpdate();
+                        int st = ps.executeUpdate();
+                        if (st==1) {
+                            request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
+                            doGet(request, response);
+                        }
                     }
-                    request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
-                    doGet(request, response);                
                 break;
             }
-            
-//            request.setAttribute("message", "El usuario " + username + " ha sido borrado.");
-//            doGet(request, response);
-            
         }
-        catch (Exception ex) {
-            Logger.getLogger(Cliente_Modificar.class.getName()).log(Level.SEVERE, null, ex);
+        catch (SQLException ex) {
+            Logger.getLogger(Aprobador_Modificar.class.getName()).log(Level.SEVERE, null, ex);
             
             request.setAttribute("error", "true");
             request.setAttribute("message", "Lo sentimos, hubo un error, ingrese los datos nuevamente...");

@@ -24,18 +24,19 @@ public class VerCarrito extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException
+    {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
-        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("cliente") == false) {
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("cliente") == false)
+        {
             response.sendRedirect("../Login"); return;
         }
 
-        if (session.getAttribute("carrito") != null) {
-            request.setAttribute("inf", ((CarritoBean) session.getAttribute("carrito")).getProductos());
-        } else {
+        if (session.getAttribute("carrito") == null)
+        {
             request.setAttribute("mensaje", "Carrito Vacio");
         }
 
@@ -45,17 +46,19 @@ public class VerCarrito extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    throws ServletException, IOException
+    {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
-        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("cliente") == false) {
+        if (session.getAttribute("username") == null || session.getAttribute("tipo").equals("cliente") == false)
+        {
             response.sendRedirect("../Login"); return;
         }
 
-        if (session.getAttribute("carrito") != null) {
+        if (session.getAttribute("carrito") != null && request.getParameter("send").equals("add"))
+        {
             String[] ids = request.getParameterValues("ids");
             String[] quantas = request.getParameterValues("quantas");
             CarritoBean c = (CarritoBean) session.getAttribute("carrito");
@@ -99,8 +102,10 @@ public class VerCarrito extends HttpServlet {
             }
 
             request.setAttribute("mensaje", "Peticion realizada");
-
-        } else {
+        }
+        else
+        {
+            session.setAttribute("carrito", null);
             request.setAttribute("mensaje", "Carrito Vacio");
         }
 

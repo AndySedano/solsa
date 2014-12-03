@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<t:layout seccion="admin" activo ="ventas_alta">
+<t:layout seccion="admin" activo ="ventas">
     <jsp:attribute name="titulo">
         Alta de Ventas
     </jsp:attribute>

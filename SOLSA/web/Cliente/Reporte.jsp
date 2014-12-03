@@ -5,13 +5,17 @@
     <jsp:attribute name="titulo">
         Cliente
     </jsp:attribute>
-      
     <jsp:body>
         <h1>Reportes</h1>
         <h3>Reportes de Productos</h3>
         <p>
             Para generar un reporte ingrese las fechas en los siguientes campos.
         </p>    
+        <h1>Reporte de Pedidos</h1>
+        <p>
+            Para hacer un reporte ingrese las fechas en el formato
+            correspondiente.
+        </p>
         <form class="form-inline" role="form">
             <div class="form-group" style="width: 300px;">
                 <div class="input-daterange input-group">

@@ -2,24 +2,24 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:layout seccion="admin" activo ="clientes">
+<t:layout seccion="admin" activo ="aprobadores">
     <jsp:attribute name="titulo">
-        Búsqueda de Cliente
+        Búsqueda de Aprobadores
     </jsp:attribute>
     <jsp:body>
         <form>
-            <h2>Clientes</h2>
+            <h2>Aprobadores</h2>
             
             <form class="form-inline" role="form">
                 <div class="form-group">
-                    <label class="sr-only" for="buscar">Buscar cliente por usuario</label>
+                    <label class="sr-only" for="buscar">Buscar aprobadores por usuario </label>
                         <div class="input-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-                        <input type="search" class="form-control" id="buscar" name="buscar" placeholder="Buscar cliente por usuario" value="${buscar}">
+                        <input type="search" class="form-control" id="buscar" name="buscar" placeholder="Buscar aprobadores por usuario" value="${buscar}">
                     </div>
                 </div>
             </form>
-            <table class="table table-hover">
+            <table id="table" class="table table-hover">
             <tr>
                 <th>
                     Username
@@ -28,34 +28,34 @@
                     Nombre
                 </th>
                 <th>
-                    Empresa
+                    Direccion
                 </th>
                 <th>
-                    Departamento
+                    Telefono
                 </th>
             </tr>
-            <tr onclick="location.href = 'Cliente_Alta'" class="text-primary">
+            <tr onclick="location.href = 'Aprobador_Alta'" class="text-primary">
                 <td>
-                    Registrar Cliente...
+                    Registrar Aprobador...
                 </td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
 
-            <c:forEach items="${clientes}" var="cliente">
-                <tr onclick="location.href = 'Cliente_Modificar?username=${cliente.username}'">
+            <c:forEach items="${aprobadores}" var="aprobador">
+                <tr onclick="location.href ='Aprobador_Modificar?username=${aprobador.username}'">
                     <td>
-                        ${cliente.username}
+                        ${aprobador.username}
                     </td>
                     <td>
-                        ${cliente.nombre}
+                        ${aprobador.nombre}
                     </td>
                     <td>
-                        ${cliente.nombreEmpresa}
+                        ${aprobador.direccion}
                     </td>
                     <td>
-                        ${cliente.nombreDepartamento}
+                        ${aprobador.telefono}
                     </td>
                 </tr>
             </c:forEach>

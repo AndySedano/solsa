@@ -155,6 +155,14 @@
         <servlet-name>Aprobador_Alta</servlet-name>
         <servlet-class>Admin.Aprobador_Alta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Aprobador_Buscar</servlet-name>
+        <servlet-class>Admin.Aprobador_Buscar</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Aprobador_Modificar</servlet-name>
+        <servlet-class>Admin.Aprobador_Modificar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -295,6 +303,14 @@
     <servlet-mapping>
         <servlet-name>Aprobador_Alta</servlet-name>
         <url-pattern>/Admin/Aprobador_Alta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Aprobador_Buscar</servlet-name>
+        <url-pattern>/Admin/Aprobador_Buscar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Aprobador_Modificar</servlet-name>
+        <url-pattern>/Admin/Aprobador_Modificar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
