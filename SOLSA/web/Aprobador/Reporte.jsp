@@ -30,7 +30,7 @@
                     
                     Peticiones Aprobadas: ${numAprobados}
                     <br />
-                    Pedidos en Espera: ${numEspera}
+                    Peticiones en Espera: ${numEspera}
                     <br />
                     <br />
                     

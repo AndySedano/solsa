@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags/" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <t:layout seccion="cliente" activo ="reporte">
     <jsp:attribute name="titulo">
@@ -7,15 +8,10 @@
     </jsp:attribute>
     <jsp:body>
         <h1>Reportes</h1>
-        <h3>Reportes de Productos</h3>
+        <h3>Reportes de Productos y de Pedidos</h3>
         <p>
             Para generar un reporte ingrese las fechas en los siguientes campos.
         </p>    
-        <h1>Reporte de Pedidos</h1>
-        <p>
-            Para hacer un reporte ingrese las fechas en el formato
-            correspondiente.
-        </p>
         <form class="form-inline" role="form">
             <div class="form-group" style="width: 300px;">
                 <div class="input-daterange input-group">
@@ -46,7 +42,7 @@
                 </tr>
 
 
-                <c:forEach items="${productos}" var="empresa">
+                <c:forEach items="${productos}" var="producto">
                     <tr>
                         <td>
                             ${producto.nombre}

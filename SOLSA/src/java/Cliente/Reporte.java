@@ -1,6 +1,7 @@
 package Cliente;
 
 import Aprobador.Peticion;
+import Beans.Producto;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,7 +34,7 @@ public class Reporte extends HttpServlet {
         }
         
 
-        List<Productos> producto = new ArrayList<>();
+        List<Producto> productos = new ArrayList<>();
         try (Connection con = Helpers.DB.newConnection(this)){
             java.sql.Date fechaInicio = null;
             java.sql.Date fechaFin = null;
@@ -50,18 +51,19 @@ public class Reporte extends HttpServlet {
             }
             
             if(fechaInicio != null){
-                sql = "select count(*) as numAprobados from Peticion where estado = 'aprobado';"
+                sql = "select count(*) as numAprobados from Usuario, Peticion where Peticion.estado = 'aprobado' and Usuario.username = ?;"
                 + "and fecha > ? and fecha < ?;";
             }
             else{
-                sql = "select count(*) as numAprobados from Peticion where estado = 'aprobado'";                
+                String username = (String) session.getAttribute("userneme");
+                sql = "select count(*) as numAprobados from Usuario, Peticion where estado = 'aprobado' and Usuario.username = '" + username + "';";                
             }
             
             try(PreparedStatement ps = con.prepareStatement(sql)){
                 if(fechaInicio != null){
                     ps.setDate(1, fechaInicio);
                     ps.setDate(2, fechaFin);
-                    
+                    ps.setString(3, (String) session.getAttribute("username"));
                 }
                 ResultSet rs = ps.executeQuery();
                 rs.next();
@@ -161,6 +163,39 @@ public class Reporte extends HttpServlet {
                 ResultSet rs = ps.executeQuery();
                 rs.next();
                 request.setAttribute("total", Helpers.Money.toString(rs.getInt("total")));                
+            }
+            
+            if(fechaInicio != null){
+                sql = "SELECT Usuario.username, Producto.nombre as producto, count(*) as Cantidad FROM Producto\n" +
+                    "INNER JOIN Carrito_Producto ON Carrito_Producto.idProducto = Producto.idProducto\n" +
+                    "INNER JOIN Carrito ON Carrito_Producto.Carrito_idCarrito=Carrito.idCarrito\n" +
+                    "INNER JOIN Usuario ON Carrito.Usuario_Username = Usuario.username\n" +
+                    "WHERE Usuario.username = '?'\n;" + 
+                    "and fecha > ? and fecha < ? GROUP BY Producto.idProducto;";
+            }
+            else{
+                sql = "SELECT Usuario.username, Producto.nombre as producto, count(*) as Cantidad FROM Producto\n" +
+                    "INNER JOIN Carrito_Producto ON Carrito_Producto.idProducto = Producto.idProducto\n" +
+                    "INNER JOIN Carrito ON Carrito_Producto.Carrito_idCarrito=Carrito.idCarrito\n" +
+                    "INNER JOIN Usuario ON Carrito.Usuario_Username = Usuario.username\n" +
+                    "WHERE Usuario.username = 'cliente' GROUP BY Producto.idProducto;";
+            }
+            try(PreparedStatement ps = con.prepareStatement(sql))
+            {
+                if(fechaInicio != null)
+                {
+                    ps.setString(1, (String) session.getAttribute("username"));
+                    ps.setDate(2, fechaInicio);
+                    ps.setDate(3, fechaFin);
+                }
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()){
+                    Producto producto = new Producto();
+                    producto.setNombre(rs.getString("nombre"));
+                    producto.setCantidad(rs.getInt("Cantidad"));
+                    
+                    productos.add(producto);
+                }
             }
             
            
