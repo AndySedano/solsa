@@ -31,6 +31,9 @@ public class Reporte extends HttpServlet
             java.sql.Date fechaInicio = null;
             java.sql.Date fechaFin = null;
             String sql;
+            String sqlAprobado;
+            String sqlRechazado;
+            String sqlRealizado;
             
             if (request.getParameter("fechaInicio") != null && request.getParameter("fechaFin") != null)
             {
@@ -40,9 +43,7 @@ public class Reporte extends HttpServlet
                 fechaInicio = new java.sql.Date(format.parse(request.getParameter("fechaInicio")).getTime());
                 fechaFin = new java.sql.Date(format.parse(request.getParameter("fechaFin")).getTime());
             }
-            
-            
-            
+                        
             if (fechaInicio != null)
             {
                 sql = "select count(*) as numAprobados from Peticion where estado = 'aprobado' "
@@ -88,38 +89,74 @@ public class Reporte extends HttpServlet
             
             if (fechaInicio != null)
             {
-                sql = "select Empresa.nombre, Empresa.idEmpresa, count(Entregado.precioTotal) as numPedidos, sum(Entregado.precioTotal) as ingresoTotal "
-                    + "from Empresa left join "
-                    + "(select * from Pedido_PrecioTotal where estado = 'entregado' and fechaDeEntrega > ? and fechaDeEntrega < ?) as Entregado "
-                    + "on Empresa.idEmpresa = Entregado.idEmpresa "
-                    + "group by Empresa.idEmpresa;";
+                sqlAprobado = "SELECT Empresa.nombre as nombreEmpresa, count(*) as numAprobadas FROM Peticion\n" +
+                    "INNER JOIN Carrito ON Peticion.Carrito_idCarrito = Carrito.idCarrito\n" +
+                    "INNER JOIN Usuario ON Carrito.Usuario_Username = Usuario.username\n" +
+                    "INNER JOIN Empresa ON Empresa.idEmpresa = Usuario.idEmpresa\n" +
+                    "WHERE Peticion.estado = 'aprobado'\n" +
+                    "and fecha > ? and fecha < ? \n" +
+                    "GROUP BY Empresa.idEmpresa;";
+                sqlRechazado = "SELECT Empresa.nombre as nombreEmpresa, count(*) as numRechazadas FROM Peticion\n" +
+                    "INNER JOIN Carrito ON Peticion.Carrito_idCarrito = Carrito.idCarrito\n" +
+                    "INNER JOIN Usuario ON Carrito.Usuario_Username = Usuario.username\n" +
+                    "INNER JOIN Empresa ON Empresa.idEmpresa = Usuario.idEmpresa\n" +
+                    "WHERE Peticion.estado = 'rechazado'\n" +
+                    "and fecha > ? and fecha < ? \n" +
+                    "GROUP BY Empresa.idEmpresa;";
+                sqlRealizado = "SELECT Empresa.nombre as nombreEmpresa, count(*) as numRealizadas FROM Peticion\n" +
+                    "INNER JOIN Carrito ON Peticion.Carrito_idCarrito = Carrito.idCarrito\n" +
+                    "INNER JOIN Usuario ON Carrito.Usuario_Username = Usuario.username\n" +
+                    "INNER JOIN Empresa ON Empresa.idEmpresa = Usuario.idEmpresa\n" +
+                    "WHERE ((Peticion.estado = 'aprobado' OR Peticion.estado = 'rechazado') OR Peticion.estado = 'espera') \n" +
+                    "and fecha > ? and fecha < ? \n" +
+                    "GROUP BY Empresa.idEmpresa;";
             }
             else
             {
-                sql = "select Empresa.nombre, Empresa.idEmpresa, count(Entregado.precioTotal) as numPedidos, sum(Entregado.precioTotal) as ingresoTotal "
-                    + "from Empresa left join "
-                    + "(select * from Pedido_PrecioTotal where estado = 'entregado') as Entregado "
-                    + "on Empresa.idEmpresa = Entregado.idEmpresa "
-                    + "group by Empresa.idEmpresa;";
+                sqlAprobado = "SELECT Empresa.nombre as nombreEmpresa, count(*) as numAprobadas FROM Peticion\n" +
+                    "INNER JOIN Carrito ON Peticion.Carrito_idCarrito = Carrito.idCarrito\n" +
+                    "INNER JOIN Usuario ON Carrito.Usuario_Username = Usuario.username\n" +
+                    "INNER JOIN Empresa ON Empresa.idEmpresa = Usuario.idEmpresa\n" +
+                    "WHERE Peticion.estado = 'aprobado'\n" +
+                    "GROUP BY Empresa.idEmpresa;";
+                sqlRechazado = "SELECT Empresa.nombre as nombreEmpresa, count(*) as numRechazadas FROM Peticion\n" +
+                    "INNER JOIN Carrito ON Peticion.Carrito_idCarrito = Carrito.idCarrito\n" +
+                    "INNER JOIN Usuario ON Carrito.Usuario_Username = Usuario.username\n" +
+                    "INNER JOIN Empresa ON Empresa.idEmpresa = Usuario.idEmpresa\n" +
+                    "WHERE Peticion.estado = 'rechazado'\n" +
+                    "GROUP BY Empresa.idEmpresa;";
+                sqlRealizado = "SELECT Empresa.nombre as nombreEmpresa, count(*) as numRealizadas FROM Peticion\n" +
+                    "INNER JOIN Carrito ON Peticion.Carrito_idCarrito = Carrito.idCarrito\n" +
+                    "INNER JOIN Usuario ON Carrito.Usuario_Username = Usuario.username\n" +
+                    "INNER JOIN Empresa ON Empresa.idEmpresa = Usuario.idEmpresa\n" +
+                    "WHERE ((Peticion.estado = 'aprobado' OR Peticion.estado = 'rechazado') OR Peticion.estado = 'espera') \n" +
+                    "GROUP BY Empresa.idEmpresa;";
             }
-            try (PreparedStatement ps = con.prepareStatement(sql))
-            {
-                if (fechaInicio != null)
-                {
-                    ps.setDate(1, fechaInicio);
-                    ps.setDate(2, fechaFin);
-                }
-                ResultSet rs = ps.executeQuery();
-                
-                while(rs.next())
-                {
-                    Peticion peticion = new Peticion();
-                    peticion.setNombreEmpresa(rs.getString("nombreEmpresa"));
-                    peticion.setNumRealizadas(rs.getInt("numRealizadas"));
-                    peticion.setNumAprobadas(rs.getInt("numAprobados"));
-                    peticion.setNumRechazadas(rs.getInt("nunRechazadas"));
-                    
-                    peticiones.add(peticion);
+            try (PreparedStatement ps1 = con.prepareStatement(sqlAprobado)){
+                try(PreparedStatement ps2 = con.prepareStatement(sqlRechazado)){
+                    try(PreparedStatement ps3 = con.prepareStatement(sqlRealizado)){
+                        if (fechaInicio != null)
+                        {
+                            ps1.setDate(1, fechaInicio);
+                            ps1.setDate(2, fechaFin);
+                            ps2.setDate(1, fechaInicio);
+                            ps2.setDate(2, fechaFin);
+                            ps3.setDate(1, fechaInicio);
+                            ps3.setDate(2, fechaFin);
+                        }
+                        ResultSet rs = ps1.executeQuery();
+
+                        while(rs.next())
+                        {
+                            Peticion peticion = new Peticion();
+                            peticion.setNombreEmpresa(rs.getString("nombreEmpresa"));
+                            peticion.setNumRealizadas(rs.getInt("numRealizadas"));
+                            peticion.setNumAprobadas(rs.getInt("numAprobadas"));
+                            peticion.setNumRechazadas(rs.getInt("numRechazadas"));
+
+                            peticiones.add(peticion);
+                        }
+                    }
                 }
             }
             

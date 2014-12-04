@@ -11,6 +11,17 @@ public class Peticion {
     private int numAprobadas;
     private int numRechazadas;
     private int numRealizadas;
+    
+    public Peticion(){
+        
+    }
+    
+    public Peticion (String nombreEmpresa, int numAprobadas, int numRechazadas, int numRealizadas) {
+        this.nombreEmpresa = nombreEmpresa;
+        this.numAprobadas= numAprobadas;
+        this.numRechazadas = numRechazadas;
+        this.numRealizadas = numRealizadas;
+    }
 
     public int getIdCarrito() {
         return idCarrito;
